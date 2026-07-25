@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gustavo - Desenvolvedor Web</title>
+  <meta http-equiv="refresh" content="0; url=portfolio/">
+  <link rel="canonical" href="portfolio/">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #00ff41;
+      font-family: 'Courier New', monospace;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; text-align: center; padding: 2rem;
+    }
+    .container { max-width: 500px; }
+    .prompt { color: #00d4ff; }
+    .cursor {
+      display: inline-block; width: 10px; height: 1.2em;
+      background: #00ff41; margin-left: 4px;
+      animation: blink 1s step-end infinite; vertical-align: text-bottom;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    p { margin-top: 1.5rem; color: rgba(0,255,65,0.5); font-size: 0.9rem; }
+    a { color: #00ff41; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div><span class="prompt">❯</span> Redirecionando<span class="cursor"></span></div>
+    <p>Se não for redirecionado, <a href="portfolio/">clique aqui</a></p>
+  </div>
+</body>
+</html>
