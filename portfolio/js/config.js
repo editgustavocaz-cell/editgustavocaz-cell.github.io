@@ -145,8 +145,11 @@ const PORTFOLIO = {
     },
     {
       name: 'Site Premium',
-      price: 'R$ 497',
-      period: 'à vista',
+      price: 'R$ 349,99',
+      period: 'no dinheiro',
+      promo: true,
+      promoPrice: 'R$ 299,99',
+      promoLabel: 'no PIX 🔥',
       features: [
         'Tudo do Básico +',
         '3 páginas completas',
@@ -159,6 +162,7 @@ const PORTFOLIO = {
         'Suporte 30 dias',
       ],
       popular: true,
+      note: '🚫 Não aceitamos cartão de crédito. Aceitamos dinheiro e PIX.',
     },
   ],
 
