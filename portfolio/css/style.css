@@ -933,6 +933,71 @@ ul { list-style: none; }
   font-weight: 500;
 }
 
+/* ─── Manutenção Mensal ─────────────────────────────── */
+.maint-info {
+  max-width: 750px;
+  margin: 1.5rem auto 0;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 212, 255, 0.03);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: 8px;
+}
+.maint-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+.maint-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.maint-header div { flex: 1; }
+.maint-header strong {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.maint-header span {
+  font-size: 0.68rem;
+  color: var(--text-light);
+  font-family: var(--font-mono);
+}
+.maint-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--secondary);
+  font-family: var(--font-heading);
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+.maint-price span {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--text-lighter);
+}
+.maint-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 212, 255, 0.06);
+}
+.maint-items span {
+  font-size: 0.65rem;
+  color: var(--text-light);
+  font-family: var(--font-mono);
+}
+
 /* ─── No Card Warning (global) ───────────────────────── */
 .no-card-warning {
   max-width: 750px;

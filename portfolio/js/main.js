@@ -253,6 +253,27 @@ document.addEventListener('DOMContentLoaded', () => {
     warning.className = 'no-card-warning';
     warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito nem débito.';
     infoBox.parentNode.insertBefore(warning, infoBox.nextSibling);
+    // Manutenção mensal
+    const maintBox = document.createElement('div');
+    maintBox.className = 'maint-info';
+    maintBox.innerHTML = `
+      <div class="maint-header">
+        <span class="maint-icon">🔄</span>
+        <div>
+          <strong>Manutenção Mensal</strong>
+          <span>Quer que eu mantenha seu site sempre atualizado?</span>
+        </div>
+        <div class="maint-price">R$ 19,90<span>/mês</span></div>
+      </div>
+      <div class="maint-items">
+        <span>✅ Domínio .com.br renovado</span>
+        <span>✅ Hospedagem grátis mantida</span>
+        <span>✅ Atualizações de conteúdo</span>
+        <span>✅ Suporte via WhatsApp</span>
+        <span>✅ SSL e segurança ativos</span>
+      </div>
+    `;
+    warning.parentNode.insertBefore(maintBox, warning.nextSibling);
   }
 
 
