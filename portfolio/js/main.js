@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Aviso global: não aceitamos cartão
     const warning = document.createElement('div');
     warning.className = 'no-card-warning';
-    warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito. Aceitamos <strong>dinheiro</strong> e <strong>PIX</strong>.';
+    warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito. Aceitamos <strong>dinheiro</strong>, <strong>PIX</strong> e <strong>débito</strong>.';
     grid.parentNode.insertBefore(warning, grid.nextSibling);
   }
 
