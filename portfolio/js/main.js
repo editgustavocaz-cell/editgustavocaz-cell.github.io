@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="hero-badge">${P.dev.role}</div>
         <h1>${P.dev.name}</h1>
         <p class="subtitle">${P.dev.tagline}</p>
-        <p style="font-size: 1rem; color: rgba(0, 255, 65, 0.5); font-family: var(--font-mono); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.8;">
+        <p style="font-size: 1.15rem; color: rgba(0, 255, 65, 0.5); font-family: var(--font-mono); max-width: 530px; margin: 0 auto 2.5rem; line-height: 1.9;">
           Crio sites profissionais para restaurantes, barbearias, clínicas e comércios.<br>
           Com WhatsApp integrado, design moderno e tudo que seu negócio precisa para atrair mais clientes.
         </p>
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <ul class="pricing-features">
           ${plan.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join('')}
         </ul>
-        ${plan.note ? `<div style="background:rgba(255,179,0,.1);border:1px solid rgba(255,179,0,.25);border-radius:6px;padding:.55rem .8rem;margin:-.5rem 0 1rem;text-align:center"><p style="font-size:.75rem;color:var(--accent);font-weight:600;font-family:var(--font-mono);letter-spacing:.02em">⚠️ <strong>${plan.note}</strong></p></div>` : ''}
+        ${plan.note ? `<div style="background:rgba(255,179,0,.1);border:1px solid rgba(255,179,0,.25);border-radius:6px;padding:.6rem .9rem;margin:-.5rem 0 1rem;text-align:center"><p style="font-size:.82rem;color:var(--accent);font-weight:600;font-family:var(--font-mono);letter-spacing:.02em">⚠️ <strong>${plan.note}</strong></p></div>` : ''}
         <a href="${whatsUrl}" target="_blank" rel="noopener" class="btn ${plan.popular ? 'btn-primary' : 'btn-whatsapp'}">
           ${ICONS.whatsapp} Quero Este Plano
         </a>
@@ -288,10 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const info = section.querySelector('.contact-info');
     info.innerHTML = `
       <div class="pf-reveal-left">
-        <h3 style="font-size:1.8rem;font-weight:800;color:var(--text);margin-bottom:1rem;line-height:1.2">
+        <h3 style="font-size:2rem;font-weight:800;color:var(--text);margin-bottom:1rem;line-height:1.2">
           Seu negócio merece <span style="color:var(--primary)">um site incrível</span>
         </h3>
-        <p style="color:var(--text-light);font-size:1.05rem;line-height:1.8;margin-bottom:2rem">
+        <p style="color:var(--text-light);font-size:1.1rem;line-height:1.9;margin-bottom:2rem">
           Entre em contato agora mesmo e vamos criar juntos o site perfeito para o seu negócio. Orçamento sem compromisso!
         </p>
         ${c.email ? `
@@ -320,10 +320,10 @@ document.addEventListener('DOMContentLoaded', () => {
     cta.innerHTML = `
       <div class="pf-reveal-right" style="text-align:center;padding:2rem">
         <div style="font-size:4rem;margin-bottom:1rem">💬</div>
-        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.8rem">
+        <h3 style="font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.8rem">
           Vamos conversar!<br><span style="color:var(--whatsapp)">Respondo rapidinho</span>
         </h3>
-        <p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.95rem">
+        <p style="color:var(--text-light);margin-bottom:1.5rem;font-size:1rem">
           Clique no botão abaixo e me mande uma mensagem no WhatsApp.<br>Vou entender seu negócio e te apresentar a melhor solução!
         </p>
         <a href="${whatsUrl}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="font-size:1.1rem;padding:1.2rem 2.5rem">
