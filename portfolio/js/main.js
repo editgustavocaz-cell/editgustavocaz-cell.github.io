@@ -219,11 +219,40 @@ document.addEventListener('DOMContentLoaded', () => {
         </a>
       </div>
     `).join('');
+    // Info box: domínio + hospedagem
+    const infoBox = document.createElement('div');
+    infoBox.className = 'domain-info';
+    infoBox.innerHTML = `
+      <div class="di-grid">
+        <div class="di-item">
+          <span class="di-icon">🌐</span>
+          <div>
+            <strong>Domínio próprio</strong>
+            <span>Seu site com <em>qualquer nome.com.br</em> — sem URL estranha. Você escolhe!</span>
+          </div>
+        </div>
+        <div class="di-item">
+          <span class="di-icon">⚡</span>
+          <div>
+            <strong>Hospedagem premium grátis</strong>
+            <span>Uso <em>Vercel</em> (mesma infraestrutura da Apple, Nike) — rápido, seguro, sem taxas. Você nunca vai ver "vercel.app" no seu site.</span>
+          </div>
+        </div>
+        <div class="di-item">
+          <span class="di-icon">🔒</span>
+          <div>
+            <strong>SSL grátis vitalício</strong>
+            <span>Cadeado verde + HTTPS automático. Google ama, cliente confia.</span>
+          </div>
+        </div>
+      </div>
+    `;
+    grid.parentNode.insertBefore(infoBox, grid.nextSibling);
     // Aviso global: não aceitamos cartão
     const warning = document.createElement('div');
     warning.className = 'no-card-warning';
     warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito nem débito.';
-    grid.parentNode.insertBefore(warning, grid.nextSibling);
+    infoBox.parentNode.insertBefore(warning, infoBox.nextSibling);
   }
 
 
