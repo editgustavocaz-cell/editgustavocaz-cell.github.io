@@ -885,7 +885,8 @@ ul { list-style: none; }
 .pricing-price { font-size: 2.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary); text-shadow: 0 0 15px rgba(0, 255, 65, 0.2); display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
 .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-lighter); }
 .price-old { font-size: 1.3rem; color: rgba(255,255,255,0.25); text-decoration: line-through; font-weight: 400; text-shadow: none; }
-.price-promo { font-size: 2.8rem; color: var(--accent); text-shadow: 0 0 20px rgba(255, 179, 0, 0.3); background: linear-gradient(135deg, var(--accent), #ff6b35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.price-promo { font-size: 2.8rem; color: var(--accent); text-shadow: 0 0 20px rgba(255, 179, 0, 0.3); background: linear-gradient(135deg, var(--accent), #ff6b35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; position: relative; }
+.price-promo::after { content: 'R$ 179,99'; position: absolute; top: 0; left: 0; right: 0; color: var(--accent); -webkit-text-fill-color: var(--accent); opacity: 0; pointer-events: none; }
 
 .pricing-features {
   margin-bottom: 2rem;
