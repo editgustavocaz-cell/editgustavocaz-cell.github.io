@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · Controle Financeiro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="d-nav" id="dNav">
+    <div class="d-nav-inner">
+      <a href="#" class="d-brand"><span class="prompt">❯</span> Finance<span class="dash">.</span></a>
+      <div class="d-nav-links">
+        <a href="#resumo" class="active">📊 Resumo</a>
+        <a href="#vendas">💰 Vendas</a>
+        <a href="#clientes">👥 Clientes</a>
+        <a href="#config">⚙️ Config</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="d-main">
+
+    <!-- RESUME SECTION -->
+    <section class="d-section" id="resumo">
+      <div class="d-container">
+        <div class="d-header">
+          <span class="d-label">📊 Painel Financeiro</span>
+          <h2>Resumo</h2>
+        </div>
+        <div class="cards-row" id="resumeCards">
+          <div class="d-card total-card"><div class="d-card-icon">💰</div><div class="d-card-body"><span class="d-card-label">Total Vendido</span><strong class="d-card-value" id="totalVendido">R$ 0</strong></div></div>
+          <div class="d-card lucro-card"><div class="d-card-icon">📈</div><div class="d-card-body"><span class="d-card-label">Lucro Líquido</span><strong class="d-card-value" id="lucroLiquido">R$ 0</strong></div></div>
+          <div class="d-card clientes-card"><div class="d-card-icon">👥</div><div class="d-card-body"><span class="d-card-label">Total Clientes</span><strong class="d-card-value" id="totalClientes">0</strong></div></div>
+          <div class="d-card manut-card"><div class="d-card-icon">🔄</div><div class="d-card-body"><span class="d-card-label">Manutenções Ativas</span><strong class="d-card-value" id="totalManut">0</strong></div></div>
+        </div>
+        <div class="chart-area">
+          <h3 class="chart-title">📈 Vendas por Mês</h3>
+          <div class="chart-bars" id="chartBars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENDAS SECTION -->
+    <section class="d-section d-section-alt" id="vendas">
+      <div class="d-container">
+        <div class="d-header">
+          <span class="d-label">💰 Registrar Venda</span>
+          <h2>Nova Venda</h2>
+        </div>
+        <form class="d-form" id="vendaForm">
+          <div class="form-row">
+            <div class="form-group"><label>Cliente</label><input type="text" id="clienteNome" placeholder="Nome do cliente" required></div>
+            <div class="form-group"><label>Plano</label><select id="planoTipo" required><option value="Básico">Básico - R$ 179,99</option><option value="Premium">Premium - R$ 299,99</option></select></div>
+            <div class="form-group"><label>Valor (R$)</label><input type="number" id="valorVenda" step="0.01" placeholder="179,99" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Manutenção Mensal?</label><select id="temManutencao"><option value="sim">Sim - R$ 19,90/mês</option><option value="nao">Não</option></select></div>
+            <div class="form-group"><label>Data</label><input type="date" id="dataVenda" required></div>
+            <div class="form-group"><label>Contato</label><input type="text" id="contatoCliente" placeholder="WhatsApp ou telefone"></div>
+          </div>
+          <button type="submit" class="d-btn d-btn-primary">➕ Registrar Venda</button>
+        </form>
+
+        <div style="margin-top:3rem">
+          <div class="d-header">
+            <h2 style="font-size:1.3rem">Histórico de Vendas</h2>
+          </div>
+          <div class="d-table-wrap">
+            <table class="d-table" id="tabelaVendas">
+              <thead><tr><th>Data</th><th>Cliente</th><th>Plano</th><th>Valor</th><th>Manutenção</th><th>Contato</th><th>Ação</th></tr></thead>
+              <tbody id="vendasBody"></tbody>
+            </table>
+          </div>
+          <div style="text-align:right;margin-top:.5rem">
+            <button class="d-btn d-btn-small" id="exportarCSV">📥 Exportar CSV</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTES SECTION -->
+    <section class="d-section" id="clientes">
+      <div class="d-container">
+        <div class="d-header">
+          <span class="d-label">👥 Base de Clientes</span>
+          <h2>Clientes</h2>
+        </div>
+        <div class="d-table-wrap">
+          <table class="d-table" id="tabelaClientes">
+            <thead><tr><th>Cliente</th><th>Plano</th><th>Valor</th><th>Data</th><th>Manutenção</th><th>Contato</th><th>Lucro</th></tr></thead>
+            <tbody id="clientesBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIG SECTION -->
+    <section class="d-section d-section-alt" id="config">
+      <div class="d-container">
+        <div class="d-header">
+          <span class="d-label">⚙️ Configurações</span>
+          <h2>Config</h2>
+        </div>
+        <div class="config-area">
+          <div class="config-item">
+            <div><strong>Custo domínio .com.br</strong><span>Valor que você paga por ano no Registro.br</span></div>
+            <input type="number" id="custoDominio" value="40" step="1" class="config-input">
+          </div>
+          <div class="config-item">
+            <div><strong>Custo manutenção mensal</strong><span>Valor que você cobra do cliente por mês</span></div>
+            <input type="number" id="valorManutencao" value="19.90" step="0.01" class="config-input">
+          </div>
+          <div class="config-item">
+            <div><strong>Seu custo com domínio por cliente</strong><span>Quanto você efetivamente gasta com o domínio dele</span></div>
+            <input type="number" id="custoDominioCliente" value="40" step="1" class="config-input">
+          </div>
+          <button class="d-btn d-btn-secondary" id="limparDados">🗑️ Limpar Todos os Dados</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
