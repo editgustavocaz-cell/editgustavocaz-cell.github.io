@@ -205,9 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = plans.map((plan, i) => `
       <div class="pricing-card ${plan.popular ? 'popular' : ''} pf-reveal" style="transition-delay: ${i * 0.12}s">
         ${plan.popular ? '<div class="pricing-badge">🔥 MAIS POPULAR</div>' : ''}
+        ${plan.promo ? '<div class="promo-badge">⚡ PROMOÇÃO</div>' : ''}
         <div class="pricing-header">
           <h3>${plan.name}</h3>
-          <div class="pricing-price">${plan.price} <span>${plan.period}</span></div>
+          <div class="pricing-price">
+            ${plan.promo ? `<span class="price-old">${plan.price}</span> <span class="price-promo">${plan.promoPrice}</span>` : plan.price}
+            <span>${plan.period}</span>
+          </div>
         </div>
         <ul class="pricing-features">
           ${plan.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join('')}

@@ -128,8 +128,10 @@ const PORTFOLIO = {
   // ─── PREÇOS ─────────────────────────────────────────────────
   pricing: [
     {
-      name: 'Site Essencial',
-      price: 'R$ 197',
+      name: 'Site Básico',
+      price: 'R$ 199,99',
+      promo: true,
+      promoPrice: 'R$ 179,99',
       period: 'à vista',
       features: [
         'Site completo 1 página',
@@ -146,7 +148,7 @@ const PORTFOLIO = {
       price: 'R$ 497',
       period: 'à vista',
       features: [
-        'Tudo do Essencial +',
+        'Tudo do Básico +',
         '3 páginas completas',
         'Design exclusivo',
         'Domínio .com.br incluso (1 ano)',
