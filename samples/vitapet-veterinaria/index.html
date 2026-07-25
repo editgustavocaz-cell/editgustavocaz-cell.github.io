@@ -34,6 +34,21 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}button{cur
 .sidebar .wpp-link{display:flex;align-items:center;gap:.4rem;margin-top:.5rem;padding:.5rem .7rem;background:rgba(37,211,102,.1);border-radius:8px;color:var(--wpp);font-size:.68rem;font-weight:500;transition:.25s}
 .sidebar .wpp-link:hover{background:rgba(37,211,102,.18);transform:translateX(4px)}
 
+/* ─── Sidebar Stats ─── */
+.sidebar-stats{background:rgba(255,255,255,.04);border-radius:10px;padding:.6rem .7rem;margin:.5rem 0;border:1px solid rgba(255,255,255,.05)}
+.ss-item{display:flex;align-items:center;gap:.5rem;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.ss-item:last-child{border-bottom:none}
+.ss-item .ss-ico{font-size:.85rem;flex-shrink:0;width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:rgba(240,180,41,.1);border-radius:6px}
+.ss-item div{display:flex;flex-direction:column}
+.ss-item strong{font-size:.65rem;font-weight:600;color:var(--gold);line-height:1.2;font-family:'Space Grotesk',sans-serif}
+.ss-item span{font-size:.5rem;color:rgba(255,255,255,.35);letter-spacing:.03em}
+
+/* ─── Sidebar Offer ─── */
+.sidebar-offer{background:linear-gradient(135deg,rgba(255,107,107,.12),rgba(240,180,41,.06));border:1px solid rgba(240,180,41,.12);border-radius:10px;padding:.7rem .7rem .65rem;text-align:center;margin:.3rem 0}
+.sidebar-offer .so-badge{display:inline-block;font-size:.45rem;background:var(--coral);color:#fff;padding:.08rem .4rem;border-radius:3px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.15rem}
+.sidebar-offer .so-price{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:var(--gold);line-height:1;letter-spacing:-.02em}
+.sidebar-offer .so-sub{font-size:.45rem;color:rgba(255,255,255,.35);letter-spacing:.03em;margin-top:.05rem}
+
 /* ═══ MAIN CONTENT ═══ */
 .main{margin-left:var(--sb-w);margin-top:22px;flex:1;min-height:calc(100vh - 22px);position:relative;z-index:1}
 
@@ -238,6 +253,16 @@ footer .social{display:flex;gap:.5rem;justify-content:center;margin:.4rem 0}
     <a href="#equipe"><span class="dot"></span>Equipe</a>
     <a href="#faq"><span class="dot"></span>FAQ</a>
   </nav>
+  <div class="sidebar-stats">
+    <div class="ss-item"><span class="ss-ico">🏆</span><div><strong>+500</strong><span>Pets atendidos</span></div></div>
+    <div class="ss-item"><span class="ss-ico">🕐</span><div><strong>24h</strong><span>Emergência</span></div></div>
+    <div class="ss-item"><span class="ss-ico">⭐</span><div><strong>98%</strong><span>Aprovação</span></div></div>
+  </div>
+  <div class="sidebar-offer">
+    <div class="so-badge">🔥 PRIMEIRA CONSULTA</div>
+    <div class="so-price">R$ 49</div>
+    <div class="so-sub">consulta geral por tempo limitado</div>
+  </div>
   <div class="sidebar-social">
     <a href="https://wa.me/5585996896378" target="_blank" aria-label="WhatsApp">💬</a>
     <a href="#" aria-label="Instagram">📸</a>
