@@ -62,4 +62,4 @@ portfolio/
 
 ---
 
-Feito com ❤️ por [Freebuff](https://freebuff.com)
+✨

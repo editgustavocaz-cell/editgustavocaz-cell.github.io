@@ -123,4 +123,4 @@ Livre para uso comercial e pessoal. Modifique, distribua e use como quiser.
 
 ---
 
-Feito com ❤️ por [Freebuff](https://freebuff.com)
+✨

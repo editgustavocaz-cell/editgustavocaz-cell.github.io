@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="footer-bottom">
         <span>${settings.footer.copyright}</span>
         <div class="footer-social">${socialFooterHtml}</div>
-        ${settings.footer.credits ? `<span class="footer-credits">Feito com ❤️ por <a href="https://freebuff.com">Freebuff</a></span>` : ''}
+
       </div>
     `;
   }
