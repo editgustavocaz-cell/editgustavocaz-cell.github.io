@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = plans.map((plan, i) => `
       <div class="pricing-card ${plan.popular ? 'popular' : ''} pf-reveal" style="transition-delay: ${i * 0.12}s">
         ${plan.popular ? '<div class="pricing-badge">🔥 MAIS POPULAR</div>' : ''}
+        ${plan.promo ? `<div class="promo-badge">⚡ ${plan.promoLabel || 'PROMOÇÃO'}</div>` : ''}
         <div class="pricing-header">
           <h3>${plan.name}</h3>
           <div class="pricing-price">${plan.price} <span>${plan.period}</span></div>
@@ -221,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Aviso global: não aceitamos cartão
     const warning = document.createElement('div');
     warning.className = 'no-card-warning';
-    warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito. Aceitamos <strong>dinheiro</strong>, <strong>PIX</strong> e <strong>débito</strong>.';
+    warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito nem débito.';
     grid.parentNode.insertBefore(warning, grid.nextSibling);
   }
 

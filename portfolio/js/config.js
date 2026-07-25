@@ -131,6 +131,8 @@ const PORTFOLIO = {
       name: 'Site Básico',
       price: 'R$ 179,99',
       period: 'à vista',
+      promo: true,
+      promoLabel: 'PROMOÇÃO',
       features: [
         'Site completo 1 página',
         'Design responsivo',
@@ -145,6 +147,8 @@ const PORTFOLIO = {
       name: 'Site Premium',
       price: 'R$ 299,99',
       period: 'à vista',
+      promo: true,
+      promoLabel: 'PROMOÇÃO',
       features: [
         'Tudo do Básico +',
         '3 páginas completas',
