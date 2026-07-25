@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Orçamento · Sites Profissionais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="g-nav" id="gNav">
+    <div class="g-nav-inner">
+      <a href="../" class="g-brand"><span class="prompt">❯</span> Orçamento</a>
+      <div class="g-nav-actions">
+        <button class="g-btn g-btn-outline" id="btnLimpar" title="Novo orçamento">✕ Novo</button>
+        <button class="g-btn g-btn-primary" id="btnPrint">🖨️ Imprimir / PDF</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="g-main">
+
+    <div class="g-editor">
+
+      <!-- ─── LEFT: FORM ─── -->
+      <section class="g-form-section" id="formSection">
+        <div class="g-form-header">
+          <span class="g-form-badge">📋 Dados do Cliente</span>
+          <h2>Preencha o orçamento</h2>
+        </div>
+
+        <form class="g-form" id="orcForm">
+          <!-- Cliente -->
+          <div class="g-form-grid">
+            <div class="g-field">
+              <label>Nome do Cliente *</label>
+              <input type="text" id="clienteNome" placeholder="Ex: João Silva" required>
+            </div>
+            <div class="g-field">
+              <label>Empresa / Negócio *</label>
+              <input type="text" id="clienteEmpresa" placeholder="Ex: Pizza Prime" required>
+            </div>
+            <div class="g-field">
+              <label>WhatsApp</label>
+              <input type="text" id="clienteWhats" placeholder="(85) 99999-9999">
+            </div>
+            <div class="g-field">
+              <label>E-mail</label>
+              <input type="email" id="clienteEmail" placeholder="cliente@email.com">
+            </div>
+          </div>
+
+          <!-- Plano -->
+          <div class="g-form-divider">📦 Plano & Serviços</div>
+          <div class="g-form-grid">
+            <div class="g-field">
+              <label>Plano *</label>
+              <select id="planoTipo" required>
+                <option value="basico">Site Básico — R$ 179,99</option>
+                <option value="premium" selected>Site Premium — R$ 299,99</option>
+                <option value="custom">Personalizado — Valor sob consulta</option>
+              </select>
+            </div>
+            <div class="g-field">
+              <label>Manutenção Mensal</label>
+              <select id="temManutencao">
+                <option value="sim">Sim — R$ 19,90/mês</option>
+                <option value="nao" selected>Não</option>
+              </select>
+            </div>
+            <div class="g-field">
+              <label>Prazo de Entrega</label>
+              <select id="prazoEntrega">
+                <option value="3">3 dias úteis</option>
+                <option value="5" selected>5 dias úteis</option>
+                <option value="7">7 dias úteis</option>
+                <option value="15">15 dias úteis</option>
+              </select>
+            </div>
+            <div class="g-field">
+              <label>Validade do Orçamento</label>
+              <select id="validadeOrcamento">
+                <option value="3">3 dias</option>
+                <option value="5">5 dias</option>
+                <option value="7" selected>7 dias</option>
+                <option value="15">15 dias</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Serviços extras -->
+          <div class="g-form-divider">➕ Serviços Extras (opcional)</div>
+          <div class="g-checkbox-grid" id="extrasGrid">
+            <label class="g-checkbox"><input type="checkbox" value="dominio" data-preco="40"> Domínio .com.br (R$ 40/ano)</label>
+            <label class="g-checkbox"><input type="checkbox" value="logo" data-preco="50"> Criação de Logo (R$ 50)</label>
+            <label class="g-checkbox"><input type="checkbox" value="fotos" data-preco="80"> Sessão de Fotos Profissionais (R$ 80)</label>
+            <label class="g-checkbox"><input type="checkbox" value="blog" data-preco="40"> Blog / Notícias (R$ 40)</label>
+            <label class="g-checkbox"><input type="checkbox" value="panfletos" data-preco="30"> Panfletos Digitais (R$ 30)</label>
+            <label class="g-checkbox"><input type="checkbox" value="redes" data-preco="25"> Integração Redes Sociais (R$ 25)</label>
+          </div>
+
+          <!-- Observações -->
+          <div class="g-form-divider">📝 Observações</div>
+          <div class="g-field">
+            <textarea id="observacoes" rows="3" placeholder="Observações sobre o projeto (opcional)..."></textarea>
+          </div>
+
+          <!-- Ações -->
+          <div class="g-form-actions">
+            <button type="button" class="g-btn g-btn-primary" id="btnGerar">📄 Gerar Orçamento</button>
+            <button type="button" class="g-btn g-btn-outline" id="btnSalvarRascunho">💾 Salvar Rascunho</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ─── RIGHT: PREVIEW ─── -->
+      <section class="g-preview-section" id="previewSection">
+        <div class="g-form-header">
+          <span class="g-form-badge">👁️ Preview</span>
+          <h2>Orçamento</h2>
+        </div>
+
+        <div class="g-preview-wrapper" id="previewWrapper">
+          <!-- Orçamento gerado aqui -->
+          <div class="g-budget" id="budgetPreview">
+            <div class="g-budget-empty">
+              <div class="g-budget-empty-icon">📄</div>
+              <h3>Nenhum orçamento gerado</h3>
+              <p>Preencha os dados ao lado e clique em <strong>"Gerar Orçamento"</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
