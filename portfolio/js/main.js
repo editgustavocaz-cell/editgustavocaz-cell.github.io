@@ -205,25 +205,24 @@ document.addEventListener('DOMContentLoaded', () => {
     grid.innerHTML = plans.map((plan, i) => `
       <div class="pricing-card ${plan.popular ? 'popular' : ''} pf-reveal" style="transition-delay: ${i * 0.12}s">
         ${plan.popular ? '<div class="pricing-badge">🔥 MAIS POPULAR</div>' : ''}
-        ${plan.promo ? `<div class="promo-badge">⚡ ${plan.promoLabel || 'PROMOÇÃO'}</div>` : ''}
         <div class="pricing-header">
           <h3>${plan.name}</h3>
-          <div class="pricing-price">
-            ${plan.promo ? `<span class="price-old">${plan.price}</span> <span class="price-promo">${plan.promoPrice}</span>` : plan.price}
-            <span>${plan.period}</span>
-          </div>
+          <div class="pricing-price">${plan.price} <span>${plan.period}</span></div>
         </div>
         <ul class="pricing-features">
           ${plan.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join('')}
         </ul>
-        ${plan.note ? (plan.popular 
-          ? `<div class="payment-note"><p>🚫 <strong>${plan.note}</strong></p></div>`
-          : `<div style="background:rgba(255,179,0,.1);border:1px solid rgba(255,179,0,.25);border-radius:6px;padding:.55rem .8rem;margin:-.5rem 0 1rem;text-align:center"><p style="font-size:.75rem;color:var(--accent);font-weight:600;font-family:var(--font-mono);letter-spacing:.02em">⚠️ <strong>${plan.note}</strong></p></div>`) : ''}
+        ${plan.note ? `<div style="background:rgba(255,179,0,.1);border:1px solid rgba(255,179,0,.25);border-radius:6px;padding:.55rem .8rem;margin:-.5rem 0 1rem;text-align:center"><p style="font-size:.75rem;color:var(--accent);font-weight:600;font-family:var(--font-mono);letter-spacing:.02em">⚠️ <strong>${plan.note}</strong></p></div>` : ''}
         <a href="${whatsUrl}" target="_blank" rel="noopener" class="btn ${plan.popular ? 'btn-primary' : 'btn-whatsapp'}">
           ${ICONS.whatsapp} Quero Este Plano
         </a>
       </div>
     `).join('');
+    // Aviso global: não aceitamos cartão
+    const warning = document.createElement('div');
+    warning.className = 'no-card-warning';
+    warning.innerHTML = '<span class="nw-icon">🚫</span> Não aceitamos cartão de crédito. Aceitamos <strong>dinheiro</strong> e <strong>PIX</strong>.';
+    grid.parentNode.insertBefore(warning, grid.nextSibling);
   }
 
 

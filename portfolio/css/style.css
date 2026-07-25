@@ -858,57 +858,34 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-.promo-badge {
-  display: inline-block;
-  margin: 0 auto 0.5rem;
-  padding: 0.25rem 0.9rem;
-  background: linear-gradient(135deg, var(--accent), #ff6b35);
-  color: #000;
-  border-radius: 4px;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-family: var(--font-mono);
-  animation: pulsePromo 2s ease-in-out infinite;
-}
-@keyframes pulsePromo {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 179, 0, 0.3); }
-  50% { box-shadow: 0 0 15px 3px rgba(255, 179, 0, 0.15); }
-}
-
 .pricing-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 .pricing-header h3 { font-size: 1.2rem; font-weight: 600; color: var(--primary); font-family: var(--font-heading); margin-bottom: 0.5rem; text-shadow: 0 0 8px rgba(0, 255, 65, 0.15); }
-.pricing-price { font-size: 2.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary); text-shadow: 0 0 15px rgba(0, 255, 65, 0.2); display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+.pricing-price { font-size: 2.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary); text-shadow: 0 0 15px rgba(0, 255, 65, 0.2); }
 .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-lighter); }
-.price-old { font-size: 1.3rem; color: rgba(255,255,255,0.25); text-decoration: line-through; font-weight: 400; text-shadow: none; }
-.price-promo { font-size: 2.8rem; color: var(--accent); text-shadow: 0 0 20px rgba(255, 179, 0, 0.3); background: linear-gradient(135deg, var(--accent), #ff6b35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-/* ─── Payment Warning ────────────────────────────────── */
-.payment-note {
-  background: rgba(255, 60, 60, 0.1);
-  border: 2px solid rgba(255, 60, 60, 0.3);
+/* ─── No Card Warning (global) ───────────────────────── */
+.no-card-warning {
+  max-width: 750px;
+  margin: 1.5rem auto 0;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 60, 60, 0.06);
+  border: 1.5px solid rgba(255, 60, 60, 0.2);
   border-radius: 8px;
-  padding: 0.7rem 0.9rem;
-  margin: -0.5rem 0 1.2rem;
   text-align: center;
-  animation: pulsePayment 2.5s ease-in-out infinite;
-}
-.payment-note p {
-  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
   color: #ff6b6b;
-  font-weight: 600;
   font-family: var(--font-mono);
-  letter-spacing: 0.02em;
-  line-height: 1.4;
+  line-height: 1.5;
 }
-@keyframes pulsePayment {
-  0%, 100% { border-color: rgba(255, 60, 60, 0.3); box-shadow: 0 0 0 0 rgba(255, 60, 60, 0.1); }
-  50% { border-color: rgba(255, 60, 60, 0.6); box-shadow: 0 0 15px 2px rgba(255, 60, 60, 0.08); }
-}
+.no-card-warning .nw-icon { font-size: 1.1rem; }
+.no-card-warning strong { color: #ff8a8a; }
 
 .pricing-features {
   margin-bottom: 2rem;
