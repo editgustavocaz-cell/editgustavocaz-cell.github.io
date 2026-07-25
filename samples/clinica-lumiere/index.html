@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière · Spa & Estética Natural</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--sage:#7A9E7E;--sage-l:rgba(122,158,126,.08);--sage-m:rgba(122,158,126,.15);--cream:#F5F0EB;--cream2:#EDE6DE;--cream3:#E5DCD2;--copper:#D4956A;--copper-l:rgba(212,149,106,.12);--copper-m:rgba(212,149,106,.25);--forest:#2C3630;--txt:#1A1F1C;--txt2:rgba(26,31,28,.6);--txt3:rgba(26,31,28,.25);--wpp:#25D366;--bg:#FAF7F4;--card:#FFFFFF;--border:rgba(44,54,48,.08)}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;font-weight:300;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+ul{list-style:none}
+::selection{background:var(--sage);color:#fff}
+
+.sample-banner{position:fixed;top:0;left:0;right:0;z-index:10000;background:var(--forest);color:var(--cream);text-align:center;padding:.2rem;font-size:.5rem;letter-spacing:.12em;font-weight:400;text-transform:uppercase}
+
+/* ─── BG LEAVES ─── */
+.bg-leaves{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-leaves .leaf{position:absolute;font-size:clamp(6rem,18vw,16rem);opacity:.025;transform:rotate(-15deg)}
+.bg-leaves .leaf:nth-child(1){top:-5%;right:-3%}
+.bg-leaves .leaf:nth-child(2){bottom:-8%;left:-5%;transform:rotate(25deg);font-size:clamp(8rem,22vw,20rem)}
+.bg-leaves .leaf:nth-child(3){top:40%;left:2%;font-size:clamp(3rem,8vw,7rem);opacity:.018}
+
+/* ─── NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:.6rem 1.5rem;transition:background .35s,backdrop-filter .35s,border-bottom .35s;background:transparent}
+.nav.scrolled{background:rgba(250,247,244,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav .in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:700;color:var(--txt);letter-spacing:-.02em;display:flex;align-items:center;gap:.3rem}
+.nav-brand .dot{display:inline-block;width:6px;height:6px;background:var(--sage);border-radius:50%}
+.nav-brand em{font-style:normal;color:var(--copper);font-weight:300}
+.nav-links{display:flex;align-items:center;gap:.05rem}
+.nav-links a{padding:.35rem .75rem;font-size:.65rem;color:var(--txt2);letter-spacing:.06em;text-transform:uppercase;transition:.25s;border-radius:6px;font-weight:400}
+.nav-links a:hover{color:var(--sage);background:var(--sage-l)}
+.nav-links .btn-nav{background:var(--copper);color:#fff!important;padding:.3rem .9rem;border-radius:100px;font-size:.6rem;font-weight:600;letter-spacing:.05em}
+.nav-links .btn-nav:hover{background:#c48358!important;color:#fff!important;transform:translateY(-1px)}
+.mt{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:5px;background:none;border:none}
+.mt span{width:20px;height:1.5px;background:var(--txt);border-radius:2px;transition:.3s}
+.mt.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}.mt.active span:nth-child(2){opacity:0}.mt.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* ─── HERO — SPLIT ORGANIC ─── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;background:var(--cream)}
+.hero-left{display:flex;align-items:center;padding:8rem 3rem 4rem;position:relative}
+.hero-left .inner{position:relative;z-index:2;max-width:500px}
+.hero-left .badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.55rem;color:var(--copper);letter-spacing:.18em;text-transform:uppercase;font-weight:500;margin-bottom:.8rem}
+.hero-left .badge::before{content:'';width:24px;height:1px;background:var(--copper)}
+.hero-left h1{font-family:'Sora',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700;line-height:1.05;letter-spacing:-.03em;color:var(--forest);margin-bottom:.3rem}
+.hero-left h1 .thin{display:block;font-family:'Inter',sans-serif;font-size:clamp(.7rem,1.2vw,.85rem);font-weight:300;color:var(--copper);letter-spacing:.12em;text-transform:uppercase;margin-top:.3rem}
+.hero-left p{font-size:.82rem;color:var(--txt2);line-height:1.8;margin:.8rem 0 1.5rem;max-width:400px;font-weight:300}
+.hero-left .btn-group{display:flex;gap:.5rem;flex-wrap:wrap}
+.hero-left .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.3rem;border:none;border-radius:100px;font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:.3s;font-family:'Inter',sans-serif}
+.hero-left .btn-primary{background:var(--sage);color:#fff}
+.hero-left .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--sage-m)}
+.hero-left .btn-out{background:transparent;border:1px solid var(--border);color:var(--txt)}
+.hero-left .btn-out:hover{background:var(--sage-l);border-color:var(--sage);color:var(--sage)}
+.hero-right{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cream2),var(--cream3))}
+.hero-right .deco-circle{position:absolute;width:clamp(300px,40vw,600px);height:clamp(300px,40vw,600px);border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(122,158,126,.12),rgba(212,149,106,.06));animation:floatDrift 12s ease-in-out infinite}
+@keyframes floatDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(-3%,2%)}}
+.hero-right .deco-circle2{position:absolute;width:clamp(200px,28vw,420px);height:clamp(200px,28vw,420px);border-radius:50%;border:1px solid var(--sage-m);animation:floatDrift 15s ease-in-out infinite reverse}  .hero-right{min-height:40vh}  .hero-right .hero-img{position:relative;z-index:2;width:clamp(200px,28vw,400px);height:clamp(200px,28vw,400px);border-radius:50%;overflow:hidden;box-shadow:0 20px 60px rgba(44,54,48,.08);border:4px solid rgba(255,255,255,.6)}
+.hero-right .hero-img img{width:100%;height:100%;object-fit:cover}
+.hero-stats{display:flex;gap:2rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.hero-stats div{text-align:left}
+.hero-stats strong{display:block;font-family:'Sora',sans-serif;font-size:1.3rem;color:var(--sage);font-weight:700;letter-spacing:-.02em}
+.hero-stats span{font-size:.5rem;color:var(--txt2);letter-spacing:.12em;text-transform:uppercase;font-weight:400}
+
+/* ─── CURVED DIVIDER ─── */
+.curve-div{position:relative;height:80px;overflow:hidden;margin-top:-1px}
+.curve-div svg{position:absolute;bottom:0;width:100%;height:80px;fill:var(--bg)}
+
+/* ─── SECTIONS ─── */
+section{padding:5rem 1.5rem;position:relative;z-index:1}
+.container{max-width:1120px;margin:0 auto}
+.sec-t{font-size:.5rem;color:var(--copper);letter-spacing:.25em;text-transform:uppercase;font-weight:500;margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem}
+.sec-t::before{content:'';width:20px;height:1px;background:var(--copper)}
+.sec-h{font-family:'Sora',sans-serif;font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:700;color:var(--forest);letter-spacing:-.02em;line-height:1.1;margin-bottom:.3rem}
+.sec-h em{color:var(--copper);font-style:normal}
+.sec-p{font-size:.78rem;color:var(--txt2);max-width:480px;line-height:1.7;font-weight:300}
+.sec-ctr{text-align:center}
+.sec-ctr .sec-t{justify-content:center}
+.sec-ctr .sec-p{margin:0 auto}
+
+.section-alt{background:var(--cream)}
+.section-forest{background:var(--forest);color:var(--cream)}
+.section-forest .sec-t{color:var(--copper)}.section-forest .sec-h{color:var(--cream)}.section-forest .sec-p{color:rgba(245,240,235,.6)}
+
+/* ─── PHILOSOPHY ─── */
+.phil-g{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.phil-txt .big-num{font-family:'Sora',sans-serif;font-size:clamp(4rem,8vw,7rem);font-weight:800;color:var(--sage-l);line-height:1;letter-spacing:-.04em;margin-bottom:-.5rem}
+.phil-txt .quote{font-family:'Sora',sans-serif;font-size:clamp(1.1rem,1.8vw,1.4rem);font-weight:400;line-height:1.5;color:var(--forest);position:relative;padding-left:1.2rem;border-left:3px solid var(--copper);margin-bottom:1rem}
+.phil-txt p{font-size:.75rem;color:var(--txt2);line-height:1.8;margin-bottom:.5rem;font-weight:300}
+.phil-txt .tags-g{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.8rem}
+.phil-txt .tags-g span{display:flex;align-items:center;gap:.2rem;font-size:.58rem;color:var(--sage);font-weight:500;background:var(--sage-l);padding:.2rem .55rem;border-radius:4px}
+.phil-img{position:relative}
+.phil-img .frame{border-radius:20px;overflow:hidden;box-shadow:0 8px 30px rgba(44,54,48,.04)}
+.phil-img .frame img{width:100%;height:clamp(300px,40vw,480px);object-fit:cover;transition:.6s}
+.phil-img .frame:hover img{transform:scale(1.05)}
+.phil-img .stamp{position:absolute;top:-.5rem;right:-.5rem;width:80px;height:80px;background:var(--copper);color:#fff;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.5rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;text-align:center;line-height:1.2;box-shadow:0 4px 15px var(--copper-m)}
+.phil-img .stamp strong{font-family:'Sora',sans-serif;font-size:.85rem;display:block}
+
+/* ─── SERVICES ─── */
+.serv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.serv-card{background:var(--card);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:.4s;border:1px solid var(--border);position:relative;overflow:hidden}
+.serv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--sage);transform:scaleX(0);transition:.4s;transform-origin:left}
+.serv-card:hover::after{transform:scaleX(1)}
+.serv-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(44,54,48,.04);border-color:var(--sage-m)}
+.serv-card .ico{font-size:2rem;margin-bottom:.4rem;display:block}
+.serv-card h4{font-family:'Sora',sans-serif;font-size:.9rem;font-weight:600;color:var(--forest);margin-bottom:.15rem}
+.serv-card p{font-size:.62rem;color:var(--txt2);line-height:1.5;font-weight:300}
+.serv-card .price{display:inline-block;margin-top:.5rem;font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:700;color:var(--copper);background:var(--copper-l);padding:.15rem .6rem;border-radius:6px;letter-spacing:-.01em}
+.serv-card .time{font-size:.5rem;color:var(--txt3);margin-top:.15rem}
+
+/* ─── TREATMENTS (large cards) ─── */
+.treat-g{display:grid;grid-template-columns:1fr;gap:.8rem;max-width:800px;margin:0 auto}
+.treat-item{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.5rem;transition:.3s}
+.treat-item:hover{border-color:var(--sage-m);transform:translateX(6px);box-shadow:0 4px 20px rgba(44,54,48,.02)}
+.treat-item .inf{display:flex;flex-direction:column;gap:.05rem}
+.treat-item .inf .name{font-family:'Sora',sans-serif;font-size:.82rem;font-weight:600;color:var(--forest)}
+.treat-item .inf .desc{font-size:.62rem;color:var(--txt2);font-weight:300}
+.treat-item .inf .tags{display:flex;gap:.2rem;margin-top:.1rem}
+.treat-item .inf .tags span{font-size:.48rem;background:var(--sage-l);color:var(--sage);padding:.08rem .3rem;border-radius:3px;font-weight:500}
+.treat-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:.1rem}
+.treat-item .right .price{font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:700;color:var(--copper);letter-spacing:-.01em;line-height:1}
+.treat-item .right .time{font-size:.48rem;color:var(--txt3);letter-spacing:.05em;text-transform:uppercase}
+
+/* ─── GALLERY — Masonry Style ─── */
+.gal-g{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.gal-item{position:relative;overflow:hidden;border-radius:12px;aspect-ratio:1}
+.gal-item:first-child{grid-row:span 2;aspect-ratio:auto}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-item .cap{position:absolute;bottom:0;left:0;right:0;padding:2rem .8rem .6rem;background:linear-gradient(transparent,rgba(44,54,48,.6));color:#fff;font-size:.65rem;font-weight:400;opacity:0;transition:.4s}
+.gal-item:hover .cap{opacity:1}
+.gal-item .cap em{display:block;font-size:.5rem;opacity:.7;font-style:normal;margin-top:.05rem}
+
+/* ─── TESTIMONIALS ─── */
+.test-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.test-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:.3s}
+.test-card:hover{transform:translateY(-3px);border-color:var(--sage-m);box-shadow:0 8px 30px rgba(44,54,48,.03)}
+.test-card .stars{font-size:.65rem;color:var(--copper);letter-spacing:.1em;margin-bottom:.4rem}
+.test-card blockquote{font-size:.72rem;color:var(--txt2);line-height:1.7;font-weight:300;font-style:italic;margin-bottom:.6rem}
+.test-card .author{display:flex;align-items:center;gap:.5rem}
+.test-card .author img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--sage-m)}
+.test-card .author div{display:flex;flex-direction:column}
+.test-card .author strong{font-size:.68rem;font-weight:600;color:var(--forest)}
+.test-card .author span{font-size:.5rem;color:var(--txt3);letter-spacing:.05em;text-transform:uppercase}
+
+/* ─── FAQ TOOLTIP ─── */
+.faq-g{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.faq-item{position:relative;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem;transition:.2s;cursor:help}
+.faq-item:hover{border-color:var(--sage-m);box-shadow:0 4px 20px rgba(44,54,48,.03)}
+.faq-item .q-row{display:flex;align-items:center;gap:.6rem}
+.faq-item .q-row .q-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1px solid var(--border);color:var(--copper);font-size:.6rem;border-radius:50%;flex-shrink:0;font-weight:500;background:var(--copper-l);transition:.3s}
+.faq-item:hover .q-row .q-icon{background:var(--copper);color:#fff;border-color:var(--copper)}
+.faq-item .q-row .q-text{font-size:.72rem;font-weight:500;color:var(--forest);font-family:'Sora',sans-serif}
+.faq-item .tooltip{position:absolute;z-index:10;top:calc(100% + 8px);left:0;right:0;background:var(--card);border:1px solid var(--sage-m);border-radius:10px;padding:.8rem 1rem;box-shadow:0 12px 40px rgba(44,54,48,.08);opacity:0;pointer-events:none;transform:translateY(-4px);transition:all .25s}
+.faq-item:hover .tooltip{opacity:1;pointer-events:auto;transform:translateY(0)}
+.faq-item .tooltip p{font-size:.63rem;color:var(--txt2);line-height:1.7;font-weight:300}
+.faq-item .tooltip::before{content:'';position:absolute;top:-5px;left:24px;width:10px;height:10px;background:var(--card);border-left:1px solid var(--sage-m);border-top:1px solid var(--sage-m);transform:rotate(45deg)}
+
+/* ─── CTA ─── */
+.cta-section{text-align:center;padding:4rem 1.5rem;background:var(--cream);position:relative;overflow:hidden}
+.cta-section::before{content:'✦';position:absolute;top:-2rem;left:-1rem;font-size:clamp(10rem,30vw,30rem);color:var(--sage-l);opacity:.5;pointer-events:none;transform:rotate(-15deg)}
+.cta-section .in{position:relative;z-index:2;max-width:600px;margin:0 auto}
+.cta-section .in .ico-b{font-size:2.5rem;margin-bottom:.3rem;display:block}
+.cta-section .in h2{font-family:'Sora',sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);color:var(--forest);font-weight:700;letter-spacing:-.02em}
+.cta-section .in h2 em{color:var(--copper);font-style:normal}
+.cta-section .in p{font-size:.75rem;color:var(--txt2);max-width:420px;margin:.3rem auto .8rem;font-weight:300;line-height:1.6}
+.cta-section .in .btn{display:inline-flex;align-items:center;gap:.35rem;padding:.5rem 1.5rem;background:var(--copper);color:#fff;border:none;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:.3s}
+.cta-section .in .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--copper-m)}
+.cta-section .in .btn-sec{background:var(--sage);color:#fff;margin-left:.4rem}
+.cta-section .in .btn-sec:hover{box-shadow:0 8px 25px var(--sage-m)}
+
+/* ─── INSTAGRAM STRIP ─── */
+.insta-strip{background:var(--card);text-align:center;padding:1.5rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.insta-strip .in{max-width:600px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.8rem;flex-wrap:wrap}
+.insta-strip .in .txt{font-size:.7rem;color:var(--txt2);font-weight:300}
+.insta-strip .in .txt strong{color:var(--forest);font-weight:600}
+.insta-strip .in .btn{display:inline-flex;align-items:center;gap:.3rem;padding:.35rem 1rem;background:linear-gradient(135deg,var(--copper),var(--sage));color:#fff;border:none;border-radius:100px;font-size:.6rem;font-weight:600;transition:.3s}
+.insta-strip .in .btn:hover{transform:translateY(-2px);opacity:.9}
+
+/* ─── FOOTER ─── */
+footer{background:var(--forest);color:rgba(245,240,235,.6);padding:3rem 1.5rem 1.5rem}
+footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;max-width:1120px;margin:0 auto 1rem}
+footer h3{font-family:'Sora',sans-serif;font-size:1rem;color:var(--cream);margin-bottom:.3rem;letter-spacing:-.01em}
+footer h3 em{color:var(--copper);font-style:normal}
+footer p{font-size:.62rem;color:rgba(245,240,235,.4);line-height:1.7;font-weight:300}
+footer h4{font-size:.48rem;color:var(--copper);letter-spacing:.22em;margin-bottom:.3rem;font-weight:500;text-transform:uppercase}
+footer .lnks{display:flex;flex-direction:column;gap:.15rem}
+footer .lnks a{font-size:.62rem;color:rgba(245,240,235,.4);transition:.25s;font-weight:300}
+footer .lnks a:hover{color:var(--cream)}
+footer .bot{border-top:1px solid rgba(245,240,235,.06);padding-top:.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1120px;margin:0 auto;font-size:.5rem;color:rgba(245,240,235,.2);font-weight:300}
+
+/* ─── REVEAL ─── */
+.fade-up{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}.fade-up.vis{opacity:1;transform:translateY(0)}
+.fade-l{opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s}.fade-l.vis{opacity:1;transform:translateX(0)}
+.fade-r{opacity:0;transform:translateX(20px);transition:opacity .6s,transform .6s}.fade-r.vis{opacity:1;transform:translateX(0)}
+.scale-in{opacity:0;transform:scale(.95);transition:opacity .6s,transform .6s}.scale-in.vis{opacity:1;transform:scale(1)}
+
+/* ─── FLOATING WPP ─── */
+.wpp-float{position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;width:50px;height:50px;background:var(--wpp);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);transition:.3s;animation:pulseWpp 2.5s infinite;color:#fff;font-size:1.2rem}
+@keyframes pulseWpp{0%{box-shadow:0 4px 20px rgba(37,211,102,.3)}50%{box-shadow:0 4px 30px rgba(37,211,102,.5)}100%{box-shadow:0 4px 20px rgba(37,211,102,.3)}}
+.wpp-float:hover{transform:scale(1.1) rotate(-5deg)}
+
+/* ─── MOBILE ─── */
+@media(max-width:968px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:6rem 1.5rem 3rem}
+  .hero-right{min-height:50vh}
+  .phil-g{grid-template-columns:1fr;gap:2rem}
+  .serv-g{grid-template-columns:repeat(2,1fr)}
+  .test-g{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+  .gal-g{grid-template-columns:repeat(2,1fr)}
+  .gal-item:first-child{grid-row:span 1;aspect-ratio:1}
+  footer .grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .hero-right{min-height:auto;padding:2rem}
+  .mt{display:flex}
+  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:280px;background:rgba(250,247,244,.98);backdrop-filter:blur(12px);flex-direction:column;padding:5rem 1.5rem;gap:.2rem;transition:.4s;z-index:999;border-left:1px solid var(--border)}
+  .nav-links.active{right:0}
+  .nav-links a{padding:.5rem .8rem;font-size:.68rem;border-radius:6px}
+  .nav-links .btn-nav{text-align:center}
+  section{padding:3.5rem 1rem}
+  .hero-stats{gap:1rem;flex-wrap:wrap}
+  .serv-g{grid-template-columns:1fr;max-width:320px;margin:0 auto}
+  .faq-g{grid-template-columns:1fr}
+  footer .grid{grid-template-columns:1fr;gap:1.2rem}
+  footer .bot{flex-direction:column;text-align:center}
+  .treat-item{flex-direction:column;align-items:flex-start;gap:.4rem}
+  .treat-item .right{flex-direction:row;align-items:center;gap:.6rem}
+  .gal-g{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .hero-left h1{font-size:2rem}.hero-left .btn{width:100%;justify-content:center}
+  .phil-img .stamp{width:65px;height:65px;top:-.3rem;right:-.3rem}
+  .phil-img .stamp strong{font-size:.7rem}
+  .treat-item{padding:1rem}
+  .gal-g{grid-template-columns:1fr 1fr;gap:.4rem}
+}
+</style>
+</head>
+<body>
+
+<div class="sample-banner">✦ Lumière · Spa & Estética · Site de exemplo</div>
+
+<div class="bg-leaves">
+  <span class="leaf">🌿</span>
+  <span class="leaf">🌱</span>
+  <span class="leaf">🍃</span>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="nav">
+  <div class="in">
+    <a href="#hero" class="nav-brand"><span class="dot"></span> Lumi<em>ère</em></a>
+    <button class="mt" id="mt" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nl">
+      <a href="#filosofia">Filosofia</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#tratamentos">Tratamentos</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20Lumière" target="_blank" rel="noopener" class="btn-nav">💬 Agendar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="inner">
+      <div class="badge fade-up">Natureza · Ciência · Cuidado</div>
+      <h1 class="fade-up" style="transition-delay:.1s">Lumière<span class="thin">Spa & Estética Natural</span></h1>
+      <p class="fade-up" style="transition-delay:.2s">Onde a natureza encontra a ciência. Cada tratamento é formulado com ingredientes naturais e tecnologia de ponta para revelar sua beleza autêntica.</p>
+      <div class="btn-group fade-up" style="transition-delay:.3s">
+        <a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20Lumière" target="_blank" rel="noopener" class="btn btn-primary">💬 Agendar Avaliação</a>
+        <a href="#servicos" class="btn btn-out">Ver Serviços →</a>
+      </div>
+      <div class="hero-stats fade-up" style="transition-delay:.4s">
+        <div><strong>8+</strong><span>Anos</span></div>
+        <div><strong>12k</strong><span>Clientes</span></div>
+        <div><strong>✦4.9</strong><span>Avaliação</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="deco-circle"></div>
+    <div class="deco-circle2"></div>
+    <div class="hero-img scale-in">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=500&h=500&fit=crop" alt="Spa" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:4rem>✨</div>'">
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHILOSOPHY ─── -->
+<section class="container" id="filosofia">
+  <div class="phil-g">
+    <div class="phil-txt fade-l">
+      <div class="big-num">✦</div>
+      <div class="quote">"A verdadeira beleza nasce do equilíbrio entre o que a natureza oferece e o que a ciência permite."</div>
+      <p>Na Lumière, acreditamos que cuidar da pele é um ritual de conexão consigo mesma. Por isso, cada tratamento é desenvolvido com ingredientes botânicos selecionados e equipamentos de última geração — unindo o melhor dos dois mundos.</p>
+      <p>Nossa equipe é formada por especialistas apaixonados pelo que fazem. Mais que resultados estéticos, buscamos transformar a forma como você se vê e se sente.</p>
+      <div class="tags-g">
+        <span>🌿 Ingredientes Naturais</span>
+        <span>🔬 Tecnologia Alemã</span>
+        <span>👩‍⚕️ Equipe Especializada</span>
+        <span>🌱 Cruelty-free</span>
+      </div>
+    </div>
+    <div class="phil-img fade-r">
+      <div class="frame"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=500&h=600&fit=crop" alt="Sala de atendimento" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:3rem;border-radius:20px>🌿</div>'"></div>
+      <div class="stamp"><strong>8+</strong>Anos de<br>Cuidado</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="section-alt" id="servicos">
+  <div class="container">
+    <div class="sec-ctr fade-up">
+      <div class="sec-t">Nossas Especialidades</div>
+      <h2 class="sec-h">Rituais de <em>Beleza Natural</em></h2>
+      <p class="sec-p">Cada serviço é pensado para oferecer uma experiência única de cuidado e renovação.</p>
+    </div>
+    <div class="serv-g" style="margin-top:2.5rem">
+      <div class="serv-card scale-in"><span class="ico">✨</span><h4>Limpeza de Pele</h4><p>Extração profunda com ativos botânicos para renovação imediata</p><span class="price">R$ 149</span><div class="time">60 min</div></div>
+      <div class="serv-card scale-in" style="transition-delay:.06s"><span class="ico">🌸</span><h4>Peeling Natural</h4><p>Esfoliação com ácidos naturais para manchas e luminosidade</p><span class="price">R$ 199</span><div class="time">45 min</div></div>
+      <div class="serv-card scale-in" style="transition-delay:.12s"><span class="ico">💎</span><h4>Microagulhamento</h4><p>Estimulação de colágeno com resultados progressivos e naturais</p><span class="price">R$ 349</span><div class="time">90 min</div></div>
+      <div class="serv-card scale-in" style="transition-delay:.18s"><span class="ico">🌹</span><h4>Radiofrequência</h4><p>Lifting facial não-invasivo para firmeza e contorno</p><span class="price">R$ 249</span><div class="time">60 min</div></div>
+      <div class="serv-card scale-in" style="transition-delay:.24s"><span class="ico">💧</span><h4>Hidrafacial</h4><p>Limpeza + hidratação profunda + antioxidantes em 30 minutos</p><span class="price">R$ 179</span><div class="time">30 min</div></div>
+      <div class="serv-card scale-in" style="transition-delay:.3s"><span class="ico">🧬</span><h4>Bioestimuladores</h4><p>Colágeno e elastina naturais para resultado duradouro</p><span class="price">R$ 599</span><div class="time">60 min</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TREATMENTS LIST ─── -->
+<section class="container" id="tratamentos">
+  <div class="sec-ctr fade-up">
+    <div class="sec-t">Detalhamento</div>
+    <h2 class="sec-h">Nossos <em>Tratamentos</em></h2>
+    <p class="sec-p">Conheça cada procedimento com detalhes de preparo, duração e benefícios.</p>
+  </div>
+  <div class="treat-g" style="margin-top:2.5rem">
+    <div class="treat-item fade-up"><div class="inf"><span class="name">✨ Limpeza de Pele Premium</span><span class="desc">Extração profunda com ativos botânicos, calmante pós-procedimento e máscara revitalizante</span><div class="tags"><span>🔬 Ativos importados</span><span>🌿 Calmante natural</span></div></div><div class="right"><span class="price">R$ 149</span><span class="time">60 min</span></div></div>
+    <div class="treat-item fade-up" style="transition-delay:.04s"><div class="inf"><span class="name">🌸 Peeling Químico Suave</span><span class="desc">Esfoliação controlada com ácidos de frutas para uniformizar textura e luminosidade</span><div class="tags"><span>🍋 Ácido glicólico</span><span>✨ Sem downtime</span></div></div><div class="right"><span class="price">R$ 199</span><span class="time">45 min</span></div></div>
+    <div class="treat-item fade-up" style="transition-delay:.08s"><div class="inf"><span class="name">💎 Microagulhamento Robusto</span><span class="desc">Estimulação profunda de colágeno com roller digital e soro bioativo</span><div class="tags"><span>🧬 Colágeno natural</span><span>📈 3 sessões</span></div></div><div class="right"><span class="price">R$ 349</span><span class="time">90 min</span></div></div>
+    <div class="treat-item fade-up" style="transition-delay:.12s"><div class="inf"><span class="name">🌹 Radiofrequência Facial</span><span class="desc">Lifting não-invasivo com aquecimento controlado para firmeza e definição</span><div class="tags"><span>🔥 Aquecimento 42°C</span><span>✨ Resultado imediato</span></div></div><div class="right"><span class="price">R$ 249</span><span class="time">60 min</span></div></div>
+    <div class="treat-item fade-up" style="transition-delay:.16s"><div class="inf"><span class="name">💧 Hidrafacial Deluxe</span><span class="desc">Limpeza + esfoliação + extração + hidratação + antioxidantes + LED em um só procedimento</span><div class="tags"><span>🌟 6 em 1</span><span>⚡ Rápido</span></div></div><div class="right"><span class="price">R$ 179</span><span class="time">30 min</span></div></div>
+    <div class="treat-item fade-up" style="transition-delay:.2s"><div class="inf"><span class="name">🧬 Bioestimuladores de Colágeno</span><span class="desc">Estimulação natural e progressiva da produção de colágeno e elastina</span><div class="tags"><span>⏳ 6 meses</span><span>🏆 Resultado top</span></div></div><div class="right"><span class="price">R$ 599</span><span class="time">60 min</span></div></div>
+  </div>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section class="section-alt">
+  <div class="container">
+    <div class="sec-ctr fade-up">
+      <div class="sec-t">Ambiente</div>
+      <h2 class="sec-h">Nosso <em>Espaço</em></h2>
+      <p class="sec-p">Cada detalhe pensado para seu conforto e bem-estar.</p>
+    </div>
+    <div class="gal-g" style="margin-top:2rem">
+      <div class="gal-item scale-in"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=500&h=500&fit=crop" alt="Sala de atendimento" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:2rem>🌿</div>'"><div class="cap">Sala de Atendimento<em>Ambiente preparado para seu conforto</em></div></div>
+      <div class="gal-item scale-in" style="transition-delay:.04s"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=300&h=300&fit=crop" alt="Equipamentos" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:2rem>🔬</div>'"><div class="cap">Equipamentos<em>Tecnologia de ponta</em></div></div>
+      <div class="gal-item scale-in" style="transition-delay:.08s"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300&h=300&fit=crop" alt="Produtos" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:2rem>🧴</div>'"><div class="cap">Produtos Naturais<em>Ingredientes selecionados</em></div></div>
+      <div class="gal-item scale-in" style="transition-delay:.12s"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=300&h=300&fit=crop" alt="Bem-estar" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:2rem>✨</div>'"><div class="cap">Espaço Bem-Estar<em>Momentos de relaxamento</em></div></div>
+      <div class="gal-item scale-in" style="transition-delay:.16s"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=300&h=300&fit=crop" alt="Recepção" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:2rem>🏡</div>'"><div class="cap">Recepção<em>Ambiente acolhedor</em></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="container">
+  <div class="sec-ctr fade-up">
+    <div class="sec-t">Depoimentos</div>
+    <h2 class="sec-h">O que nossas <em>clientes dizem</em></h2>
+  </div>
+  <div class="test-g" style="margin-top:2rem">
+    <div class="test-card scale-in">
+      <div class="stars">★★★★★</div>
+      <blockquote>"A Lumière mudou minha relação com minha pele. O acompanhamento é tão cuidadoso que os resultados vão muito além da estética."</blockquote>
+      <div class="author">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<div style=width:36px;height:36px;border-radius:50%;background:var(--sage-l);display:flex;align-items:center;justify-content:center;font-size:.8rem>👤</div>'">
+        <div><strong>Ana Paula</strong><span>Cliente há 2 anos</span></div>
+      </div>
+    </div>
+    <div class="test-card scale-in" style="transition-delay:.06s">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Ambiente acolhedor, profissionais incríveis e produtos que realmente funcionam. O protocolo de hidratação salvou minha pele no verão!"</blockquote>
+      <div class="author">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<div style=width:36px;height:36px;border-radius:50%;background:var(--sage-l);display:flex;align-items:center;justify-content:center;font-size:.8rem>👤</div>'">
+        <div><strong>Juliana Costa</strong><span>Cliente há 1 ano</span></div>
+      </div>
+    </div>
+    <div class="test-card scale-in" style="transition-delay:.12s">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Faço microagulhamento há 6 meses e o resultado é incrível. Minha pele nunca esteve tão firme e uniforme. Super recomendo!"</blockquote>
+      <div class="author">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<div style=width:36px;height:36px;border-radius:50%;background:var(--sage-l);display:flex;align-items:center;justify-content:center;font-size:.8rem>👤</div>'">
+        <div><strong>Marina Santos</strong><span>Cliente há 6 meses</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="section-alt" id="faq">
+  <div class="container">
+    <div class="sec-ctr fade-up">
+      <div class="sec-t">FAQ</div>
+      <h2 class="sec-h">Dúvidas <em>Frequentes</em></h2>
+    </div>
+    <div class="faq-g" style="margin-top:2rem">
+      <div class="faq-item fade-up"><div class="q-row"><span class="q-icon">?</span><span class="q-text">Quanto tempo dura cada sessão?</span></div><div class="tooltip"><p>Limpeza de pele ~60 min, microagulhamento ~90 min, hidrafacial ~30 min. Na avaliação gratuita explicamos tudo.</p></div></div>
+      <div class="faq-item fade-up" style="transition-delay:.04s"><div class="q-row"><span class="q-icon">?</span><span class="q-text">Precisa de preparo antes de vir?</span></div><div class="tooltip"><p>Chegar com a pele limpa e sem maquiagem. Para procedimentos mais invasivos, evitar exposição ao sol 48h antes.</p></div></div>
+      <div class="faq-item fade-up" style="transition-delay:.08s"><div class="q-row"><span class="q-icon">?</span><span class="q-text">Os procedimentos são dolorosos?</span></div><div class="tooltip"><p>Utilizamos anestésicos tópicos e protocolos especiais de conforto. Nossa equipe é treinada para minimizar qualquer desconforto.</p></div></div>
+      <div class="faq-item fade-up" style="transition-delay:.12s"><div class="q-row"><span class="q-icon">?</span><span class="q-text">Aceitam cartão e parcelamento?</span></div><div class="tooltip"><p>Sim! Cartões de crédito, débito, PIX e parcelamento em até 6x sem juros.</p></div></div>
+      <div class="faq-item fade-up" style="transition-delay:.16s"><div class="q-row"><span class="q-icon">?</span><span class="q-text">Resultados são permanentes?</span></div><div class="tooltip"><p>Depende do procedimento. Sessões de manutenção são recomendadas para resultados duradouros. Explicamos tudo na avaliação.</p></div></div>
+      <div class="faq-item fade-up" style="transition-delay:.2s"><div class="q-row"><span class="q-icon">?</span><span class="q-text">Tem estacionamento?</span></div><div class="tooltip"><p>Sim! Estacionamento gratuito no local. Também temos bicicletário e fácil acesso de uber/táxi.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<div class="cta-section">
+  <div class="in scale-in">
+    <span class="ico-b">🌿</span>
+    <h2>Sua beleza <em>merece esse cuidado</em></h2>
+    <p>Agende uma avaliação gratuita e descubra o tratamento ideal para sua pele.</p>
+    <a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20Lumière" target="_blank" rel="noopener" class="btn">💬 Agendar Avaliação Gratuita</a>
+  </div>
+</div>
+
+<!-- ─── INSTAGRAM ─── -->
+<div class="insta-strip">
+  <div class="in">
+    <span class="txt">📸 Siga <strong>@lumiere.spa</strong> e veja nossos rituais de beleza</span>
+    <a href="#" target="_blank" rel="noopener" class="btn">📷 Seguir</a>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="grid">
+    <div><h3>Lumi<em>ère</em></h3><p>Spa & Estética Natural desde 2018. Onde a natureza encontra a ciência para revelar sua beleza autêntica.</p></div>
+    <div><h4>Navegue</h4><div class="lnks"><a href="#hero">Início</a><a href="#filosofia">Filosofia</a><a href="#servicos">Serviços</a><a href="#tratamentos">Tratamentos</a><a href="#faq">FAQ</a></div></div>
+    <div><h4>Contato</h4><div class="lnks"><a href="https://wa.me/5585996896378" target="_blank">💬 WhatsApp</a><a href="#">📸 @lumiere.spa</a><a href="#">📍 Rua Silva Paulet, 1420</a></div></div>
+  </div>
+  <div class="bot"><span>© 2026 Lumière. Site de exemplo — demonstração de capacidades.</span><span>🌿 Beleza que transforma</span></div>
+</footer>
+
+<!-- 📱 FLOATING WPP -->
+<a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20Lumière" target="_blank" rel="noopener" class="wpp-float">💬</a>
+
+<script>
+const appear = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); appear.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-up, .fade-l, .fade-r, .scale-in').forEach(el => appear.observe(el));
+
+// ── MOBILE NAV ──
+const mt = document.getElementById('mt'), nl = document.getElementById('nl');
+mt.addEventListener('click', () => { mt.classList.toggle('active'); nl.classList.toggle('active'); });
+nl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mt.classList.remove('active'); nl.classList.remove('active'); }));
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VitaPet · Clínica Veterinária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1B2A4A;--navy2:rgba(27,42,74,.06);--navy3:rgba(27,42,74,.12);--coral:#FF6B6B;--coral2:rgba(255,107,107,.10);--coral3:rgba(255,107,107,.20);--gold:#F0B429;--gold2:rgba(240,180,41,.12);--cream:#FFF5F0;--cream2:#F5EDE6;--cream3:#EDE3DA;--txt:#1A1F2E;--txt2:rgba(26,31,46,.55);--txt3:rgba(26,31,46,.25);--wpp:#25D366;--card:#fff;--border:rgba(27,42,74,.06);--sb-w:260px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--txt);overflow-x:hidden;font-weight:300;font-size:15px;line-height:1.6;display:flex;min-height:100vh}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}ul{list-style:none}::selection{background:var(--navy);color:#fff}
+
+.sample-banner{position:fixed;top:0;left:0;right:0;z-index:10000;background:var(--navy);color:#fff;text-align:center;padding:3px 10px;font-size:10px;letter-spacing:.12em;font-weight:400;height:22px}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{position:fixed;top:22px;left:0;bottom:0;width:var(--sb-w);background:var(--navy);color:rgba(255,255,255,.7);z-index:900;display:flex;flex-direction:column;padding:2rem 1.5rem;overflow-y:auto}
+.sidebar-brand{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:.25rem;display:flex;align-items:center;gap:.4rem;letter-spacing:-.02em}
+.sidebar-brand span{font-size:1.1rem}
+.sidebar .sub{font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;font-weight:400;margin-bottom:2rem}
+.sidebar-nav{display:flex;flex-direction:column;gap:.15rem;flex:1}
+.sidebar-nav a{padding:.45rem .7rem;color:rgba(255,255,255,.5);font-size:.75rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;transition:.25s;border-radius:6px;display:flex;align-items:center;gap:.6rem}
+.sidebar-nav a .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.3;transition:.25s}
+.sidebar-nav a:hover{color:var(--gold);background:rgba(240,180,41,.06)}
+.sidebar-nav a:hover .dot{opacity:1;background:var(--gold)}
+.sidebar-nav .active{color:var(--gold);background:rgba(240,180,41,.06)}
+.sidebar-nav .active .dot{opacity:1;background:var(--gold)}
+.sidebar-social{display:flex;gap:.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06)}
+.sidebar-social a{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.3);transition:.25s}
+.sidebar-social a:hover{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.06)}
+.sidebar .wpp-link{display:flex;align-items:center;gap:.4rem;margin-top:.5rem;padding:.5rem .7rem;background:rgba(37,211,102,.1);border-radius:8px;color:var(--wpp);font-size:.68rem;font-weight:500;transition:.25s}
+.sidebar .wpp-link:hover{background:rgba(37,211,102,.18);transform:translateX(4px)}
+
+/* ═══ MAIN CONTENT ═══ */
+.main{margin-left:var(--sb-w);margin-top:22px;flex:1;min-height:calc(100vh - 22px);position:relative;z-index:1}
+
+/* ═══ HERO ═══ */
+.hero{min-height:calc(100vh - 22px);display:flex;flex-direction:column;justify-content:center;padding:4rem 4rem 3rem;position:relative;overflow:hidden;background:linear-gradient(170deg,#FFF5F0 0%,#F5EDE6 40%,#EDE3DA 100%)}
+.hero::before{content:'';position:absolute;top:-30%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,107,107,.04),transparent 70%);border-radius:50%}
+.hero .inner{position:relative;z-index:2;max-width:720px}
+.hero .pre{font-size:.55rem;color:var(--coral);letter-spacing:.25em;text-transform:uppercase;font-weight:500;margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.hero .pre::before{content:'';width:24px;height:1.5px;background:var(--coral)}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.8rem,5.5vw,4.2rem);font-weight:700;line-height:1.05;color:var(--navy);letter-spacing:-.03em;margin-bottom:.3rem}
+.hero h1 em{color:var(--coral);font-style:normal}
+.hero .sub{font-size:.85rem;color:var(--txt2);max-width:480px;line-height:1.9;margin-bottom:1.2rem;font-weight:300}
+.hero .btn-group{display:flex;gap:.5rem;flex-wrap:wrap}
+.hero .btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1.4rem;border:none;border-radius:100px;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:.3s;font-family:'Inter',sans-serif}
+.hero .btn-pri{background:var(--navy);color:#fff}
+.hero .btn-pri:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(27,42,74,.15)}
+.hero .btn-wpp{background:var(--wpp);color:#fff}
+.hero .btn-wpp:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.15)}
+.hero .btn-out{background:transparent;border:1.5px solid var(--border);color:var(--txt)}
+.hero .btn-out:hover{background:var(--navy2);border-color:var(--navy3);color:var(--navy)}
+.hero-stats{display:flex;gap:2rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.hero-stats div{text-align:left}
+.hero-stats strong{display:block;font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:600;color:var(--coral);letter-spacing:-.02em}
+.hero-stats span{font-size:.5rem;color:var(--txt2);letter-spacing:.12em;text-transform:uppercase;font-weight:400}
+
+/* ═══ SECTIONS ═══ */
+section{padding:5rem 4rem;position:relative}
+.section-container{max-width:800px;margin:0 auto}
+
+.section-t{font-size:.5rem;color:var(--coral);letter-spacing:.25em;text-transform:uppercase;font-weight:500;margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem}
+.section-t::before{content:'';width:20px;height:1.5px;background:var(--coral)}
+.section-h{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--navy);letter-spacing:-.02em;line-height:1.1;margin-bottom:.5rem}
+.section-h em{color:var(--coral);font-style:normal}
+
+.section-alt{background:var(--card)}
+
+/* ═══ ABOUT ═══ */
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-txt .big-letter{font-family:'Space Grotesk',sans-serif;font-size:clamp(5rem,10vw,8rem);font-weight:700;color:var(--navy3);line-height:.7;margin-bottom:-.3rem;letter-spacing:-.04em}
+.about-txt .quote{font-family:'Space Grotesk',sans-serif;font-size:clamp(1rem,1.5vw,1.2rem);font-weight:400;color:var(--navy);line-height:1.4;margin-bottom:.6rem}
+.about-txt p{font-size:.75rem;color:var(--txt2);line-height:1.8;margin-bottom:.4rem;font-weight:300}
+.about-txt .tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.about-txt .tags span{font-size:.55rem;background:var(--coral2);color:var(--coral);padding:.15rem .5rem;border-radius:4px;font-weight:500;display:flex;align-items:center;gap:.15rem}
+.about-img{position:relative}
+.about-img .frame{border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(27,42,74,.04)}
+.about-img .frame img{width:100%;height:clamp(300px,40vw,450px);object-fit:cover;transition:.6s}
+.about-img .frame:hover img{transform:scale(1.04)}
+.about-img .stamp{position:absolute;top:-.5rem;right:-.5rem;width:80px;height:80px;background:var(--coral);color:#fff;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.5rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;text-align:center;line-height:1.2;box-shadow:0 4px 15px var(--coral3)}
+.about-img .stamp strong{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;display:block}
+
+/* ═══ SERVICES ═══ */
+.serv-list{display:flex;flex-direction:column;gap:.6rem}
+.serv-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;background:var(--cream);border-radius:10px;transition:.3s;border:1px solid transparent}
+.serv-item:hover{border-color:var(--navy3);background:var(--cream2);transform:translateX(6px)}
+.serv-item .ico{flex-shrink:0;width:40px;height:40px;border-radius:10px;background:var(--navy2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:.3s}
+.serv-item:hover .ico{background:var(--navy3);transform:scale(1.08)}
+.serv-item .info{flex:1}
+.serv-item .info h4{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:1px}
+.serv-item .info p{font-size:.62rem;color:var(--txt2);line-height:1.5;font-weight:300}
+.serv-item .price-tag{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold);background:var(--gold2);padding:.15rem .5rem;border-radius:6px;letter-spacing:-.01em;white-space:nowrap;flex-shrink:0}
+
+/* ═══ PRICING ═══ */
+.pricing-section{background:var(--navy);color:rgba(255,255,255,.85)}
+.pricing-section .section-h{color:#fff}
+.pricing-section .section-h em{color:var(--gold)}
+.pricing-section .section-t{color:var(--gold)}
+.pricing-section .section-t::before{background:var(--gold)}
+.pricing-section .section-p{font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:2rem;font-weight:300}
+
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.5rem;transition:.35s;position:relative;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);opacity:0;transition:.35s}
+.price-card:hover::before{opacity:1}
+.price-card:hover{transform:translateY(-5px);background:rgba(255,255,255,.06);border-color:rgba(240,180,41,.15)}
+.price-card.featured{border-color:rgba(240,180,41,.15);background:rgba(240,180,41,.04)}
+.price-card .p-name{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;color:#fff;margin-bottom:.15rem}
+.price-card .p-desc{font-size:.58rem;color:rgba(255,255,255,.4);line-height:1.5;font-weight:300;margin-bottom:.4rem}
+.price-card .p-price{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--gold);letter-spacing:-.02em;line-height:1}
+.price-card .p-price small{font-size:.6rem;font-weight:400;color:rgba(255,255,255,.35);margin-left:.2rem}
+.price-card .p-tag{display:inline-block;font-size:.45rem;color:var(--gold);background:rgba(240,180,41,.1);padding:.1rem .4rem;border-radius:3px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:.25rem}
+
+/* ═══ TEAM ═══ */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.team-card{display:flex;align-items:center;gap:.8rem;padding:.8rem;background:var(--cream);border-radius:10px;transition:.3s;border:1px solid transparent}
+.team-card:hover{border-color:var(--navy3);background:var(--cream2);transform:translateY(-4px)}
+.team-card .av{width:50px;height:50px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--navy2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px solid var(--cream2);transition:.3s}
+.team-card:hover .av{border-color:var(--navy);transform:scale(1.08)}
+.team-card .av img{width:100%;height:100%;object-fit:cover}
+.team-card .info h4{font-size:.78rem;font-weight:600;color:var(--navy);margin-bottom:1px}
+.team-card .info .role{font-size:.5rem;color:var(--coral);font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.team-card .info .bio{font-size:.6rem;color:var(--txt2);line-height:1.4;margin-top:2px;font-weight:300}
+
+/* ═══ GALLERY ═══ */
+.gal-scroll{display:flex;gap:.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:thin;scrollbar-color:var(--navy3) transparent;cursor:grab}
+.gal-scroll::-webkit-scrollbar{height:4px}
+.gal-scroll::-webkit-scrollbar-thumb{background:var(--navy3);border-radius:4px}
+.gal-item{flex:0 0 220px;scroll-snap-align:start;border-radius:10px;overflow:hidden;position:relative;aspect-ratio:1;background:var(--cream2)}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-item .cap{position:absolute;bottom:0;left:0;right:0;padding:1.5rem .5rem .4rem;background:linear-gradient(transparent,rgba(27,42,74,.6));color:#fff;font-size:.6rem;font-weight:400;opacity:0;transition:.35s}
+.gal-item:hover .cap{opacity:1}
+
+/* ═══ TESTIMONIALS ═══ */
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.test-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;transition:.3s}
+.test-card:hover{transform:translateY(-3px);border-color:var(--navy3);box-shadow:0 8px 30px rgba(27,42,74,.02)}
+.test-card .stars{font-size:.6rem;color:var(--gold);letter-spacing:.08em;margin-bottom:.3rem}
+.test-card blockquote{font-size:.68rem;color:var(--txt2);line-height:1.7;font-weight:300;font-style:italic;margin-bottom:.4rem}
+.test-card .author{display:flex;align-items:center;gap:.4rem}
+.test-card .author .av{width:30px;height:30px;border-radius:50%;background:var(--navy2);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0}
+.test-card .author div{display:flex;flex-direction:column}
+.test-card .author strong{font-size:.62rem;font-weight:600;color:var(--navy)}
+.test-card .author span{font-size:.48rem;color:var(--txt3);letter-spacing:.04em}
+
+/* ═══ FAQ ═══ */
+.faq-list{max-width:650px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:.8rem 0}
+.faq-item:first-child{padding-top:0}
+.faq-item button{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:var(--txt);font-size:.78rem;text-align:left;cursor:pointer;font-family:'Inter',sans-serif;font-weight:400;padding:.2rem 0;transition:.2s}
+.faq-item button:hover{color:var(--navy)}
+.faq-item button .arr{font-size:.5rem;color:var(--txt3);transition:.3s}
+.faq-item.open button .arr{transform:rotate(180deg);color:var(--coral)}
+.faq-item .answer{max-height:0;overflow:hidden;transition:max-height .35s}
+.faq-item.open .answer{max-height:180px}
+.faq-item .answer p{padding:.4rem .5rem 0;font-size:.65rem;color:var(--txt2);line-height:1.7;font-weight:300}
+
+/* ═══ CTA ═══ */
+.cta-section{text-align:center;padding:4rem;background:linear-gradient(170deg,var(--coral),#E85A5A);color:#fff;position:relative;overflow:hidden}
+.cta-section::before{content:'🐾';position:absolute;top:-2rem;right:-1rem;font-size:clamp(8rem,25vw,20rem);opacity:.05;pointer-events:none;transform:rotate(-12deg)}
+.cta-section .in{position:relative;z-index:2;max-width:550px;margin:0 auto}
+.cta-section .in .ico-b{font-size:2.5rem;margin-bottom:.2rem;display:block}
+.cta-section .in h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;letter-spacing:-.02em;color:#fff}
+.cta-section .in h2 em{color:var(--gold);font-style:normal}
+.cta-section .in p{font-size:.72rem;opacity:.85;max-width:400px;margin:.3rem auto .8rem;font-weight:300;line-height:1.6}
+.cta-section .in .btn{display:inline-flex;align-items:center;gap:.35rem;padding:.5rem 1.5rem;background:var(--gold);color:var(--navy);border:none;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:.3s;font-family:'Inter',sans-serif}
+.cta-section .in .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
+.cta-section .in .btn-sec{background:rgba(255,255,255,.15);color:#fff;margin-left:.3rem}
+.cta-section .in .btn-sec:hover{background:rgba(255,255,255,.25)}
+
+/* ═══ FOOTER ═══ */
+footer{padding:2rem 4rem 1.5rem;text-align:center;margin-left:var(--sb-w)}
+footer .brand{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;color:var(--navy)}
+footer .brand span{color:var(--coral)}
+footer p{font-size:.55rem;color:var(--txt3);margin-top:.15rem}
+footer .social{display:flex;gap:.5rem;justify-content:center;margin:.4rem 0}
+
+/* ═══ ANIMATIONS ═══ */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}.fade-in.vis{opacity:1;transform:translateY(0)}
+.slide-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}.slide-up.vis{opacity:1;transform:translateY(0)}
+.fade-l{opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s}.fade-l.vis{opacity:1;transform:translateX(0)}
+.fade-r{opacity:0;transform:translateX(20px);transition:opacity .6s,transform .6s}.fade-r.vis{opacity:1;transform:translateX(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:968px){
+  .sidebar{width:200px;padding:1.2rem 1rem}
+  :root{--sb-w:200px}
+  .hero{padding:3rem 2rem}
+  section{padding:3.5rem 2rem}
+  .about-g{grid-template-columns:1fr;gap:2rem}
+  .price-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  body{flex-direction:column}
+  .sidebar{position:static;top:auto;width:100%;padding:1rem 1.2rem;flex-direction:row;align-items:center;gap:1rem;flex-wrap:wrap;min-height:auto}
+  .sidebar .sub{display:none}
+  .sidebar-nav{flex-direction:row;gap:.1rem;flex:none;overflow-x:auto;padding:.2rem 0}
+  .sidebar-nav a{font-size:.55rem;padding:.25rem .5rem;white-space:nowrap}
+  .sidebar-nav a .dot{display:none}
+  .sidebar-social,.sidebar .wpp-link{display:none}
+  .main{margin-left:0}
+  footer{margin-left:0}
+  .hero{padding:2.5rem 1.2rem;min-height:auto}
+  .hero-stats{gap:1rem;flex-wrap:wrap}
+  section{padding:2.5rem 1.2rem}
+  .team-grid{grid-template-columns:1fr}
+  .test-grid{grid-template-columns:1fr}
+  .serv-item{flex-wrap:wrap}
+  .cta-section{padding:3rem 1.2rem}
+  .about-img .stamp{width:65px;height:65px;top:-.3rem;right:-.3rem}
+  .about-img .stamp strong{font-size:.7rem}
+  .gal-item{flex:0 0 160px}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.2rem}.hero .btn{width:100%;justify-content:center}
+  .price-card .p-price{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+
+<div class="sample-banner">✦ VITAPET · Site de exemplo — demonstração de capacidades</div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">🐾 VitaPet</div>
+  <div class="sub">Clínica Veterinária</div>
+  <nav class="sidebar-nav">
+    <a href="#hero" class="active"><span class="dot"></span>Início</a>
+    <a href="#sobre"><span class="dot"></span>Sobre</a>
+    <a href="#servicos"><span class="dot"></span>Serviços</a>
+    <a href="#precos"><span class="dot"></span>Preços</a>
+    <a href="#equipe"><span class="dot"></span>Equipe</a>
+    <a href="#faq"><span class="dot"></span>FAQ</a>
+  </nav>
+  <div class="sidebar-social">
+    <a href="https://wa.me/5585996896378" target="_blank" aria-label="WhatsApp">💬</a>
+    <a href="#" aria-label="Instagram">📸</a>
+  </div>
+  <a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20VitaPet" target="_blank" class="wpp-link">💬 Agende pelo WhatsApp</a>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="inner">
+    <div class="pre fade-in">Desde 2018 · Cuidado que transforma</div>
+    <h1 class="fade-in" style="transition-delay:.08s">VitaPet<em>.</em></h1>
+    <p class="sub fade-in" style="transition-delay:.16s">O cuidado que seu pet merece. Atendimento humanizado, tecnologia de ponta e muito carinho em cada consulta. Seu melhor amigo em boas mãos.</p>
+    <div class="btn-group fade-in" style="transition-delay:.24s">
+      <a href="#servicos" class="btn btn-pri">Nossos Serviços →</a>
+      <a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20VitaPet" target="_blank" class="btn btn-wpp">💬 Agendar</a>
+    </div>
+    <div class="hero-stats fade-in" style="transition-delay:.32s">
+      <div><strong>8+</strong><span>Anos</span></div>
+      <div><strong>+500</strong><span>Pets</span></div>
+      <div><strong>98%</strong><span>Aprovação</span></div>
+      <div><strong>24h</strong><span>Emergência</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre">
+  <div class="section-container">
+    <div class="about-g">
+      <div class="about-txt">
+        <div class="big-letter fade-l">♥</div>
+        <div class="quote fade-l" style="transition-delay:.06s">"Mais que uma clínica — uma família que cuida de quem você ama."</div>
+        <p class="fade-l" style="transition-delay:.12s">A VitaPet nasceu do sonho de oferecer um atendimento veterinário que unisse excelência técnica e amor genuíno pelos animais. Aqui, cada paciente é tratado como parte da família — com respeito, carinho e dedicação.</p>
+        <p class="fade-l" style="transition-delay:.18s">Contamos com equipamentos modernos, uma equipe multidisciplinar apaixonada e um ambiente pensado para que seu pet se sinta seguro e acolhido em cada visita.</p>
+        <div class="tags fade-l" style="transition-delay:.24s">
+          <span>🏥 Estrutura Completa</span>
+          <span>👩‍⚕️ Equipe Premium</span>
+          <span>🔬 Diagnóstico Preciso</span>
+          <span>💚 Amor em cada detalhe</span>
+        </div>
+      </div>
+      <div class="about-img fade-r">
+        <div class="frame"><img src="https://images.unsplash.com/photo-1628009368231-3bb7cfcb8a9a?w=500&h=600&fit=crop" alt="Clínica VitaPet" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream);font-size:3rem;border-radius:16px>🐾</div>'"></div>
+        <div class="stamp"><strong>8+</strong>Anos de<br>Cuidado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section-alt" id="servicos">
+  <div class="section-container">
+    <div class="section-t slide-up">Nossos Serviços</div>
+    <h2 class="section-h slide-up" style="transition-delay:.06s">Cuidado <em>Completo</em></h2>
+    <p class="section-p slide-up" style="transition-delay:.12s;font-size:.75rem;color:var(--txt2);line-height:1.7;margin-bottom:1.5rem;font-weight:300">Tudo que seu pet precisa em um só lugar.</p>
+    <div class="serv-list">
+      <div class="serv-item slide-up"><div class="ico">🩺</div><div class="info"><h4>Consultas Clínicas</h4><p>Atendimento geral com veterinários experientes. Avaliação completa do seu pet com carinho e dedicação.</p></div><span class="price-tag">R$ 89</span></div>
+      <div class="serv-item slide-up" style="transition-delay:.04s"><div class="ico">💉</div><div class="info"><h4>Vacinação</h4><p>Protocolo vacinal completo — V8, V10, antirrábica e vacinas específicas com total segurança.</p></div><span class="price-tag">R$ 69</span></div>
+      <div class="serv-item slide-up" style="transition-delay:.08s"><div class="ico">🔬</div><div class="info"><h4>Exames & Diagnóstico</h4><p>Laboratoriais, imagem, ultrassom e check-up completo para prevenir e diagnosticar com precisão.</p></div><span class="price-tag">R$ 129</span></div>
+      <div class="serv-item slide-up" style="transition-delay:.12s"><div class="ico">🦷</div><div class="info"><h4>Odontologia</h4><p>Limpeza, extração e tratamento de tártaro para a saúde bucal do seu pet.</p></div><span class="price-tag">R$ 179</span></div>
+      <div class="serv-item slide-up" style="transition-delay:.16s"><div class="ico">✂️</div><div class="info"><h4>Castração Segura</h4><p>Procedimento com anestesia inalatória e acompanhamento completo pós-operatório.</p></div><span class="price-tag">R$ 349</span></div>
+      <div class="serv-item slide-up" style="transition-delay:.2s"><div class="ico">🏥</div><div class="info"><h4>Internação 24h</h4><p>Estrutura completa para cuidados intensivos com equipe disponível 24 horas.</p></div><span class="price-tag">R$ 199</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="precos">
+  <div class="section-container">
+    <div class="section-t slide-up">Tabela de Preços</div>
+    <h2 class="section-h slide-up" style="transition-delay:.06s">Investimento <em>Transparente</em></h2>
+    <p class="section-p slide-up" style="transition-delay:.12s">Preços justos e sem surpresas. Seu pet merece o melhor cuidado.</p>
+    <div class="price-grid">
+      <div class="price-card slide-up"><div class="p-name">🩺 Consulta Geral</div><div class="p-desc">Atendimento clínico completo com veterinário especializado</div><div class="p-price">R$ 89 <small>/consulta</small></div><span class="p-tag">📅 Agende já</span></div>
+      <div class="price-card slide-up" style="transition-delay:.04s"><div class="p-name">💉 Vacina V10</div><div class="p-desc">Vacina polivalente canina com dose única</div><div class="p-price">R$ 69 <small>/dose</small></div><span class="p-tag">⚠️ Anual</span></div>
+      <div class="price-card featured slide-up" style="transition-delay:.08s"><div class="p-name">🔥 Combo Bem-Estar</div><div class="p-desc">Consulta + vacina + exames laboratoriais básicos</div><div class="p-price">R$ 199 <small>/pacote</small></div><span class="p-tag">⭐ MAIS VENDIDO</span></div>
+      <div class="price-card slide-up" style="transition-delay:.12s"><div class="p-name">✂️ Castração</div><div class="p-desc">Procedimento completo com anestesia e acompanhamento</div><div class="p-price">R$ 349 <small>/procedimento</small></div><span class="p-tag">🐱 Cães e gatos</span></div>
+      <div class="price-card slide-up" style="transition-delay:.16s"><div class="p-name">🔬 Check-up Premium</div><div class="p-desc">Exames laboratoriais + imagem + avaliação cardiológica</div><div class="p-price">R$ 449 <small>/pacote</small></div><span class="p-tag">📋 Completo</span></div>
+      <div class="price-card slide-up" style="transition-delay:.2s"><div class="p-name">🏥 Plano VitaCare</div><div class="p-desc">Consultas ilimitadas + 30% off em procedimentos</div><div class="p-price">R$ 59 <small>/mês</small></div><span class="p-tag">💚 Exclusivo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="equipe">
+  <div class="section-container">
+    <div class="section-t slide-up">Nossa Equipe</div>
+    <h2 class="section-h slide-up" style="transition-delay:.06s">Quem cuida do <em>seu pet</em></h2>
+    <div class="team-grid" style="margin-top:1.5rem">
+      <div class="team-card slide-up"><div class="av"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop" alt="Dra. Marina" loading="lazy" onerror="this.outerHTML='<div class=av style=font-size:1.2rem>👩</div>'"></div><div class="info"><h4>Dra. Marina Castro</h4><div class="role">Clínica Geral</div><div class="bio">CRMV-SP 12.345 · 12 anos de experiência em clínica geral.</div></div></div>
+      <div class="team-card slide-up" style="transition-delay:.04s"><div class="av"><img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=100&h=100&fit=crop" alt="Dr. Carlos" loading="lazy" onerror="this.outerHTML='<div class=av style=font-size:1.2rem>👨</div>'"></div><div class="info"><h4>Dr. Carlos Rocha</h4><div class="role">Cirurgião</div><div class="bio">CRMV-SP 12.789 · Especialista em cirurgia e ortopedia.</div></div></div>
+      <div class="team-card slide-up" style="transition-delay:.08s"><div class="av"><img src="https://images.unsplash.com/photo-1592621385612-4d7129426394?w=100&h=100&fit=crop" alt="Dra. Paula" loading="lazy" onerror="this.outerHTML='<div class=av style=font-size:1.2rem>👩</div>'"></div><div class="info"><h4>Dra. Paula Lima</h4><div class="role">Dermatologia</div><div class="bio">CRMV-SP 12.567 · Referência em dermatologia animal.</div></div></div>
+      <div class="team-card slide-up" style="transition-delay:.12s"><div class="av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Dr. Felipe" loading="lazy" onerror="this.outerHTML='<div class=av style=font-size:1.2rem>👨</div>'"></div><div class="info"><h4>Dr. Felipe Torres</h4><div class="role">Imagenologia</div><div class="bio">CRMV-SP 12.901 · Diagnóstico por imagem.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section-alt">
+  <div class="section-container">
+    <div class="section-t slide-up">Galeria</div>
+    <h2 class="section-h slide-up" style="transition-delay:.06s">Nossos <em>Pacientes</em></h2>
+    <div class="gal-scroll slide-up" style="transition-delay:.12s" id="galScroll"></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-container">
+    <div class="section-t slide-up">Depoimentos</div>
+    <h2 class="section-h slide-up" style="transition-delay:.06s">O que falam <em>da gente</em></h2>
+    <div class="test-grid" style="margin-top:1.5rem">
+      <div class="test-card slide-up"><div class="stars">★★★★★</div><blockquote>"A VitaPet salvou a vida da minha gata quando outra clínica disse que não tinha jeito. Profissionais incríveis!"</blockquote><div class="author"><div class="av">👩</div><div><strong>Ana Paula</strong><span>Cliente há 3 anos</span></div></div></div>
+      <div class="test-card slide-up" style="transition-delay:.06s"><div class="stars">★★★★★</div><blockquote>"Meu bulldog é super medroso, mas a equipe tem uma paciência incrível. Ambiente calmo e acolhedor."</blockquote><div class="author"><div class="av">👨</div><div><strong>Carlos Eduardo</strong><span>Cliente há 2 anos</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-alt" id="faq">
+  <div class="section-container">
+    <div class="section-t slide-up">FAQ</div>
+    <h2 class="section-h slide-up" style="transition-delay:.06s">Dúvidas <em>Frequentes</em></h2>
+    <div class="faq-list" style="margin-top:1.5rem">
+      <div class="faq-item slide-up"><button onclick="this.parentElement.classList.toggle('open')">Precisa agendar consulta?<span class="arr">▼</span></button><div class="answer"><p>Sim! Recomendamos agendamento. Em casos de emergência, aceitamos sem agendamento 24h.</p></div></div>
+      <div class="faq-item slide-up" style="transition-delay:.04s"><button onclick="this.parentElement.classList.toggle('open')">Quais vacinas são obrigatórias?<span class="arr">▼</span></button><div class="answer"><p>Cães: V8 ou V10 (anual) + antirrábica. Gatos: V3 ou V4 (anual) + antirrábica.</p></div></div>
+      <div class="faq-item slide-up" style="transition-delay:.08s"><button onclick="this.parentElement.classList.toggle('open')">Aceitam animais silvestres?<span class="arr">▼</span></button><div class="answer"><p>Atendemos cães, gatos e pequenos roedores (hamsters, porquinhos-da-índia, coelhos).</p></div></div>
+      <div class="faq-item slide-up" style="transition-delay:.12s"><button onclick="this.parentElement.classList.toggle('open')">Tem plano de saúde pet?<span class="arr">▼</span></button><div class="answer"><p>Sim! O VitaCare oferece consultas ilimitadas e 30% off em procedimentos. Consulte valores!</p></div></div>
+      <div class="faq-item slide-up" style="transition-delay:.16s"><button onclick="this.parentElement.classList.toggle('open')">Quanto tempo dura cada procedimento?<span class="arr">▼</span></button><div class="answer"><p>Consultas ~30min, exames ~20min, castração ~1h com preparo e recuperação.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="in slide-up">
+    <span class="ico-b">🐾</span>
+    <h2>Seu pet merece <em>o melhor cuidado</em></h2>
+    <p>Agende uma consulta e descubra por que somos a clínica preferida de Fortaleza.</p>
+    <a href="https://wa.me/5585996896378?text=Olá!%20Vim%20pelo%20site%20da%20VitaPet.%20Quero%20agendar%20uma%20consulta." target="_blank" class="btn">💬 Agendar Consulta</a>
+    <a href="#precos" class="btn btn-sec">Ver Preços</a>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="brand">🐾 Vita<span>Pet</span></div>
+  <p>© 2026 VitaPet · Clínica Veterinária · Site de exemplo</p>
+</footer>
+
+<script>
+// ── Gallery ──
+document.getElementById('galScroll').innerHTML = [
+  {s:'https://images.unsplash.com/photo-1544568100-847a948585b9?w=250&h=250&fit=crop',a:'Thor'},
+  {s:'https://images.unsplash.com/photo-1553882809-a4f57e595701?w=250&h=250&fit=crop',a:'Luna'},
+  {s:'https://images.unsplash.com/photo-1552053831-71594a27632d?w=250&h=250&fit=crop',a:'Bidu'},
+  {s:'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=250&h=250&fit=crop',a:'Mimi'},
+  {s:'https://images.unsplash.com/photo-1568572933382-74d440642117?w=250&h=250&fit=crop',a:'Pipoca'},
+  {s:'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=250&h=250&fit=crop',a:'Mel'},
+  {s:'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=250&h=250&fit=crop',a:'Simba'},
+  {s:'https://images.unsplash.com/photo-1560807707-8cc77767d783?w=250&h=250&fit=crop',a:'Toddy'},
+].map((i,n)=>`<div class="gal-item"><img src="${i.s}" alt="${i.a}" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--cream2);font-size:2.5rem>🐾</div>'"><div class="cap">${i.a}</div></div>`).join('');
+
+// ── Observer ──
+const watcher = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); watcher.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in, .slide-up, .fade-l, .fade-r').forEach(el => watcher.observe(el));
+
+// ── Active sidebar link ──
+const sections = document.querySelectorAll('section[id]');
+const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      sidebarLinks.forEach(l => l.classList.remove('active'));
+      const activeLink = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+sections.forEach(s => sectionObserver.observe(s));
+</script>
+</body>
+</html>

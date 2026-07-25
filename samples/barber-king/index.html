@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barber King · Barbearia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0A0A0A;--bg2:#111;--card:#151515;--txt:#fff;--txt2:rgba(255,255,255,.55);--txt3:rgba(255,255,255,.12);--lime:#CCFF00;--lime2:rgba(204,255,0,.08);--lime3:rgba(204,255,0,.04);--wpp:#25D366}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--txt3) var(--bg)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt2);overflow-x:hidden;font-weight:300;-webkit-font-smoothing:antialiased;font-size:15px}
+h1,h2,h3,h4{font-family:'Archivo Black',sans-serif;color:var(--txt);letter-spacing:-.02em;line-height:1}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}::selection{background:var(--lime);color:var(--bg)}
+.sample-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--lime);color:var(--bg);text-align:center;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:.1em}
+
+/* ─── SCROLL HYBRID NAV ─── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 1.5rem;background:rgba(10,10,10,.92);border-bottom:1px solid rgba(204,255,0,.03);transform:translateY(-100%);transition:transform .35s ease,background .3s}
+.nav.show{transform:translateY(0)}
+.nav .in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.5rem 0}
+.nav-brand{font-family:'Archivo Black',sans-serif;font-size:1rem;color:var(--txt);display:flex;align-items:center;gap:6px}
+.nav-brand span{color:var(--lime);font-size:1.1rem}
+.nav-links{display:flex;gap:2px}
+.nav-links a{padding:.25rem .7rem;color:var(--txt3);font-size:.5rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;transition:.3s;border-radius:3px}
+.nav-links a:hover{color:var(--lime);background:var(--lime2)}
+.mt{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;background:none;border:none;z-index:1001}
+.mt span{width:20px;height:2px;background:var(--txt);transition:.25s;border-radius:2px}
+.mt.active span:nth-child(1){transform:rotate(45deg) translate(4px,5px)}
+.mt.active span:nth-child(2){opacity:0}
+.mt.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
+
+/* ─── HERO — Full-viewport with BG IMAGE + glass card ─── */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero .hero-bg{position:absolute;inset:0;z-index:0}
+.hero .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.10;filter:grayscale(.9) contrast(1.2)}
+.hero .hero-bg .overlay{position:absolute;inset:0;background:linear-gradient(160deg,#0A0A0A 0%,rgba(10,10,10,.85) 35%,rgba(10,10,10,.6) 60%,#0A0A0A 100%)}
+.hero .hero-bg .glow-orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.hero .hero-bg .glow-orb.g1{width:400px;height:400px;background:rgba(204,255,0,.04);top:-100px;right:-100px;animation:orbFloat 20s ease-in-out infinite}
+.hero .hero-bg .glow-orb.g2{width:300px;height:300px;background:rgba(204,255,0,.02);bottom:-80px;left:-60px;animation:orbFloat 25s ease-in-out infinite reverse}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-20px) scale(1.1)}66%{transform:translate(-15px,15px) scale(.95)}}
+.hero .inner{position:relative;z-index:2;max-width:800px;margin:0 auto;text-align:center;padding:6rem 1.5rem 3rem}
+.hero .glass-card{background:rgba(20,20,20,.55);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(204,255,0,.06);border-radius:24px;padding:3rem 2.5rem;position:relative;overflow:hidden;margin-bottom:2rem;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.hero .glass-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(204,255,0,.03),transparent 50%);pointer-events:none;border-radius:24px}
+.hero .glass-card .sparkle{position:absolute;width:4px;height:4px;background:var(--lime);border-radius:50%;pointer-events:none;animation:sparkle 3s ease-in-out infinite}
+.hero .glass-card .sparkle:nth-child(1){top:8%;left:6%;animation-delay:0s;opacity:.3}
+.hero .glass-card .sparkle:nth-child(2){top:12%;right:10%;animation-delay:.8s;width:3px;height:3px;opacity:.2}
+.hero .glass-card .sparkle:nth-child(3){bottom:15%;left:8%;animation-delay:1.6s;opacity:.25}
+.hero .glass-card .sparkle:nth-child(4){bottom:20%;right:8%;animation-delay:2.4s;width:5px;height:5px;opacity:.2}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}30%{opacity:var(--o,.4)}70%{opacity:var(--o,.4)}100%{opacity:0;transform:scale(1) translateY(-8px)}}
+.hero .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:var(--lime2);border:1px solid rgba(204,255,0,.06);border-radius:30px;font-size:9px;color:var(--lime);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(3rem,11vw,7rem);text-transform:uppercase;line-height:.82;margin-bottom:.5rem}
+.hero h1 .outline{-webkit-text-stroke:2.5px var(--txt);color:transparent}
+.hero h1 .hl{color:var(--lime);position:relative}
+.hero h1 .hl::after{content:'';position:absolute;bottom:4px;left:0;right:0;height:8px;background:var(--lime);opacity:.12;border-radius:2px}
+.hero p{font-size:.95rem;color:var(--txt2);max-width:500px;margin:0 auto 2rem;line-height:1.9}
+.hero .btn-group{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.hero .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 2rem;background:var(--lime);color:var(--bg);border:none;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:.3s;font-family:'Inter',sans-serif;cursor:pointer}
+.hero .btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(204,255,0,.1)}
+.hero .btn-out{background:transparent;border:1.5px solid rgba(255,255,255,.06);color:var(--txt);padding:.75rem 1.8rem}
+.hero .btn-out:hover{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.12)}
+.hero .stats-row{display:flex;gap:2rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.hero .stats-row .s{text-align:center;padding:0 .5rem}
+.hero .stats-row .s .n{font-family:'Archivo Black',sans-serif;font-size:1.6rem;color:var(--lime);line-height:1;letter-spacing:-.02em}
+.hero .stats-row .s .l{font-size:.55rem;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;font-weight:400}
+
+/* ─── SCROLL HINT ─── */
+.scroll-hint{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--txt3);font-size:9px;letter-spacing:.1em;text-transform:uppercase;animation:scrollBounce 2.5s infinite;z-index:3}
+.scroll-hint .line{width:1px;height:32px;background:linear-gradient(var(--lime),transparent);opacity:.25}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ─── FLOATING DECOR ─── */
+.decor{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.decor span{position:absolute;color:#fff;opacity:.015;font-size:clamp(2rem,4vw,5rem);animation:decorFloat 15s ease-in-out infinite;user-select:none}
+@keyframes decorFloat{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}33%{transform:translateY(-15px) rotate(5deg) scale(1.05)}66%{transform:translateY(-8px) rotate(-3deg) scale(.97)}}
+.decor .d1{left:3%;top:8%;animation-delay:0s;font-size:3rem}
+.decor .d2{right:2%;top:25%;animation-delay:4s;font-size:2rem}
+.decor .d3{left:1%;top:50%;animation-delay:8s;font-size:3.5rem}
+.decor .d4{right:1%;top:65%;animation-delay:2s;font-size:2.5rem}
+.decor .d5{left:5%;top:80%;animation-delay:6s;font-size:2rem}
+.decor .d6{right:5%;top:10%;animation-delay:10s;font-size:2.8rem}
+
+/* ─── SECTION BASE ─── */
+section{padding:5rem 1.5rem;position:relative}
+.container{max-width:1100px;margin:0 auto}
+.bk-h{text-align:center;margin-bottom:3rem}
+.bk-h .bk-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:var(--lime2);border:1px solid rgba(204,255,0,.04);border-radius:30px;font-size:9px;color:var(--lime);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.bk-h h2{font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;letter-spacing:-.02em}
+.bk-h h2 em{font-style:normal;color:var(--lime)}
+.bk-h p{font-size:.85rem;color:var(--txt2);max-width:480px;margin:.4rem auto 0;line-height:1.7}
+
+/* ─── SERVICES — Bento Grid ─── */
+.srv-section{background:var(--bg2)}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:900px;margin:0 auto}
+.bento .b-item{background:var(--card);border:1px solid rgba(204,255,0,.005);padding:1.5rem 1.2rem;transition:.4s;position:relative;overflow:hidden;border-radius:6px;display:flex;flex-direction:column}
+.bento .b-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--lime),transparent);opacity:0;transition:.3s}
+.bento .b-item:hover::after{opacity:.4}
+.bento .b-item:hover{transform:translateY(-6px);border-color:rgba(204,255,0,.01);background:rgba(204,255,0,.002)}
+.bento .b-item .top{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.3rem}
+.bento .b-item .ico{font-size:1.6rem;min-width:32px}
+.bento .b-item .top h3{font-family:'Archivo Black',sans-serif;font-size:.85rem;text-transform:uppercase;letter-spacing:-.01em;color:var(--txt);line-height:1.1}
+.bento .b-item .desc{font-size:.65rem;color:var(--txt2);line-height:1.5;margin-bottom:.4rem;flex:1}
+.bento .b-item .bot{display:flex;justify-content:space-between;align-items:center;padding-top:.4rem;border-top:1px solid rgba(204,255,0,.005)}
+.bento .b-item .bot .price{font-family:'Archivo Black',sans-serif;font-size:1.3rem;color:var(--lime);letter-spacing:-.01em;line-height:1}
+.bento .b-item .bot .price small{font-family:'Inter',sans-serif;font-size:.4rem;font-weight:400;color:var(--txt3)}
+.bento .b-item .bot .tag-s{font-size:.35rem;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+.bento .b-item.king{grid-column:span 2;grid-row:span 1}
+.bento .b-item.king .top h3{font-size:1.1rem}
+.bento .b-item.king .price{font-size:1.8rem!important}
+.bento .b-item.king .badge-king{position:absolute;top:0;right:-2rem;background:var(--lime);color:var(--bg);font-size:.3rem;font-weight:700;letter-spacing:.12em;padding:.05rem 2.5rem;transform:rotate(45deg) translateY(12px);text-transform:uppercase;text-align:center;width:8rem}
+
+/* ─── ABOUT — Full-width image with text overlay ─── */
+.about-section{position:relative;overflow:hidden;padding:0}
+.about-section .bg-img{width:100%;height:clamp(350px,55vw,550px);object-fit:cover;filter:grayscale(.85) contrast(1.2);opacity:.18}
+.about-section .overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.88) 0%,rgba(10,10,10,.4) 50%,rgba(10,10,10,.88) 100%)}
+.about-section .content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;max-width:800px;margin:0 auto;text-align:center;padding:2rem}
+.about-section .content .inner-a{max-width:600px}
+.about-section .content .tag{display:inline-block;padding:3px 10px;border:1px solid rgba(204,255,0,.06);font-size:8px;color:var(--lime);letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem}
+.about-section .content h2{font-size:clamp(1.5rem,3.5vw,2.2rem);text-transform:uppercase;color:var(--txt);margin-bottom:.4rem}
+.about-section .content h2 em{font-style:normal;color:var(--lime)}
+.about-section .content p{font-size:.8rem;color:var(--txt2);line-height:1.8;margin-bottom:.6rem}
+.about-section .content .tags{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap}
+.about-section .content .tags span{font-size:.55rem;color:var(--lime);background:var(--lime2);padding:.15rem .5rem;border-radius:2px;font-weight:500}
+
+/* ─── INSTA STRIP — Social proof ─── */
+.insta-strip{background:var(--bg);text-align:center;padding:1.5rem 1.5rem;border-top:1px solid rgba(204,255,0,.003);border-bottom:1px solid rgba(204,255,0,.003)}
+.insta-strip .in{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.insta-strip .in .txt{font-size:.75rem;color:var(--txt2);font-weight:300}
+.insta-strip .in .txt strong{color:var(--txt);font-weight:500}
+.insta-strip .in .btn{display:inline-flex;align-items:center;gap:.3rem;padding:.4rem 1.2rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:4px;font-size:.6rem;font-weight:600;transition:.3s}
+.insta-strip .in .btn:hover{transform:translateY(-2px);opacity:.9}
+.insta-strip .in .mini-av{display:flex;gap:4px}
+.insta-strip .in .mini-av span{width:28px;height:28px;border-radius:50%;overflow:hidden;border:2px solid var(--bg2);font-size:.55rem}
+.insta-strip .in .mini-av span img{width:100%;height:100%;object-fit:cover}
+
+/* ─── GALLERY — Bigger carousel ─── */
+.gal-section{background:var(--bg2);overflow:hidden}
+.carousel{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 1.5rem 1.5rem;scrollbar-width:none;cursor:grab}
+.carousel::-webkit-scrollbar{display:none}
+.carousel .slide{flex:0 0 320px;height:360px;scroll-snap-align:start;overflow:hidden;position:relative;border-radius:6px}
+.carousel .slide.wide{flex:0 0 440px}
+.carousel .slide img{width:100%;height:100%;object-fit:cover;filter:grayscale(.6) contrast(1.1);transition:.6s}
+.carousel .slide:hover img{transform:scale(1.08);filter:grayscale(0) contrast(1)}
+.carousel .slide .cap{position:absolute;bottom:0;left:0;right:0;padding:1rem .8rem .6rem;background:linear-gradient(transparent,rgba(0,0,0,.9));font-size:.65rem;color:rgba(255,255,255,.5);letter-spacing:.05em;font-weight:300}
+
+/* ─── RESULTS — Before/After cards ─── */
+.results-section{background:var(--bg)}
+.results-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:800px;margin:0 auto}
+.result-card{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/5;background:var(--card);border:1px solid rgba(204,255,0,.004);transition:.4s;cursor:pointer}
+.result-card:hover{transform:translateY(-6px);border-color:rgba(204,255,0,.008)}
+.result-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) contrast(1.1);transition:.5s}
+.result-card:hover img{transform:scale(1.06);filter:grayscale(0) contrast(1)}
+.result-card .badge-r{position:absolute;bottom:0;left:0;right:0;padding:.5rem .6rem;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:.55rem;color:rgba(255,255,255,.5);letter-spacing:.05em;font-weight:300}
+.result-card .tag-r{position:absolute;top:.4rem;left:.4rem;background:var(--lime);color:var(--bg);font-size:.35rem;font-weight:700;padding:.05rem .4rem;border-radius:2px;text-transform:uppercase;letter-spacing:.08em}
+
+/* ─── TEAM ─── */
+.team-section{background:var(--bg)}
+.team-list{max-width:650px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.team-card{display:flex;align-items:center;gap:1.2rem;padding:1rem 1.2rem;background:var(--card);border:1px solid rgba(204,255,0,.004);border-radius:6px;transition:.3s}
+.team-card:hover{transform:translateX(8px);border-color:rgba(204,255,0,.008)}
+.team-card:nth-child(even){flex-direction:row-reverse;text-align:right}
+.team-card:nth-child(even):hover{transform:translateX(-8px)}
+.team-card .av{width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0;filter:grayscale(.5) contrast(1.1);border:2px solid var(--bg2);transition:.3s}
+.team-card:hover .av{border-color:var(--lime);filter:grayscale(0) contrast(1);transform:scale(1.06)}
+.team-card .av img{width:100%;height:100%;object-fit:cover}
+.team-card .info h3{font-family:'Archivo Black',sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:1px}
+.team-card .info .pos{font-size:.45rem;color:var(--lime);letter-spacing:.15em;text-transform:uppercase;font-weight:500}
+.team-card .info .esp{font-size:.6rem;color:var(--txt2);margin-top:2px;font-weight:300}
+
+/* ─── FAQ TAB PANEL ─── */
+.faq-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0}
+.faq-tab{padding:.5rem .9rem;background:var(--card);border:1px solid rgba(204,255,0,.08);border-radius:6px;color:var(--txt2);font-size:.65rem;font-weight:500;cursor:pointer;transition:.3s;font-family:'Inter',sans-serif}
+.faq-tab:hover{border-color:var(--lime3);color:var(--txt)}
+.faq-tab.active{background:var(--lime);color:var(--bg);border-color:var(--lime);font-weight:600}
+.faq-panel{background:var(--card);border:1px solid rgba(204,255,0,.06);border-radius:6px;padding:1.2rem;margin-top:10px;display:none}
+.faq-panel.active{display:block}
+.faq-panel p{font-size:.75rem;color:var(--txt2);line-height:1.8;font-weight:300}
+
+/* ─── CTA ─── */
+.cta-section{background:var(--bg2)}
+.cta-split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto;align-items:center}
+.cta-left{text-align:center;padding:2rem}
+.cta-left .big{font-size:3rem;display:block;margin-bottom:.5rem}
+.cta-left h2{font-family:'Archivo Black',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;color:var(--txt);margin-bottom:.4rem;letter-spacing:-.02em}
+.cta-left h2 em{font-style:normal;color:var(--lime)}
+.cta-left p{font-size:.8rem;color:var(--txt2);margin-bottom:1.5rem;line-height:1.7}
+.cta-left .btn-big{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 2rem;background:var(--wpp);color:#fff;border:none;border-radius:4px;font-size:.75rem;font-weight:600;transition:.3s;font-family:'Inter',sans-serif}
+.cta-left .btn-big:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(37,211,102,.08)}
+.cta-left .info-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;font-size:.65rem;color:var(--txt2)}
+.cta-left .info-row span{display:flex;align-items:center;gap:4px}
+.cta-right .mapa{border:1px solid rgba(204,255,0,.004);overflow:hidden;border-radius:6px}
+.cta-right .mapa iframe{width:100%;height:260px;border:none;display:block;filter:grayscale(1) contrast(1.05)}
+
+/* ─── FOOTER ─── */
+footer{padding:3rem 1.5rem 1.5rem;text-align:center;border-top:1px solid rgba(204,255,0,.003)}
+footer .brand{font-family:'Archivo Black',sans-serif;font-size:1rem;color:var(--txt);margin-bottom:.2rem}
+footer .brand span{color:var(--lime)}
+footer .social{display:flex;gap:.8rem;justify-content:center;margin:.6rem 0 .8rem}
+footer .social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(204,255,0,.04);display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:.2s;color:var(--txt2)}
+footer .social a:hover{border-color:var(--lime);color:var(--lime);background:var(--lime2);transform:translateY(-3px)}
+footer .copy{font-size:.5rem;color:var(--txt3);letter-spacing:.05em}
+
+/* ─── REVEAL ─── */
+.fade{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}
+.fade.vis{opacity:1;transform:translateY(0)}
+.fade-l{opacity:0;transform:translateX(-20px);transition:opacity .7s,transform .7s}
+.fade-l.vis{opacity:1;transform:translateX(0)}
+.fade-r{opacity:0;transform:translateX(20px);transition:opacity .7s,transform .7s}
+.fade-r.vis{opacity:1;transform:translateX(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:868px){
+  .bento{grid-template-columns:1fr 1fr}
+  .bento .b-item.king{grid-column:span 2}
+  .cta-split{grid-template-columns:1fr;gap:1.5rem}
+  .results-g{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .mt{display:flex}
+  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:260px;background:rgba(10,10,10,.95);flex-direction:column;padding:5rem 1.5rem;gap:.2rem;transition:right .35s;z-index:999;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .nav-links.active{right:0}
+  .nav-links a{padding:.6rem .8rem;font-size:.65rem;border-bottom:1px solid rgba(204,255,0,.003);position:relative;z-index:2}
+  .hero .glass-card{padding:2rem 1.2rem}
+  .hero h1{font-size:2.5rem}
+  .hero p{font-size:.85rem}
+  .bento{grid-template-columns:1fr}
+  .bento .b-item.king{grid-column:span 1}
+  .carousel .slide{flex:0 0 240px;height:280px}
+  .carousel .slide.wide{flex:0 0 300px}
+  .team-card:hover{transform:translateX(4px)}
+  .team-card:nth-child(even):hover{transform:translateX(-4px)}
+  .results-g{grid-template-columns:1fr;max-width:320px;margin:0 auto}
+  section{padding:3.5rem 1rem}
+  footer{padding:2rem 1rem 1rem}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2rem}
+  .hero .btn{width:100%;justify-content:center}
+  .carousel .slide{flex:0 0 200px;height:240px}
+  .cta-left .btn-big{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="sample-banner">⚡ BARBER KING · Site de exemplo — demonstração de capacidades profissionais</div>
+
+<div class="decor">
+  <span class="d1">💈</span><span class="d2">✂️</span><span class="d3">👑</span><span class="d4">🪒</span><span class="d5">🔥</span><span class="d6">💇</span>
+</div>
+
+<nav class="nav" id="nav">
+  <div class="in">
+    <a href="#hero" class="nav-brand"><span>✦</span> Barber King</a>
+    <button class="mt" id="mt"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nl">
+      <a href="#hero">Início</a>
+      <a href="#servicos">Preços</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#equipe">Equipe</a>
+      <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20agendar%20um%20horário%20na%20Barber%20King" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO — Now with background image! -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=1400&h=900&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="overlay"></div>
+    <div class="glow-orb g1"></div>
+    <div class="glow-orb g2"></div>
+  </div>
+  <div class="inner">
+    <div class="glass-card">
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="badge">✦ Desde 2019 · São Paulo</div>
+      <h1>Barber <span class="outline">King</span> <span class="hl">✧</span></h1>
+      <p>Corte, barba e estilo. Sem frescura. Sem firula. Só o que importa — e do jeito que tem que ser.</p>
+      <div class="btn-group">
+        <a href="#servicos" class="btn">✦ Ver Preços</a>
+        <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20agendar%20um%20horário%20na%20Barber%20King" target="_blank" class="btn btn-out">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="s"><div class="n">6+</div><div class="l">Anos</div></div>
+      <div class="s"><div class="n">+3k</div><div class="l">Clientes</div></div>
+      <div class="s"><div class="n">4.9</div><div class="l">★ Avaliação</div></div>
+      <div class="s"><div class="n">1k</div><div class="l">Atend./mês</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Role</span><div class="line"></div></div>
+</section>
+
+<!-- SERVICES -->
+<section class="srv-section" id="servicos">
+  <div class="container">
+    <div class="bk-h fade">
+      <div class="bk-tag">✦ Preçário</div>
+      <h2>Serviços & <em>Preços</em></h2>
+      <p>Transparência total. O preço que você vê é o que você paga. Sem surpresa.</p>
+    </div>
+    <div class="bento">
+      <div class="b-item king">
+        <div class="badge-king">🔥 POPULAR</div>
+        <div class="top"><span class="ico">👑</span><h3>Combo King</h3></div>
+        <div class="desc">Corte + barba + hidratação. O pacote completo que todo mundo pede. Finalização com balm e penteado.</div>
+        <div class="bot"><span class="price">R$ 110 <small>1h30</small></span><span class="tag-s">🔥 Mais pedido</span></div>
+      </div>
+      <div class="b-item fade"><div class="top"><span class="ico">💈</span><h3>Degradê</h3></div><div class="desc">Fade americano, mid, low. Acabamento na navalha com máquina zero.</div><div class="bot"><span class="price">R$ 45 <small>40min</small></span><span class="tag-s">Popular</span></div></div>
+      <div class="b-item fade" style="transition-delay:.04s"><div class="top"><span class="ico">✂️</span><h3>Barba</h3></div><div class="desc">Navalha, toalha quente e balm. Design de barba incluso.</div><div class="bot"><span class="price">R$ 35 <small>30min</small></span><span class="tag-s">Clássico</span></div></div>
+      <div class="b-item fade" style="transition-delay:.08s"><div class="top"><span class="ico">🔥</span><h3>Hot Towel</h3></div><div class="desc">Massagem facial + toalha quente + barba premium com óleos.</div><div class="bot"><span class="price">R$ 55 <small>45min</small></span><span class="tag-s">Premium</span></div></div>
+      <div class="b-item fade" style="transition-delay:.12s"><div class="top"><span class="ico">🧔</span><h3>Design</h3></div><div class="desc">Visagismo + corte personalizado. Análise de formato facial.</div><div class="bot"><span class="price">R$ 80 <small>50min</small></span><span class="tag-s">Exclusivo</span></div></div>
+      <div class="b-item fade" style="transition-delay:.16s"><div class="top"><span class="ico">🧴</span><h3>Hidratação</h3></div><div class="desc">Óleos essenciais e massagem revitalizante para o cabelo.</div><div class="bot"><span class="price">R$ 40 <small>25min</small></span><span class="tag-s">Revitaliza</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="sobre">
+  <img class="bg-img" src="https://images.unsplash.com/photo-1503951914875-452cb67e3ef6?w=1400&h=550&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="inner-a">
+      <div class="tag">✦ Nossa História</div>
+      <h2>Barbearia <em>Sem Enrolação</em></h2>
+      <p>Nasceu em São Paulo com uma ideia simples: barbearia sem frescura. Sem poltrona de veludo. Só corte bom, equipe foda e ambiente que o cara se sente em casa.</p>
+      <p>Marcos Silva, nosso fundador, cansou de barbearia que parecia museu. Criou o Barber King pra ser direto, moderno e com o melhor degradê da cidade.</p>
+      <div class="tags"><span>✂️ Degradê Especialista</span><span>🔥 Toalha Quente</span><span>👑 Ambiente Exclusivo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM STRIP -->
+<div class="insta-strip">
+  <div class="in">
+    <div class="mini-av">
+      <span><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<span style=font-size:.6rem>👤</span>'"></span>
+      <span><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<span style=font-size:.6rem>👤</span>'"></span>
+      <span><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<span style=font-size:.6rem>👤</span>'"></span>
+    </div>
+    <span class="txt">Siga nosso Instagram <strong>@barber.king</strong> — +4.500 seguidores</span>
+    <a href="#" class="btn">📷 Seguir</a>
+  </div>
+</div>
+
+<!-- GALLERY — More slides -->
+<section class="gal-section" id="galeria">
+  <div class="container">
+    <div class="bk-h fade">
+      <div class="bk-tag">✦ Galeria</div>
+      <h2>Nossos <em>Trampos</em></h2>
+      <p>Alguns dos nossos melhores trabalhos. Cada corte é único, cada cliente é tratado como rei.</p>
+    </div>
+  </div>
+  <div class="carousel" id="carousel"></div>
+</section>
+
+<!-- RESULTS — Before/After -->
+<section class="results-section" id="resultados">
+  <div class="container">
+    <div class="bk-h fade">
+      <div class="bk-tag">✦ Resultados</div>
+      <h2>Antes & <em>Depois</em></h2>
+      <p>Transformações reais dos nossos clientes. O resultado fala por si.</p>
+    </div>
+    <div class="results-g" id="resultsGrid"></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="equipe">
+  <div class="container">
+    <div class="bk-h fade">
+      <div class="bk-tag">✦ Equipe</div>
+      <h2>Nossos <em>Barbers</em></h2>
+      <p>Profissionais que entendem do riscado. Cada um com sua especialidade.</p>
+    </div>
+    <div class="team-list">
+      <div class="team-card fade-l"><div class="av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<div class=av style=display:flex;align-items:center;justify-content:center;font-size:1.5rem>👤</div>'"></div><div class="info"><h3>Marcos</h3><div class="pos">Master Barber</div><div class="esp">15 anos · Degradê e visagismo</div></div></div>
+      <div class="team-card fade-r" style="transition-delay:.04s"><div class="av"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<div class=av style=display:flex;align-items:center;justify-content:center;font-size:1.5rem>👤</div>'"></div><div class="info"><h3>João</h3><div class="pos">Barber Designer</div><div class="esp">8 anos · Cortes modernos</div></div></div>
+      <div class="team-card fade-l" style="transition-delay:.08s"><div class="av"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='<div class=av style=display:flex;align-items:center;justify-content:center;font-size:1.5rem>👤</div>'"></div><div class="info"><h3>Felipe</h3><div class="pos">Barber Estilista</div><div class="esp">6 anos · Pompadour e criativos</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="srv-section" id="faq">
+  <div class="container">
+    <div class="bk-h fade">
+      <div class="bk-tag">✦ FAQ</div>
+      <h2>Dúvidas <em>Rápidas</em></h2>
+      <p>Respostas diretas, sem enrolação.</p>
+    </div>
+    <div class="faq-tabs" id="faqTabs">
+      <button class="faq-tab active" data-tab="0">📅 Agendar</button>
+      <button class="faq-tab" data-tab="1">⏱ Duração</button>
+      <button class="faq-tab" data-tab="2">💰 Pagamento</button>
+      <button class="faq-tab" data-tab="3">📍 Onde fica</button>
+      <button class="faq-tab" data-tab="4">🧔 Barba grande</button>
+    </div>
+    <div class="faq-panel active" id="faqPanel0"><p>Aceitamos ambos. Recomendamos WhatsApp pra garantir horário, mas se tiver vaga atendemos na hora. Finais de semana é melhor agendar.</p></div>
+    <div class="faq-panel" id="faqPanel1"><p>Degradê ~40min, barba ~30min, Combo King ~1h30. Hot towel ~45min. Varia de cada estilo.</p></div>
+    <div class="faq-panel" id="faqPanel2"><p>Dinheiro, cartão, PIX e vale-presente. Parcelamos em até 3x sem juros no cartão.</p></div>
+    <div class="faq-panel" id="faqPanel3"><p>Rua Augusta, 1500 — Consolação, SP. Metrô Consolação a 3 min a pé. Estacionamento a 50m.</p></div>
+    <div class="faq-panel" id="faqPanel4"><p>Sim! Barba grande, longa ou rústica. Hidratação, modelagem e finalização. Traz que a gente doma.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="agende">
+  <div class="container">
+    <div class="cta-split">
+      <div class="cta-left fade-l">
+        <span class="big">💈</span>
+        <h2>Vem pro <em>King</em></h2>
+        <p>Agende seu horário pelo WhatsApp ou passa aqui pra conhecer o espaço. Primeira visita com desconto especial.</p>
+        <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20agendar%20um%20horário%20na%20Barber%20King" target="_blank" class="btn-big">💬 Agendar no WhatsApp</a>
+        <div class="info-row">
+          <span>📞 (85) 99896-378</span>
+          <span>🕐 Ter-Sex 09h-20h · Sáb 08h-18h</span>
+          <span>📸 @barber.king</span>
+        </div>
+      </div>
+      <div class="cta-right fade-r">
+        <div class="mapa">
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-46.6585,-23.5576,-46.6535,-23.5546&amp;layer=mapnik&amp;marker=-23.5561,-46.6560" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand"><span>✦</span> Barber King</div>
+  <div class="social">
+    <a href="#">📸</a>
+    <a href="https://wa.me/5585996896378">💬</a>
+    <a href="#">📍</a>
+  </div>
+  <div class="copy">© 2026 Barber King · Site de exemplo — demonstração de capacidades</div>
+</footer>
+
+<script>
+// ── Carousel ──
+document.getElementById('carousel').innerHTML = [
+  {s:'https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=450&h=360&fit=crop',a:'Degradê Americano',w:false},
+  {s:'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=550&h=360&fit=crop',a:'Barba Modelada',w:true},
+  {s:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=450&h=360&fit=crop',a:'Corte Navalha',w:false},
+  {s:'https://images.unsplash.com/photo-1503951914875-452cb67e3ef6?w=550&h=360&fit=crop',a:'Barbearia',w:true},
+  {s:'https://images.unsplash.com/photo-1567894340315-735d7c361db7?w=450&h=360&fit=crop',a:'Pompadour',w:false},
+  {s:'https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=450&h=360&fit=crop',a:'Barba King',w:false},
+  {s:'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=550&h=360&fit=crop',a:'Degradê Social',w:true},
+  {s:'https://images.unsplash.com/photo-1503951914875-452cb67e3ef6?w=550&h=360&fit=crop',a:'Barba Completa',w:true},
+  {s:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=450&h=360&fit=crop',a:'Estilo Clássico',w:false},
+].map((i,n)=>`<div class="slide${i.w?' wide':''}"><img src="${i.s}" alt="" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:var(--card);font-size:2rem>💈</div>'"><div class="cap">${i.a}</div></div>`).join('');
+
+// ── Results Grid ──
+document.getElementById('resultsGrid').innerHTML = [
+  {s:'https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=400&h=500&fit=crop',a:'Degradê + Barba',t:'Transformação'},
+  {s:'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=400&h=500&fit=crop',a:'Barba Completa',t:'Modelagem'},
+  {s:'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=500&fit=crop',a:'Corte + Barba',t:'Combo King'},
+].map((i,n)=>`<div class="result-card fade" style="transition-delay:${n*.08}s"><img src="${i.s}" alt="" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:var(--card);font-size:2.5rem>💈</div>'"><div class="badge-r">${i.a}</div><div class="tag-r">${i.t}</div></div>`).join('');
+
+// ── Scroll-hybrid Nav ──
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const cur=window.scrollY;
+  const nav=document.getElementById('nav');
+  if(cur>80&&cur>lastScroll)nav.classList.remove('show');
+  else if(cur>80)nav.classList.add('show');
+  else nav.classList.remove('show');
+  lastScroll=cur;
+});
+
+// ── Mobile Nav ──
+document.getElementById('mt').addEventListener('click',function(){this.classList.toggle('active');document.getElementById('nl').classList.toggle('active')});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('mt').classList.remove('active');document.getElementById('nl').classList.remove('active')}));
+
+// ── FAQ Tabs ──
+document.querySelectorAll('.faq-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.faq-tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.faq-panel').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('faqPanel' + t.dataset.tab).classList.add('active');
+  });
+});
+
+// ── Scroll Reveal ──
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');ro.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.fade,.fade-l,.fade-r').forEach(e=>ro.observe(e));
+</script>
+</body>
+</html>

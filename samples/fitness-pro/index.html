@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fitness Pro · Academia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:opsz,wght@14..32,200..700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+:root{--bg1:#0B0B0B;--bg2:#111111;--card:#151515;--orange:#FF6B00;--orange2:rgba(255,107,0,.06);--orange3:rgba(255,107,0,.12);--cyan:#00D4FF;--txt:#F0F0F0;--txt2:rgba(240,240,240,.4);--txt3:rgba(240,240,240,.15);--wpp:#25D366}
+body{font-family:'Inter',sans-serif;background:var(--bg1);color:var(--txt);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:16px}
+a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}ul{list-style:none}::selection{background:var(--orange);color:#fff}img{max-width:100%;display:block}
+
+.sample-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--orange);color:#fff;text-align:center;padding:5px 14px;font-size:12px;letter-spacing:.08em;font-weight:700}
+
+/* ═══ DECORATIVE SYMBOLS ═══ */
+.bg-symbols{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-symbols span{position:absolute;font-size:clamp(30px,4vw,60px);opacity:.018;animation:drift 14s ease-in-out infinite}
+.bg-symbols .s1{top:5%;left:2%;animation-delay:0s}
+.bg-symbols .s2{top:18%;right:1%;animation-delay:1.5s;font-size:clamp(36px,5vw,72px)}
+.bg-symbols .s3{top:35%;left:1%;animation-delay:3s}
+.bg-symbols .s4{top:50%;right:1%;animation-delay:4.5s;font-size:clamp(40px,5.5vw,78px)}
+.bg-symbols .s5{top:68%;left:2%;animation-delay:6s}
+.bg-symbols .s6{bottom:2%;right:2%;animation-delay:7.5s}
+.bg-symbols .s7{top:10%;left:96%;animation-delay:2s}
+.bg-symbols .s8{top:60%;left:97%;animation-delay:5.5s}
+.bg-symbols .s9{top:45%;left:4%;animation-delay:4s;font-size:clamp(24px,3vw,50px)}
+.bg-symbols .s10{top:80%;left:95%;animation-delay:8s}
+.bg-symbols .s11{top:28%;left:6%;animation-delay:3.5s;font-size:clamp(22px,2.5vw,40px)}
+.bg-symbols .s12{top:75%;right:5%;animation-delay:6.5s;font-size:clamp(26px,3vw,46px)}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(3deg)}}
+
+/* ═══ SECTION BASE ═══ */
+.snap{min-height:100vh;scroll-snap-align:start;display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 40px}
+.snap .inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2}
+.glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;opacity:.04}
+.glow.g1{width:450px;height:450px;background:var(--orange);top:-120px;right:-120px}
+.glow.g2{width:350px;height:350px;background:var(--cyan);bottom:-100px;left:-100px}
+
+/* ═══ SHARED ═══ */
+.section-t{font-size:13px;color:var(--orange);letter-spacing:.15em;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.section-h{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,5vw,52px);text-transform:uppercase;letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
+.section-h em{color:var(--orange);font-style:normal}
+.section-p{font-size:15px;color:var(--txt2);line-height:1.8;max-width:600px;margin-bottom:28px}
+
+/* ═══════ 1. HERO ═══════ */
+.sec-hero{position:relative}
+.sec-hero .hero-bg{position:absolute;inset:0;z-index:0}
+.sec-hero .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.06;filter:grayscale(1)}
+.sec-hero .hero-bg .overlay{position:absolute;inset:0;background:linear-gradient(170deg,#0B0B0B 0%,rgba(11,11,11,.88) 40%,rgba(11,11,11,.7) 70%,#0B0B0B 100%)}
+.sec-hero .hero-content{max-width:800px;position:relative;z-index:2}
+.sec-hero .badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.sec-hero .badge-row .b{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;background:var(--orange2);border:1px solid var(--orange3);border-radius:30px;font-size:10px;color:var(--orange);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.sec-hero .hero-sub-text{font-size:13px;color:var(--txt2);line-height:1.8;margin-bottom:8px;max-width:560px;border-left:2px solid var(--orange3);padding-left:16px}
+.sec-hero h1{font-family:'Archivo Black',sans-serif;font-size:clamp(56px,12vw,120px);line-height:.82;letter-spacing:-.04em;text-transform:uppercase}
+.sec-hero h1 .hl{color:var(--orange);position:relative;display:inline-block}
+.sec-hero h1 .hl::after{content:'';position:absolute;bottom:6px;left:0;right:0;height:6px;background:var(--orange);border-radius:2px;opacity:.2}
+.sec-hero h1 .sub{display:block;font-size:clamp(13px,1.6vw,18px);font-weight:400;letter-spacing:.22em;color:var(--txt2);margin-top:6px;font-family:'Inter',sans-serif}
+.sec-hero p{font-size:16px;color:var(--txt2);line-height:2;max-width:540px;margin:10px 0 22px}
+.sec-hero .btn-hero{display:inline-flex;align-items:center;gap:12px;padding:16px 40px;background:var(--orange);color:#fff;border:none;border-radius:4px;font-size:15px;font-weight:700;transition:.3s;font-family:'Inter',sans-serif}
+.sec-hero .btn-hero:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,107,0,.25)}
+.sec-hero .stats{display:flex;gap:40px;margin-top:20px;padding-top:18px;border-top:1px solid var(--orange3);flex-wrap:wrap}
+.sec-hero .stats div{text-align:left}
+.sec-hero .stats strong{display:block;font-family:'Archivo Black',sans-serif;font-size:32px;color:var(--orange);letter-spacing:-.02em;line-height:1}
+.sec-hero .stats span{font-size:11px;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:3px}
+.sec-hero .hero-highlights{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+.sec-hero .hero-highlights span{font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.02);border-radius:4px}
+.sec-hero .hero-highlights span::before{content:'⏣';color:var(--orange);font-size:10px}
+.sec-hero .scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--txt2);font-size:10px;letter-spacing:.12em;text-transform:uppercase;animation:bounce 2s infinite;z-index:3}
+.sec-hero .scroll-indicator .arrow{width:18px;height:18px;border-right:2px solid var(--orange);border-bottom:2px solid var(--orange);transform:rotate(45deg);opacity:.35}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(12px)}}
+
+/* ═══════ 2. VALORES ═══════ */
+.sec-valores{background:var(--bg2)}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.val-card{position:relative;padding:48px 32px;border:1px solid rgba(255,107,0,.03);border-radius:4px;text-align:center;transition:.4s;background:rgba(255,255,255,.006);overflow:hidden}
+.val-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--orange),transparent);opacity:0;transition:.4s}
+.val-card:hover{background:rgba(255,107,0,.012);border-color:rgba(255,107,0,.06);transform:translateY(-8px)}
+.val-card:hover::before{opacity:1}
+.val-card .num{font-family:'Archivo Black',sans-serif;font-size:64px;color:var(--orange);opacity:.05;line-height:1;margin-bottom:-24px;text-align:left;letter-spacing:-.03em}
+.val-card .ic{font-size:44px;display:block;margin-bottom:8px}
+.val-card h3{font-family:'Archivo Black',sans-serif;font-size:21px;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px}
+.val-card p{font-size:14px;color:var(--txt2);line-height:1.7}
+.val-card .val-tag{display:inline-block;margin-top:12px;font-size:10px;color:var(--orange);background:var(--orange2);padding:3px 14px;border-radius:2px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+
+/* ═══════ 3. MIX ═══════ */
+.sec-mix{background:linear-gradient(170deg,#0B0B0B 0%,#0A0500 40%,#0B0B0B 100%)}
+.mix-content{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.mix-col{display:flex;flex-direction:column;gap:10px}
+.mix-item{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid rgba(255,107,0,.02);border-radius:4px;transition:.3s;background:rgba(255,255,255,.003)}
+.mix-item:hover{border-color:rgba(255,107,0,.06);transform:translateX(8px);background:rgba(255,107,0,.006)}
+.mix-item .ic{flex-shrink:0;font-size:22px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(255,107,0,.035);border-radius:3px}
+.mix-item .info{flex:1}
+.mix-item .info .top-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mix-item .info .top-row h4{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;letter-spacing:-.01em}
+.mix-item .info .top-row .tag-ex{font-size:9px;background:rgba(255,107,0,.05);color:var(--orange);padding:2px 9px;border-radius:2px;font-weight:600;letter-spacing:.05em}
+.mix-item .info p{font-size:12px;color:var(--txt2);line-height:1.5;margin-top:2px}
+.mix-item .info .detail-row{display:flex;gap:12px;margin-top:4px;font-size:10px;color:var(--txt3);letter-spacing:.04em;flex-wrap:wrap}
+.mix-item .info .detail-row span{display:flex;align-items:center;gap:3px}
+.plan-card-mix{padding:24px 24px;border:1px solid rgba(255,107,0,.035);border-radius:4px;transition:.3s;background:rgba(255,255,255,.005)}
+.plan-card-mix:hover{border-color:rgba(255,107,0,.07);transform:translateX(6px)}
+.plan-card-mix.featured{border-color:var(--orange3);background:rgba(255,107,0,.012)}
+.plan-card-mix .top{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.plan-card-mix .top .left{display:flex;align-items:center;gap:10px}
+.plan-card-mix .top .left h4{font-family:'Archivo Black',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:-.01em}
+.plan-card-mix .top .left .tag{font-size:9px;color:var(--orange);font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,107,0,.04);padding:2px 9px;border-radius:2px}
+.plan-card-mix .top .right{display:flex;align-items:center;gap:10px}
+.plan-card-mix .top .right .price{font-family:'Archivo Black',sans-serif;font-size:30px;color:var(--orange);letter-spacing:-.02em;white-space:nowrap}
+.plan-card-mix .top .right .price small{font-size:12px;color:var(--txt2);font-weight:400}
+.plan-card-mix .top .right .btn-plan{padding:8px 20px;background:var(--orange);color:#fff;border:none;border-radius:3px;font-size:12px;font-weight:700;transition:.2s;font-family:'Inter',sans-serif}
+.plan-card-mix .top .right .btn-plan:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(255,107,0,.12)}
+.plan-card-mix .feats{display:flex;gap:12px;margin-top:8px;font-size:11px;color:var(--txt2);flex-wrap:wrap}
+.plan-card-mix .feats span{display:flex;align-items:center;gap:3px}
+.plan-card-mix .feats span::before{content:'◆';color:var(--orange);font-size:7px}
+.plan-card-mix .extra{display:flex;gap:16px;margin-top:6px;font-size:10px;flex-wrap:wrap}
+.plan-card-mix .extra .promo{color:var(--wpp);font-weight:600;letter-spacing:.03em}
+.plan-card-mix .extra .note{color:var(--txt2);opacity:.25}
+
+/* ═══════ 4. GALERIA ═══════ */
+.sec-galeria{background:var(--bg2)}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:12px}
+.gal-grid .item{position:relative;overflow:hidden;border-radius:4px;aspect-ratio:4/3;background:var(--card);border:1px solid rgba(255,107,0,.015);transition:.4s;cursor:pointer}
+.gal-grid .item:hover{transform:scale(1.02);border-color:rgba(255,107,0,.06);z-index:2}
+.gal-grid .item img{width:100%;height:100%;object-fit:cover;transition:.6s;filter:saturate(.7)}
+.gal-grid .item:hover img{transform:scale(1.08);filter:saturate(1)}
+.gal-grid .item.wide{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.gal-grid .item .label{position:absolute;bottom:0;left:0;right:0;padding:36px 14px 10px;background:linear-gradient(transparent,rgba(11,11,11,.85));font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--txt);opacity:0;transition:.3s}
+.gal-grid .item:hover .label{opacity:1}
+@media(max-width:768px){.gal-grid{grid-template-columns:1fr 1fr}.gal-grid .item.wide{grid-column:span 2;grid-row:span 1;aspect-ratio:4/3}}
+
+/* ═══════ 5. DEPOIMENTOS ═══════ */
+.sec-depoimento{background:var(--bg2);text-align:center}
+.depo-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:920px;margin:0 auto;text-align:left}
+.depo-left{display:flex;flex-direction:column;gap:16px}
+.depo-card{background:rgba(255,255,255,.006);border:1px solid rgba(255,107,0,.025);border-radius:4px;padding:24px 24px;transition:.3s}
+.depo-card:hover{border-color:rgba(255,107,0,.06);transform:translateX(6px)}
+.depo-card .stars{color:#FFB800;font-size:13px;letter-spacing:2px;margin-bottom:6px}
+.depo-card p{font-size:14px;color:var(--txt2);line-height:1.7;font-style:italic}
+.depo-card .author{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,107,0,.02)}
+.depo-card .author .av{width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--orange2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.depo-card .author .av img{width:100%;height:100%;object-fit:cover}
+.depo-card .author .info h4{font-size:13px;font-weight:700;color:var(--txt)}
+.depo-card .author .info span{font-size:10px;color:var(--txt2);letter-spacing:.06em;text-transform:uppercase}
+.depo-right{display:flex;flex-direction:column;gap:16px;justify-content:center}
+.depo-stat-card{background:rgba(255,255,255,.005);border:1px solid rgba(255,107,0,.02);border-radius:4px;padding:22px 24px;text-align:center;transition:.3s}
+.depo-stat-card:hover{border-color:rgba(255,107,0,.05);transform:translateY(-4px)}
+.depo-stat-card .n{font-family:'Archivo Black',sans-serif;font-size:38px;color:var(--orange);letter-spacing:-.02em;line-height:1}
+.depo-stat-card .l{font-size:12px;color:var(--txt2);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.depo-stat-card .sub{font-size:10px;color:var(--txt3);margin-top:4px}
+
+/* ═══════ 6. FAQ ═══════ */
+.sec-faq{background:linear-gradient(170deg,#0B0B0B 0%,#0A0500 40%,#0B0B0B 100%)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.faq-item{background:rgba(255,255,255,.005);border:1px solid rgba(255,107,0,.02);border-radius:4px;padding:20px 22px;transition:.3s}
+.faq-item:hover{border-color:rgba(255,107,0,.05);transform:translateX(4px)}
+.faq-item h4{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.faq-item h4 .q-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--orange2);color:var(--orange);border-radius:50%;font-size:12px;font-weight:700;flex-shrink:0}
+.faq-item p{font-size:13px;color:var(--txt2);line-height:1.7;padding-left:30px}
+.schedule-box{background:rgba(255,107,0,.008);border:1px solid rgba(255,107,0,.03);border-radius:4px;padding:28px 30px;margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.schedule-box .s-item{display:flex;justify-content:space-between;font-size:13px;color:var(--txt2);padding:6px 0;border-bottom:1px solid rgba(255,107,0,.02)}
+.schedule-box .s-item strong{color:var(--txt);font-weight:600}
+.schedule-box .s-item .day{color:var(--orange);font-weight:600;text-transform:uppercase;font-size:12px;letter-spacing:.05em}
+@media(max-width:768px){.faq-grid{grid-template-columns:1fr}.schedule-box{grid-template-columns:1fr;padding:20px}}
+
+/* ═══════ 7. UNIDADES ═══════ — BIGGER! */
+.sec-unidades{background:var(--bg2)}
+.unidades-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.uni-card{padding:28px 28px;border:1px solid rgba(255,107,0,.02);border-radius:6px;transition:.3s;background:rgba(255,255,255,.004);position:relative;overflow:hidden}
+.uni-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--orange);opacity:0;transition:.3s}
+.uni-card:hover::before{opacity:.3}
+.uni-card:hover{border-color:rgba(255,107,0,.06);transform:translateY(-6px);background:rgba(255,107,0,.005)}
+.uni-card .city{font-size:12px;color:var(--orange);font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+.uni-card h4{font-family:'Archivo Black',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:2px}
+.uni-card .end{font-size:14px;color:var(--txt2);margin:4px 0 6px;line-height:1.5}
+.uni-card .meta{display:flex;gap:16px;font-size:12px;color:var(--txt2);opacity:.6;flex-wrap:wrap}
+.uni-card .meta span{display:flex;align-items:center;gap:4px}
+
+/* ═══════ 8. CTA ═══════ */
+.sec-cta{background:linear-gradient(170deg,#0B0B0B 0%,#0F0800 30%,#120A00 60%,#0B0B0B 100%);text-align:center}
+.sec-cta .cta-inner{max-width:650px;margin:0 auto}
+.sec-cta .cta-inner .big{font-size:70px;display:block;margin-bottom:12px}
+.sec-cta .cta-inner h2{font-family:'Archivo Black',sans-serif;font-size:clamp(38px,6vw,60px);text-transform:uppercase;letter-spacing:-.02em;line-height:.9}
+.sec-cta .cta-inner h2 .hl{color:var(--orange)}
+.sec-cta .cta-inner p{font-size:15px;color:var(--txt2);margin:12px 0 20px;line-height:1.8;max-width:500px;margin-left:auto;margin-right:auto}
+.sec-cta .cta-inner .benefits{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.sec-cta .cta-inner .benefits span{font-size:12px;color:var(--txt);background:rgba(255,107,0,.035);border:1px solid rgba(255,107,0,.05);padding:6px 14px;border-radius:3px;display:flex;align-items:center;gap:6px}
+.sec-cta .cta-inner .benefits span .ch{color:var(--orange);font-weight:700}
+.sec-cta .cta-inner .btn-big{display:inline-flex;align-items:center;gap:12px;padding:18px 44px;background:var(--wpp);color:#fff;border:none;border-radius:4px;font-size:17px;font-weight:700;transition:.3s;font-family:'Inter',sans-serif;box-shadow:0 6px 25px rgba(37,211,102,.08)}
+.sec-cta .cta-inner .btn-big:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(37,211,102,.12)}
+.sec-cta .cta-inner .contact-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.sec-cta .cta-inner .contact-row a{font-size:12px;color:var(--txt2);padding:8px 16px;border:1px solid rgba(255,255,255,.015);border-radius:3px;transition:.2s;display:flex;align-items:center;gap:6px}
+.sec-cta .cta-inner .contact-row a:hover{border-color:rgba(255,107,0,.08);color:var(--txt)}
+
+/* ═══════ NAV DOTS ═══════ */
+.nav-dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:12px}
+.nav-dots a{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,107,0,.12);display:block;transition:.3s;position:relative}
+.nav-dots a:hover,.nav-dots a.active{border-color:var(--orange);background:var(--orange);box-shadow:0 0 12px rgba(255,107,0,.08)}
+.nav-dots a .tip{position:absolute;right:26px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--txt);background:var(--bg1);padding:4px 10px;border:1px solid rgba(255,107,0,.05);border-radius:3px;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap;font-weight:500;letter-spacing:.03em}
+.nav-dots a:hover .tip{opacity:1}
+.nav-dots a.active .tip{opacity:1;border-color:rgba(255,107,0,.08)}
+
+/* ═══════ FOOTER ═══════ */
+.footer-min{padding:28px 40px;display:flex;justify-content:space-between;font-size:12px;color:var(--txt2);opacity:.2;border-top:1px solid rgba(255,107,0,.015)}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media(max-width:768px){
+  .snap{min-height:auto;padding:60px 20px;scroll-snap-align:none}
+  .val-grid,.mix-content,.depo-grid,.unidades-grid{grid-template-columns:1fr}
+  .nav-dots,.bg-symbols{display:none}
+  .sec-hero .stats{gap:16px}
+  .sec-hero .stats strong{font-size:24px}
+  .sec-hero .scroll-indicator{display:none}
+  .plan-card-mix .top .right{width:100%;justify-content:space-between;margin-top:6px}
+  .schedule-box{grid-template-columns:1fr;padding:20px}
+  .depo-right{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .uni-card{padding:22px 20px}
+  .uni-card h4{font-size:19px}
+  .uni-card .end{font-size:13px}
+  .uni-card .meta{font-size:11px;gap:12px}
+  .section-h{font-size:clamp(28px,8vw,36px)}
+  .val-card{padding:36px 24px}
+  .val-card h3{font-size:18px}
+  .mix-item{padding:14px 16px}
+  .faq-item{padding:16px}
+  .faq-item h4{font-size:13px}
+  .footer-min{padding:20px;flex-direction:column;text-align:center;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<div class="sample-banner">✦ FITNESS PRO · Site de exemplo — demonstração de capacidades</div>
+
+<div class="bg-symbols">
+  <span class="s1">🏋️</span><span class="s2">💪</span><span class="s3">🏋️</span><span class="s4">💪</span>
+  <span class="s5">🏋️</span><span class="s6">💪</span><span class="s7">🏋️</span><span class="s8">💪</span>
+  <span class="s9">🔥</span><span class="s10">🔥</span><span class="s11">🎯</span><span class="s12">⚡</span>
+</div>
+
+<div class="nav-dots">
+  <a href="#hero" class="active"><span class="tip">Início</span></a>
+  <a href="#valores"><span class="tip">Diferenciais</span></a>
+  <a href="#mix"><span class="tip">Treinos + Planos</span></a>
+  <a href="#galeria"><span class="tip">Galeria</span></a>
+  <a href="#depoimentos"><span class="tip">Depoimentos</span></a>
+  <a href="#faq"><span class="tip">FAQ + Horários</span></a>
+  <a href="#unidades"><span class="tip">Unidades</span></a>
+  <a href="#cta"><span class="tip">Contato</span></a>
+</div>
+
+<!-- ── 1. HERO ── -->
+<section class="snap sec-hero" id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&h=900&fit=crop" alt="" loading="lazy" onerror="this.style.display='none'">
+    <div class="overlay"></div>
+  </div>
+  <span class="glow g1"></span><span class="glow g2"></span>
+  <div class="inner">
+    <div class="hero-content">
+      <div class="badge-row">
+        <span class="b">🏆 FORTALEZA · CE</span>
+        <span class="b">⏱ 24 HORAS</span>
+        <span class="b">💪 DESDE 2018</span>
+        <span class="b">📱 APP PRÓPRIO</span>
+        <span class="b">🚗 ESTACIONAMENTO</span>
+      </div>
+      <div class="hero-sub-text">Referência em fitness na região — mais de 12 mil alunos, 15 unidades e nota 4.9★ no Google. Estrutura completa aberta 24 horas.</div>
+      <h1>FITNESS <span class="hl">PRO</span><span class="sub">SUA EVOLUÇÃO COMEÇA AQUI</span></h1>
+      <p>Equipamentos de última geração, métodos inovadores e o ambiente ideal para superar seus limites. Mais de 15 unidades na região com estrutura premium e profissionais qualificados.</p>
+      <a href="#cta" class="btn-hero">💬 Comece Agora →</a>
+      <div class="stats">
+        <div><strong>15+</strong><span>Unidades</span></div>
+        <div><strong>+40</strong><span>Equipamentos</span></div>
+        <div><strong>24h</strong><span>Funcionamento</span></div>
+        <div><strong>+12k</strong><span>Alunos</span></div>
+        <div><strong>98%</strong><span>Satisfação</span></div>
+        <div><strong>8</strong><span>Anos</span></div>
+      </div>
+      <div class="hero-highlights">
+        <span>Estacionamento grátis</span><span>Wi-Fi liberado</span><span>Armários inclusos</span><span>Toalha grátis</span><span>Avaliação física</span>
+      </div>
+    </div>
+    <div class="scroll-indicator"><span>Role para explorar</span><div class="arrow"></div></div>
+  </div>
+</section>
+
+<!-- ── 2. VALORES ── -->
+<section class="snap sec-valores" id="valores">
+  <div class="inner">
+    <div class="val-grid">
+      <div class="val-card"><div class="num">01</div><span class="ic">🏋️</span><h3>Estrutura Premium</h3><p>Equipamentos modernos importados, espaços amplos com climatização central, vestiários completos com armários individuais e área de cardio com aparelhos multimídia.</p><span class="val-tag">+40 equipamentos</span></div>
+      <div class="val-card"><div class="num">02</div><span class="ic">🎯</span><h3>Resultados Reais</h3><p>Metodologia comprovada com profissionais de educação física que acompanham sua evolução, ajustam seu treino mensalmente e garantem que cada minuto na academia valha a pena.</p><span class="val-tag">Avaliação gratuita</span></div>
+      <div class="val-card"><div class="num">03</div><span class="ic">🔥</span><h3>Comunidade Ativa</h3><p>Ambiente motivador com alunos engajados, desafios semanais, aulas em grupo vibrantes e uma equipe que incentiva você a superar seus limites todos os dias.</p><span class="val-tag">+12k alunos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. MODALIDADES + PLANOS ── -->
+<section class="snap sec-mix" id="mix">
+  <span class="glow g1" style="width:280px;height:280px;top:20%;right:-60px"></span>
+  <div class="inner">
+    <div class="section-t">⚡ Treinos & Investimento</div>
+    <div class="section-h">Tudo que você <em>precisa</em></div>
+    <div class="mix-content">
+      <div class="mix-col">
+        <div class="mix-item"><div class="ic">🏋️</div><div class="info"><div class="top-row"><h4>Musculação</h4><span class="tag-ex">+40 equip.</span></div><p>Força e hipertrofia com equipamentos de ponta importados</p><div class="detail-row"><span>⏱ Seg-Sáb 06h-23h</span><span>👤 Prof. disponível</span></div></div></div>
+        <div class="mix-item"><div class="ic">💥</div><div class="info"><div class="top-row"><h4>Cross Training</h4><span class="tag-ex">🔥 Intenso</span></div><p>WODs diários de alta intensidade para condicionamento total</p><div class="detail-row"><span>⏱ 45min/aula</span><span>📅 Turmas limitadas</span></div></div></div>
+        <div class="mix-item"><div class="ic">🤸</div><div class="info"><div class="top-row"><h4>Funcional</h4><span class="tag-ex">Todos níveis</span></div><p>Movimentos naturais que melhoram sua performance diária</p><div class="detail-row"><span>⏱ 30min</span><span>🎯 Baixo impacto</span></div></div></div>
+        <div class="mix-item"><div class="ic">🚴</div><div class="info"><div class="top-row"><h4>Spinning</h4><span class="tag-ex">30 vagas</span></div><p>Aulas em grupo com instrutores certificados e playlist exclusiva</p><div class="detail-row"><span>⏱ 45min</span><span>🎵 Música ao vivo</span></div></div></div>
+        <div class="mix-item"><div class="ic">⚡</div><div class="info"><div class="top-row"><h4>HIIT</h4><span class="tag-ex">⏱ 30 min</span></div><p>Treino intervalado de alta intensidade para queima máxima</p><div class="detail-row"><span>🔥 400 cal/sessão</span><span>📱 App exclusivo</span></div></div></div>
+        <div class="mix-item"><div class="ic">🧘</div><div class="info"><div class="top-row"><h4>Yoga & Pilates</h4><span class="tag-ex">Turmas reduzidas</span></div><p>Equilíbrio entre corpo e mente para bem-estar completo</p><div class="detail-row"><span>⏱ 50min</span><span>🧘 Iniciantes bem-vindos</span></div></div></div>
+      </div>
+      <div class="mix-col">
+        <div class="plan-card-mix featured">
+          <div class="top">
+            <div class="left"><h4>Black</h4><span class="tag">⚡ MAIS VENDIDO</span></div>
+            <div class="right"><span class="price">R$ 159 <small>/mês</small></span><a href="https://wa.me/5585996896378?text=Olá!%20Quero%20o%20plano%20Black%20da%20Fitness%20Pro" target="_blank" class="btn-plan">Quero</a></div>
+          </div>
+          <div class="feats"><span>Acesso total</span><span>Cross incluso</span><span>Avaliação mensal</span><span>2 meses personal grátis</span><span>Todas unidades</span></div>
+          <div class="extra"><span class="promo">🔥 1º mês grátis</span><span class="note">12 meses de fidelidade</span></div>
+        </div>
+        <div class="plan-card-mix">
+          <div class="top">
+            <div class="left"><h4>Smart</h4><span class="tag">Sem fidelidade</span></div>
+            <div class="right"><span class="price">R$ 119 <small>/mês</small></span><a href="https://wa.me/5585996896378?text=Olá!%20Quero%20o%20plano%20Smart%20da%20Fitness%20Pro" target="_blank" class="btn-plan">Quero</a></div>
+          </div>
+          <div class="feats"><span>Acesso 3 unid.</span><span>Cancele quando quiser</span><span>Aulas liberadas</span><span>Avaliação semestral</span></div>
+          <div class="extra"><span class="promo">🔥 1º mês grátis</span><span class="note">Sem fidelidade</span></div>
+        </div>
+        <div class="plan-card-mix">
+          <div class="top">
+            <div class="left"><h4>Fit</h4><span class="tag">Econômico</span></div>
+            <div class="right"><span class="price">R$ 99 <small>/mês</small></span><a href="https://wa.me/5585996896378?text=Olá!%20Quero%20o%20plano%20Fit%20da%20Fitness%20Pro" target="_blank" class="btn-plan">Quero</a></div>
+          </div>
+          <div class="feats"><span>Acesso 1 unid.</span><span>Musculação</span><span>Aulas em grupo</span><span>Horário livre</span></div>
+          <div class="extra"><span class="promo">🔥 1º mês grátis</span><span class="note">12 meses de fidelidade</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. GALERIA ── -->
+<section class="snap sec-galeria" id="galeria">
+  <div class="inner">
+    <div class="section-t">📸 Conheça nossa estrutura</div>
+    <div class="section-h">Fotos da <em>Academia</em></div>
+    <div class="gal-grid" id="galGrid"></div>
+  </div>
+</section>
+
+<!-- ── 5. DEPOIMENTOS ── -->
+<section class="snap sec-depoimento" id="depoimentos">
+  <span class="glow g1" style="width:350px;height:350px;left:-100px;top:10%"></span>
+  <span class="glow g2" style="width:250px;height:250px;right:-80px;bottom:20%"></span>
+  <div class="inner">
+    <div class="section-t" style="text-align:center">💛 O que dizem nossos alunos</div>
+    <div class="section-h" style="text-align:center">Resultados que <em>inspiram</em></div>
+    <div class="depo-grid">
+      <div class="depo-left">
+        <div class="depo-card"><div class="stars">★★★★★</div><p>"A melhor academia que já treinei! Estrutura incrível, profissionais dedicados e resultado rápido. Perdi 12kg em 4 meses com o acompanhamento deles."</p><div class="author"><div class="av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='👩'"></div><div class="info"><h4>Ana Paula</h4><span>Aluna há 2 anos · Plano Black</span></div></div></div>
+        <div class="depo-card"><div class="stars">★★★★★</div><p>"Treino aqui desde a inauguração. O Cross Training transformou minha vida — mais disposição, mais força e uma comunidade que me motiva todos os dias."</p><div class="author"><div class="av"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='👨'"></div><div class="info"><h4>Carlos Eduardo</h4><span>Aluno desde 2019 · Plano Black</span></div></div></div>
+        <div class="depo-card"><div class="stars">★★★★★</div><p>"Comecei no plano Fit e em 3 meses já migrei pro Black de tão viciado que fiquei. Estrutura 24h salvou minha rotina corrida de trabalho."</p><div class="author"><div class="av"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop" alt="" loading="lazy" onerror="this.outerHTML='👨'"></div><div class="info"><h4>Rafael Martins</h4><span>Aluno há 8 meses · Plano Black</span></div></div></div>
+      </div>
+      <div class="depo-right">
+        <div class="depo-stat-card"><div class="n">+12.000</div><div class="l">Alunos Ativos</div><div class="sub">Maior rede da região</div></div>
+        <div class="depo-stat-card"><div class="n">4.9 ★</div><div class="l">Avaliação Média</div><div class="sub">Google + Apple</div></div>
+        <div class="depo-stat-card"><div class="n">98%</div><div class="l">Recomendam</div><div class="sub">Pesquisa de satisfação</div></div>
+        <div class="depo-stat-card"><div class="n">8 Anos</div><div class="l">De História</div><div class="sub">Desde 2018</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. FAQ + HORÁRIOS ── -->
+<section class="snap sec-faq" id="faq">
+  <div class="inner">
+    <div class="section-t">❓ Perguntas frequentes</div>
+    <div class="section-h">Tire suas <em>dúvidas</em></div>
+    <div class="section-p">Tudo que você precisa saber sobre a Fitness Pro antes de começar.</div>
+    <div class="faq-grid">
+      <div class="faq-item"><h4><span class="q-badge">?</span>Qual o melhor horário para treinar?</h4><p>Funcionamos 24h! Horários mais tranquilos: 06h-09h e 22h-00h. Pico de movimento: 18h-20h. Recomendamos manhã cedo ou tarde da noite para quem prefere silêncio.</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Precisa de avaliação física?</h4><p>Sim! Oferecemos avaliação gratuita na primeira visita com bioimpedância, anamnese completa e montamos seu treino personalizado com um profissional.</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Tem estacionamento?</h4><p>Sim! Estacionamento gratuito com 200 vagas, bicicletário seguro e ponto de ônibus a 50m de todas as unidades.</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Existe fidelidade?</h4><p>Não! Temos planos sem fidelidade (Smart). Cancele quando quiser sem multa. Planos Fit e Black têm 12 meses com benefícios exclusivos.</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Quais formas de pagamento?</h4><p>Aceitamos cartões de crédito (até 6x), débito, PIX, boleto bancário e vale-cultura. Parcelamento sem juros no cartão.</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Posso levar um amigo?</h4><p>Sim! Nosso programa "Amigo Fitness" permite levar um convidado 2x por mês gratuitamente. Seu amigo ganha 1 semana grátis também!</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Tem programa de pontos?</h4><p>Sim! O Fitness Club acumula pontos por presença, evolução e indicações. Troque por descontos na mensalidade, assessórios e até meses grátis!</p></div>
+      <div class="faq-item"><h4><span class="q-badge">?</span>Como cancelar o plano?</h4><p>Cancelamento pelo WhatsApp ou presencialmente. Aviso de 30 dias. Plano Smart não tem multa. Demais planos seguem contrato de 12 meses.</p></div>
+    </div>
+    <div class="schedule-box">
+      <div class="s-item"><span class="day">Segunda</span><span><strong>06h — 23h</strong></span></div>
+      <div class="s-item"><span class="day">Terça</span><span><strong>06h — 23h</strong></span></div>
+      <div class="s-item"><span class="day">Quarta</span><span><strong>06h — 23h</strong></span></div>
+      <div class="s-item"><span class="day">Quinta</span><span><strong>06h — 23h</strong></span></div>
+      <div class="s-item"><span class="day">Sexta</span><span><strong>06h — 23h</strong></span></div>
+      <div class="s-item"><span class="day">Sábado</span><span><strong>08h — 18h</strong></span></div>
+      <div class="s-item"><span class="day">Domingo</span><span><strong>08h — 14h</strong></span></div>
+      <div class="s-item"><span class="day" style="color:var(--wpp)">Emergência</span><span><strong style="color:var(--wpp)">24h (chaveiro)</strong></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7. UNIDADES ── -->
+<section class="snap sec-unidades" id="unidades">
+  <div class="inner">
+    <div class="section-t">📍 Encontre a mais próxima</div>
+    <div class="section-h">Nossas <em>Unidades</em></div>
+    <div class="section-p">Mais de 15 unidades espalhadas pela região. Sempre uma perto de você.</div>
+    <div class="unidades-grid">
+      <div class="uni-card"><div class="city">📍 Zona Sul</div><h4>Fitness Pro Sul</h4><div class="end">Av. Washington Soares, 4335 — Sapiranga, Fortaleza</div><div class="meta"><span>🕐 24h</span><span>📞 (85) 99896-378</span><span>🚗 200 vagas</span></div></div>
+      <div class="uni-card"><div class="city">📍 Centro</div><h4>Fitness Pro Centro</h4><div class="end">Rua Guilherme Rocha, 1500 — Centro, Fortaleza</div><div class="meta"><span>🕐 24h</span><span>📞 (85) 99896-378</span><span>🚗 150 vagas</span></div></div>
+      <div class="uni-card"><div class="city">📍 Aldeota</div><h4>Fitness Pro Aldeota</h4><div class="end">Av. Dom Luís, 900 — Aldeota, Fortaleza</div><div class="meta"><span>🕐 06h-23h</span><span>📞 (85) 99896-378</span><span>🚗 Bicicletário</span></div></div>
+      <div class="uni-card"><div class="city">📍 Parangaba</div><h4>Fitness Pro Parangaba</h4><div class="end">Rua Germano Franck, 300 — Parangaba, Fortaleza</div><div class="meta"><span>🕐 24h</span><span>📞 (85) 99896-378</span><span>🚗 300 vagas</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 8. CTA ── -->
+<section class="snap sec-cta" id="cta">
+  <span class="glow g2" style="background:var(--orange)"></span>
+  <div class="inner">
+    <div class="cta-inner">
+      <span class="big">💪</span>
+      <h2>Bora <span class="hl">Treinar?</span></h2>
+      <p>Agende sua visita gratuita e conheça a academia que vai transformar seus resultados. Sem compromisso, sem taxa de adesão.</p>
+      <div class="benefits">
+        <span><span class="ch">✓</span> Primeira semana grátis</span>
+        <span><span class="ch">✓</span> Avaliação física gratuita</span>
+        <span><span class="ch">✓</span> Sem taxa de adesão</span>
+        <span><span class="ch">✓</span> Cancele quando quiser</span>
+      </div>
+      <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20agendar%20uma%20visita%20na%20Fitness%20Pro" target="_blank" class="btn-big">💬 Agendar Visita Gratuita</a>
+      <div class="contact-row">
+        <a href="#">📷 @fitnesspro</a>
+        <a href="mailto:contato@fitnesspro.com">📧 contato@fitnesspro.com</a>
+        <a href="https://wa.me/5585996896378">💬 (85) 99896-378</a>
+        <a href="#">📍 R. Guilherme Rocha, 1500</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer-min"><span>© 2026 Fitness Pro · Todos os direitos reservados · Site de exemplo</span><span>⚡ Sua evolução começa aqui</span></div>
+
+<script>
+// Gallery
+document.getElementById('galGrid').innerHTML = [
+  {s:'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop',a:'🏋️ Sala de musculação',w:false},
+  {s:'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=300&fit=crop',a:'💪 Área de cross training',w:false},
+  {s:'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=500&h=400&fit=crop',a:'🏃 Espaço cardio',w:true},
+  {s:'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop',a:'🚴 Sala de spinning',w:false},
+  {s:'https://images.unsplash.com/photo-1517344884509-a0c97ec11bcc?w=500&h=400&fit=crop',a:'🧘 Estúdio de yoga',w:true},
+  {s:'https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=300&fit=crop',a:'🏋️ Equipamentos',w:false},
+  {s:'https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=400&h=300&fit=crop',a:'🤸 Área funcional',w:false},
+].map((i,n)=>`<div class="item${i.w?' wide':''}"><img src="${i.s}" alt="" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;height:100%;background:var(--card);font-size:2rem>${i.a.slice(0,2)}</div>'"><div class="label">${i.a}</div></div>`).join('');
+
+// Nav observer
+const sections = document.querySelectorAll('.snap');
+const dots = document.querySelectorAll('.nav-dots a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      dots.forEach(d => d.classList.remove('active'));
+      const active = document.querySelector(`.nav-dots a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Prime · Since 2015</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--cream:#FFF8F0;--terracotta:#C85A3F;--terracotta-l:rgba(200,90,63,.08);--terra-d:#A83A2F;--olive:#5B7B4E;--olive-l:rgba(91,123,78,.08);--warm:#F5E6D3;--warm2:#EDD9C4;--brown:#4A3728;--txt:#2C1810;--txt2:rgba(44,24,16,.65);--txt3:rgba(44,24,16,.3);--wpp:#25D366;--warm-dark:#E8D5C0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--txt);overflow-x:hidden;font-weight:400;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+ul{list-style:none}
+::selection{background:var(--terracotta);color:#fff}
+
+/* ── SAMPLE BANNER ── */
+.sample-banner{position:fixed;top:0;left:0;right:0;z-index:10000;background:var(--terracotta);color:#fff;text-align:center;padding:.25rem;font-size:.55rem;font-family:'Inter',sans-serif;letter-spacing:.1em;font-weight:500}
+
+/* ── BG PATTERN ── */
+.bg-pattern{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-pattern::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(200,90,63,.02) 60px,rgba(200,90,63,.02) 61px)}
+.bg-pattern::after{content:'🍕';position:absolute;bottom:5%;right:3%;font-size:clamp(8rem,20vw,18rem);opacity:.03;transform:rotate(-12deg)}
+
+/* ── TOP STRIP ── */
+.top-strip{background:var(--terracotta);color:#fff;padding:.4rem 1rem;display:flex;align-items:center;justify-content:center;gap:clamp(.5rem,2vw,2rem);font-size:.6rem;font-weight:500;flex-wrap:wrap;position:relative;z-index:1001}
+.top-strip span{display:flex;align-items:center;gap:.3rem}
+.top-strip .hl{background:rgba(255,255,255,.15);padding:.15rem .6rem;border-radius:100px;font-size:.55rem;font-weight:600}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:1000;background:rgba(255,248,240,.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--warm-dark)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;max-width:1160px;margin:0 auto;padding:.65rem 1.5rem}
+.nav-brand{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brown);letter-spacing:-.02em;display:flex;align-items:center;gap:.4rem}
+.nav-brand .dot{display:inline-block;width:7px;height:7px;background:var(--terracotta);border-radius:50%}
+.nav-brand em{font-style:italic;color:var(--terracotta)}
+.nav-links{display:flex;gap:.1rem;align-items:center}
+.nav-links a{padding:.35rem .8rem;color:var(--txt2);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;transition:.25s;border-radius:6px;font-weight:500}
+.nav-links a:hover{color:var(--terracotta);background:var(--terracotta-l)}
+.nav-links .btn-nav{background:var(--terracotta);color:#fff!important;padding:.35rem 1rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.06em;display:flex;align-items:center;gap:.3rem}
+.nav-links .btn-nav:hover{background:var(--terra-d);transform:translateY(-1px)}
+.mt{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;background:none;border:none;z-index:1001}
+.mt span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:.3s}
+.mt.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.mt.active span:nth-child(2){opacity:0}
+.mt.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* ── HERO ── */
+.hero{min-height:92vh;display:flex;align-items:center;position:relative;background:linear-gradient(170deg,var(--cream) 0%,var(--warm) 40%,var(--warm2) 100%);overflow:hidden;padding-top:2rem}
+.hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(200,90,63,.06) 0%,transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-10%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(91,123,78,.05) 0%,transparent 70%);border-radius:50%}
+.hero .inner{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:4rem 1.5rem;width:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+.hero-txt .badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--olive-l);color:var(--olive);padding:.3rem .8rem;border-radius:4px;font-size:.55rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;border:1px solid rgba(91,123,78,.15)}
+.hero-txt .badge .fire{color:var(--terracotta);font-size:.65rem}
+.hero-txt h1{font-family:'Poppins',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.05;color:var(--brown);letter-spacing:-.03em}
+.hero-txt h1 em{color:var(--terracotta);font-style:italic;position:relative}
+.hero-txt h1 em::after{content:'';position:absolute;bottom:4px;left:0;right:0;height:3px;background:var(--terracotta);opacity:.3;border-radius:2px}
+.hero-txt .sub{font-size:clamp(.85rem,1.4vw,1rem);color:var(--txt2);font-weight:300;margin:.6rem 0 1.2rem;max-width:480px;line-height:1.8}
+.hero-txt .btn-group{display:flex;gap:.5rem;flex-wrap:wrap}
+.hero-txt .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.65rem 1.6rem;border:none;border-radius:100px;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:.3s;font-family:'Inter',sans-serif}
+.hero-txt .btn-primary{background:var(--terracotta);color:#fff}
+.hero-txt .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(200,90,63,.3)}
+.hero-txt .btn-wpp{background:var(--wpp);color:#fff}
+.hero-txt .btn-wpp:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,.25)}
+.hero-txt .btn-out{background:transparent;border:1px solid rgba(74,55,40,.15);color:var(--brown)}
+.hero-txt .btn-out:hover{background:var(--terracotta-l);border-color:var(--terracotta)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-visual .plate{width:clamp(260px,30vw,440px);height:clamp(260px,30vw,440px);border-radius:50%;background:radial-gradient(circle at 40% 35%,#F5F0EB,#E8DCD0);box-shadow:0 20px 60px rgba(74,55,40,.1),inset 0 -10px 40px rgba(74,55,40,.04);position:relative;display:flex;align-items:center;justify-content:center;border:2px solid rgba(200,90,63,.06)}
+.hero-visual .plate .pizza{width:75%;height:75%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#E8A87C,#D4835A);position:relative;box-shadow:inset 0 -8px 25px rgba(0,0,0,.08)}
+.hero-visual .plate .pizza .topping{position:absolute;width:20%;height:20%;border-radius:50%;background:var(--terracotta);opacity:.7}
+.hero-visual .plate .pizza .topping:nth-child(1){top:18%;left:28%}.hero-visual .plate .pizza .topping:nth-child(2){top:45%;right:22%}.hero-visual .plate .pizza .topping:nth-child(3){bottom:20%;left:35%}.hero-visual .plate .pizza .topping:nth-child(4){top:30%;right:35%;width:14%;height:14%;background:var(--olive)}
+.hero-visual .plate .pizza .topping:nth-child(5){bottom:38%;left:15%;width:12%;height:12%;background:var(--olive)}
+.hero-visual .ring-decor{position:absolute;width:110%;height:110%;border-radius:50%;border:1px dashed rgba(200,90,63,.08);animation:spinRing 40s linear infinite}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+.hero-visual .ring-decor2{position:absolute;width:120%;height:120%;border-radius:50%;border:1px dashed rgba(91,123,78,.06);animation:spinRing 50s linear infinite reverse}
+.hero-stats{display:flex;gap:1.5rem;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--warm-dark)}
+.hero-stats div{text-align:left}
+.hero-stats strong{display:block;font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:700;color:var(--terracotta);letter-spacing:-.02em}
+.hero-stats span{font-size:.55rem;color:var(--txt2);letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+
+/* ─── DELIVERY STRIP ─── */
+.delivery-strip{background:#fff;padding:2rem 1.5rem;border-top:1px solid var(--warm-dark);border-bottom:1px solid var(--warm-dark)}
+.delivery-strip .in{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.delivery-strip .in .txt{display:flex;align-items:center;gap:.6rem}
+.delivery-strip .in .txt .ico{font-size:1.5rem}
+.delivery-strip .in .txt h3{font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:600;color:var(--brown)}
+.delivery-strip .in .txt h3 em{color:var(--terracotta);font-style:italic}
+.delivery-strip .in .txt p{font-size:.65rem;color:var(--txt2);font-weight:300}
+.delivery-strip .in .btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.delivery-strip .in .btns a{display:inline-flex;align-items:center;gap:.3rem;padding:.45rem 1.1rem;border-radius:100px;font-size:.62rem;font-weight:600;letter-spacing:.03em;transition:.3s}
+.delivery-strip .in .btns .b-wpp{background:var(--wpp);color:#fff}
+.delivery-strip .in .btns .b-ifood{background:var(--terracotta);color:#fff}
+.delivery-strip .in .btns .b-app{background:var(--brown);color:#fff;border:1px solid rgba(255,255,255,.1)}
+.delivery-strip .in .btns a:hover{transform:translateY(-2px)}
+
+/* ─── SECTIONS ─── */
+section{padding:5rem 1.5rem;position:relative;z-index:1}
+.container{max-width:1160px;margin:0 auto}
+.pp-h{text-align:left;margin-bottom:2.5rem}
+.pp-h-ctr{text-align:center;margin-bottom:2.5rem}
+.pp-h .pp-t{font-size:.5rem;color:var(--terracotta);letter-spacing:.25em;text-transform:uppercase;font-weight:600;margin-bottom:.2rem}
+.pp-h-ctr .pp-t{font-size:.5rem;color:var(--terracotta);letter-spacing:.25em;text-transform:uppercase;font-weight:600;margin-bottom:.2rem}
+.pp-h h2{font-family:'Poppins',sans-serif;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:700;color:var(--brown);letter-spacing:-.02em;line-height:1.1}
+.pp-h-ctr h2{font-family:'Poppins',sans-serif;font-size:clamp(1.5rem,3vw,2.4rem);font-weight:700;color:var(--brown);letter-spacing:-.02em;line-height:1.1}
+.pp-h h2 em,.pp-h-ctr h2 em{color:var(--terracotta);font-style:italic}
+.pp-h p,.pp-h-ctr p{font-size:.75rem;color:var(--txt2);max-width:520px;margin-top:.3rem;line-height:1.7;font-weight:300}
+
+.section-alt{background:var(--warm)}
+
+/* ─── STORY ─── */
+.story-g{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.story-txt .big-quote{font-family:'Poppins',sans-serif;font-size:clamp(1.2rem,2vw,1.6rem);font-weight:500;line-height:1.4;color:var(--brown);margin-bottom:1rem;position:relative;padding-left:1.5rem;border-left:3px solid var(--terracotta)}
+.story-txt p{font-size:.78rem;color:var(--txt2);line-height:1.8;margin-bottom:.5rem;font-weight:300}
+.story-txt .tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.story-txt .tags span{display:flex;align-items:center;gap:.2rem;font-size:.6rem;color:var(--olive);font-weight:500;background:var(--olive-l);padding:.25rem .6rem;border-radius:4px;letter-spacing:.02em}
+.story-img{position:relative}
+.story-img .frame{border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(74,55,40,.06)}
+.story-img .frame img{width:100%;height:clamp(320px,45vw,500px);object-fit:cover;transition:.6s}
+.story-img .frame:hover img{transform:scale(1.04)}
+.story-img .stamp{position:absolute;bottom:-.8rem;right:-.8rem;width:90px;height:90px;background:var(--terracotta);color:#fff;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.55rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;text-align:center;line-height:1.2;box-shadow:0 4px 15px rgba(200,90,63,.25)}
+.story-img .stamp strong{font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:700;display:block}
+
+/* ─── PRODUTOS CATEGORIAS ─── */
+.cat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.cat-card{background:#fff;border-radius:16px;padding:2.5rem 1.5rem;text-align:center;transition:.4s;border:1px solid var(--warm-dark);position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--terracotta);transform:scaleX(0);transition:.4s;transform-origin:left}
+.cat-card:hover::before{transform:scaleX(1)}
+.cat-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(74,55,40,.06);border-color:var(--terracotta-l)}
+.cat-card .ico{font-size:2.5rem;margin-bottom:.4rem;display:block}
+.cat-card h4{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:600;color:var(--brown);margin-bottom:.15rem}
+.cat-card p{font-size:.65rem;color:var(--txt2);line-height:1.5;font-weight:300}
+.cat-card .tag-cat{display:inline-block;margin-top:.4rem;font-size:.5rem;color:var(--terracotta);background:var(--terracotta-l);padding:.2rem .6rem;border-radius:100px;font-weight:600;letter-spacing:.05em}
+
+/* ─── MENU ─── */
+.menu-wrapper{max-width:900px;margin:0 auto}
+.menu-nota{display:flex;align-items:center;gap:.5rem;background:#fff;padding:.6rem 1rem;border-radius:8px;margin-bottom:1.5rem;font-size:.68rem;color:var(--txt2);border:1px solid var(--warm-dark);font-weight:300}
+.menu-nota strong{color:var(--terracotta);font-weight:600}
+.menu-tabs{display:flex;gap:.2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.menu-tab{padding:.35rem 1rem;border:1px solid var(--warm-dark);background:#fff;color:var(--txt2);font-size:.65rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;border-radius:100px;transition:.25s;font-family:'Inter',sans-serif}
+.menu-tab.active,.menu-tab:hover{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
+.menu-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
+.menu-item{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;background:#fff;border:1px solid var(--warm-dark);border-radius:10px;transition:.25s}
+.menu-item:hover{border-color:var(--terracotta-l);transform:translateX(4px);background:rgba(255,255,255,.8)}
+.menu-item .inf{display:flex;flex-direction:column;gap:.05rem}
+.menu-item .inf h4{font-size:.8rem;font-weight:600;color:var(--brown);margin:0;font-family:'Poppins',sans-serif}
+.menu-item .inf .desc{font-size:.6rem;color:var(--txt2);font-weight:300}
+.menu-item .inf .tags{display:flex;gap:.2rem;margin-top:.15rem}
+.menu-item .inf .tags span{font-size:.5rem;background:var(--terracotta-l);color:var(--terracotta);padding:.08rem .35rem;border-radius:3px;font-weight:600}
+.menu-item .preco{font-family:'Poppins',sans-serif;font-size:1.05rem;font-weight:700;color:var(--terracotta);margin-left:.5rem;white-space:nowrap;letter-spacing:-.01em}
+
+/* ─── UNITS ─── */
+.units-g{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.unit-card{background:#fff;border:1px solid var(--warm-dark);border-radius:16px;padding:1.5rem;transition:.3s;display:flex;flex-direction:column;gap:.3rem}
+.unit-card:hover{transform:translateY(-3px);border-color:var(--terracotta-l);box-shadow:0 8px 30px rgba(200,90,63,.04)}
+.unit-card .city{font-size:.5rem;color:var(--terracotta);font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.05rem}
+.unit-card h4{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:600;color:var(--brown);letter-spacing:-.01em;margin-bottom:.1rem}
+.unit-card .addr{display:flex;align-items:flex-start;gap:.3rem;font-size:.68rem;color:var(--txt2);line-height:1.5;font-weight:300}
+.unit-card .addr .ico{min-width:14px;font-size:.65rem}
+.unit-card .info-r{display:flex;gap:1rem;flex-wrap:wrap;font-size:.58rem;color:var(--txt3);font-weight:300}
+.unit-card .info-r span{display:flex;align-items:center;gap:.2rem}
+.unit-card .unit-btns{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.2rem}
+.unit-card .unit-btns a{display:inline-flex;align-items:center;gap:.2rem;padding:.3rem .7rem;border-radius:100px;font-size:.58rem;font-weight:600;transition:.25s;letter-spacing:.02em}
+.unit-card .unit-btns .uwpp{background:var(--wpp);color:#fff}
+.unit-card .unit-btns .uifood{background:var(--terracotta);color:#fff}
+.unit-card .unit-btns .uapp{background:var(--brown);color:#fff}
+.unit-card .unit-btns a:hover{transform:translateY(-2px)}
+
+/* ─── BANNER ESPECIAL ─── */
+.banner-especial{background:linear-gradient(135deg,var(--terracotta),var(--terra-d));color:#fff;padding:3rem 1.5rem;margin-top:-1px}
+.banner-especial .in{max-width:700px;margin:0 auto;text-align:center}
+.banner-especial .in .ico-b{font-size:2.5rem;margin-bottom:.3rem;display:block}
+.banner-especial .in h2{font-family:'Poppins',sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;letter-spacing:-.02em}
+.banner-especial .in p{font-size:.75rem;opacity:.8;max-width:450px;margin:.3rem auto .8rem;font-weight:300;line-height:1.6}
+.banner-especial .in .btn{display:inline-flex;align-items:center;gap:.35rem;padding:.5rem 1.5rem;background:#fff;color:var(--terracotta);border:none;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:.3s}
+.banner-especial .in .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
+
+/* ─── INSTAGRAM ─── */
+.pp-faq-defs{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.pp-faq-item{display:grid;grid-template-columns:1.1fr 2fr;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--warm-dark);align-items:start;transition:.2s}
+.pp-faq-item:last-child{border-bottom:none}
+.pp-faq-item:hover{padding-left:.5rem}
+.pp-faq-q{font-family:'Poppins',sans-serif;font-size:.8rem;font-weight:600;color:var(--brown);letter-spacing:-.01em;display:flex;align-items:flex-start;gap:.3rem}
+.pp-faq-q .pp-fq-ico{font-size:.9rem}
+.pp-faq-a{font-size:.68rem;color:var(--txt2);line-height:1.6;font-weight:300}
+
+.insta-strip{background:#fff;text-align:center;padding:2rem 1.5rem;border-top:1px solid var(--warm-dark);border-bottom:1px solid var(--warm-dark)}
+.insta-strip .in{max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.insta-strip .in .txt{font-size:.72rem;color:var(--txt2);font-weight:300}
+.insta-strip .in .txt strong{color:var(--brown);font-weight:600}
+.insta-strip .in .btn{display:inline-flex;align-items:center;gap:.3rem;padding:.4rem 1.2rem;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:100px;font-size:.62rem;font-weight:600;transition:.3s}
+.insta-strip .in .btn:hover{transform:translateY(-2px);opacity:.9}
+
+/* ─── TESTIMONIAL ─── */
+.test-strip{background:var(--warm);text-align:center;padding:2.5rem 1.5rem}
+.test-strip blockquote{max-width:550px;margin:0 auto;font-family:'Poppins',sans-serif;font-size:clamp(1rem,1.8vw,1.25rem);font-weight:500;color:var(--brown);line-height:1.6;font-style:italic}
+.test-strip cite{display:block;margin-top:.4rem;font-size:.58rem;color:var(--txt2);font-style:normal;font-weight:400;letter-spacing:.06em}
+
+/* ─── FOOTER ─── */
+footer{background:var(--brown);color:rgba(255,255,255,.7);padding:3.5rem 1.5rem 1.5rem}
+footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;max-width:1160px;margin:0 auto 1.2rem}
+footer h3{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.3rem;letter-spacing:-.01em}
+footer h3 em{color:var(--terracotta);font-style:italic}
+footer p{font-size:.65rem;color:rgba(255,255,255,.5);line-height:1.7;font-weight:300}
+footer h4{font-size:.5rem;color:var(--terracotta);letter-spacing:.2em;margin-bottom:.3rem;font-weight:600;text-transform:uppercase}
+footer .lnks{display:flex;flex-direction:column;gap:.2rem}
+footer .lnks a{font-size:.65rem;color:rgba(255,255,255,.5);transition:.25s;font-weight:300}
+footer .lnks a:hover{color:#fff}
+footer .bot{border-top:1px solid rgba(255,255,255,.08);padding-top:.6rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;max-width:1160px;margin:0 auto;font-size:.52rem;color:rgba(255,255,255,.3);font-weight:300}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .6s,transform .6s}.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-25px);transition:opacity .6s,transform .6s}.reveal-l.visible{opacity:1;transform:translateX(0)}
+.reveal-r{opacity:0;transform:translateX(25px);transition:opacity .6s,transform .6s}.reveal-r.visible{opacity:1;transform:translateX(0)}
+
+/* ─── FLOATING WPP ─── */
+.wpp-float{position:fixed;bottom:1.2rem;right:1.2rem;z-index:9999;width:52px;height:52px;background:var(--wpp);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:.3s;animation:pulseWpp 2.5s infinite;color:#fff;font-size:1.3rem}
+@keyframes pulseWpp{0%{box-shadow:0 4px 20px rgba(37,211,102,.35)}50%{box-shadow:0 4px 30px rgba(37,211,102,.55)}100%{box-shadow:0 4px 20px rgba(37,211,102,.35)}}
+.wpp-float:hover{transform:scale(1.1) rotate(-5deg)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:968px){
+  .hero .inner{grid-template-columns:1fr;gap:2rem;padding:3rem 1.5rem}
+  .hero-visual{display:none}
+  .story-g{grid-template-columns:1fr;gap:2rem}
+  .story-img .stamp{right:.5rem;bottom:-.8rem;width:80px;height:80px}
+  .cat-g{grid-template-columns:repeat(2,1fr)}
+  footer .grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .mt{display:flex}
+  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:280px;background:rgba(255,248,240,.98);backdrop-filter:blur(12px);flex-direction:column;padding:5.5rem 1.5rem;gap:.3rem;transition:.4s;z-index:999;border-left:1px solid var(--warm-dark)}
+  .nav-links.active{right:0}
+  .nav-links a{padding:.5rem .8rem;font-size:.7rem;color:var(--txt2);border-radius:6px}
+  .nav-links .btn-nav{text-align:center}
+  .nav-in{padding:.5rem 1rem}
+  section{padding:3.5rem 1rem}
+  .top-strip{gap:.4rem;font-size:.55rem;padding:.3rem .8rem}
+  .hero-stats{gap:1rem;flex-wrap:wrap}
+  .cat-g{grid-template-columns:1fr;max-width:350px;margin:0 auto}
+  .units-g{grid-template-columns:1fr}
+  footer .grid{grid-template-columns:1fr}
+  footer .bot{flex-direction:column;text-align:center}
+  .delivery-strip .in{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .hero-txt h1{font-size:2.2rem}.hero-txt .btn{width:100%;justify-content:center}
+  .menu-item{padding:.6rem .7rem}
+  .story-img .stamp{width:70px;height:70px;right:.3rem;bottom:-.8rem}
+  .story-img .stamp strong{font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ⚠️ SAMPLE -->
+<div class="sample-banner">⚡ Site de exemplo — demonstração de capacidades</div>
+
+<!-- 🟤 BG PATTERN -->
+<div class="bg-pattern"></div>
+
+<!-- 🟤 TOP STRIP -->
+<div class="top-strip">
+  <span>🔥 <strong>Pizza Prime</strong> — desde 2015</span>
+  <span class="hl">🕐 Ter-Dom 18h-23h</span>
+  <span>📍 Fortaleza</span>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#hero" class="nav-brand"><span class="dot"></span> Pizza <em>Prime</em></a>
+    <button class="mt" id="mt" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="nl">
+      <a href="#hero">Início</a>
+      <a href="#historia">História</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#unidades">Unidades</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20fazer%20um%20pedido%20na%20Pizza%20Prime" target="_blank" rel="noopener" class="btn-nav">💬 Pedir</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="inner">
+    <div class="hero-txt">
+      <div class="badge"><span class="fire">🔥</span> Autêntica cozinha italiana</div>
+      <h1>A verdadeira <em>pizza artesanal</em> de Fortaleza</h1>
+      <p class="sub">Massa fresca feita diariamente, ingredientes selecionados e forno a lenha. Na Pizza Prime, cada fatia conta uma história de sabor e tradição.</p>
+      <div class="btn-group">
+        <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20fazer%20um%20pedido%20na%20Pizza%20Prime" target="_blank" rel="noopener" class="btn btn-wpp">💬 Peça no WhatsApp</a>
+        <a href="#cardapio" class="btn btn-out">Ver Cardápio →</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>15+</strong><span>Unidades</span></div>
+        <div><strong>50+</strong><span>Sabores</span></div>
+        <div><strong>✦4.9</strong><span>Avaliação</span></div>
+        <div><strong>10</strong><span>Anos de história</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ring-decor"></div>
+      <div class="ring-decor2"></div>
+      <div class="plate">
+        <div class="pizza">
+          <span class="topping"></span>
+          <span class="topping"></span>
+          <span class="topping"></span>
+          <span class="topping"></span>
+          <span class="topping"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DELIVERY STRIP ─── -->
+<div class="delivery-strip">
+  <div class="in">
+    <div class="txt">
+      <span class="ico">🛵</span>
+      <div>
+        <h3>Delivery <em>Prime</em></h3>
+        <p>Peça pelo WhatsApp ou iFood. Entrega gratuita nas zonas Sul e Aldeota*</p>
+      </div>
+    </div>
+    <div class="btns">
+      <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20fazer%20um%20pedido%20na%20Pizza%20Prime" target="_blank" class="b-wpp">💬 WhatsApp</a>
+      <a href="#" target="_blank" rel="noopener" class="b-ifood">🟥 iFood</a>
+      <a href="#" class="b-app">📱 App Prime</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── STORY ─── -->
+<section class="container" id="historia">
+  <div class="pp-h">
+    <div class="pp-t">✦ Nossa História</div>
+    <h2>Uma história de <em>sabor e tradição</em></h2>
+  </div>
+  <div class="story-g">
+    <div class="story-txt reveal-l">
+      <div class="big-quote">"Nossa missão é simples: levar o sabor autêntico da Itália para a mesa dos fortalezenses."</div>
+      <p>Fundada em 2015 pelo Chef Antonio Rossi, natural de Florença, a Pizza Prime nasceu do sonho de compartilhar a verdadeira culinária toscana no coração do Nordeste. Cada ingrediente é selecionado pessoalmente — azeites importados, massas artesanais preparadas diariamente, queijos e embutidos de pequenos produtores.</p>
+      <p>Nosso forno a lenha, construído artesanalmente com tijolos refratários italianos, atinge temperaturas de até 400°C — o segredo para uma massa crocante por fora e macia por dentro. Uma experiência que vai muito além de uma simples pizza.</p>
+      <div class="tags">
+        <span>🔥 Forno a Lenha Italiano</span>
+        <span>🫒 Massa Artesanal Diária</span>
+        <span>🧀 Ingredientes Importados</span>
+        <span>🍷 Harmonização com Vinhos</span>
+      </div>
+    </div>
+    <div class="story-img reveal-r">
+      <div class="frame"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&h=650&fit=crop" alt="Chef preparando pizza" loading="lazy" onerror="this.outerHTML='<div style=display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#fff;font-size:3rem;border-radius:16px>👨‍🍳</div>'"></div>
+      <div class="stamp"><strong>10</strong> Anos<br>de Sabor</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CATEGORIAS ─── -->
+<section style="padding:2rem 1.5rem" class="container">
+  <div class="pp-h-ctr reveal">
+    <div class="pp-t">✦ Categorias</div>
+    <h2>Nossas <em>especialidades</em></h2>
+  </div>
+  <div class="cat-g">
+    <div class="cat-card reveal"><span class="ico">🍕</span><h4>Pizzas Tradicionais</h4><p>Clássicas e irresistíveis, com borda recheada</p><span class="tag-cat">+30 sabores</span></div>
+    <div class="cat-card reveal" style="transition-delay:.06s"><span class="ico">🔥</span><h4>Pizzas Especiais</h4><p>Criações exclusivas do Chef com ingredientes premium</p><span class="tag-cat">Assinatura</span></div>
+    <div class="cat-card reveal" style="transition-delay:.12s"><span class="ico">🥟</span><h4>Calzones & Focaccias</h4><p>Recheados, crocantes e perfeitos para compartilhar</p><span class="tag-cat">+12 opções</span></div>
+    <div class="cat-card reveal" style="transition-delay:.18s"><span class="ico">🍟</span><h4>Acompanhamentos</h4><p>Batatas, bruschettas e entradas especiais</p><span class="tag-cat">Entradas</span></div>
+    <div class="cat-card reveal" style="transition-delay:.24s"><span class="ico">🍷</span><h4>Bebidas & Vinhos</h4><p>Seleção especial de vinhos, cervejas artesanais e drinks</p><span class="tag-cat">Carta de Vinhos</span></div>
+    <div class="cat-card reveal" style="transition-delay:.3s"><span class="ico">🍰</span><h4>Sobremesas</h4><p>Doces italianos tradicionais para finalizar com chave de ouro</p><span class="tag-cat">+8 opções</span></div>
+  </div>
+</section>
+
+<!-- ─── MENU ─── -->
+<section class="section-alt" id="cardapio">
+  <div class="container">
+    <div class="pp-h-ctr reveal">
+      <div class="pp-t">✦ Cardápio</div>
+      <h2>Escolha seu <em>sabor</em></h2>
+    </div>
+    <div class="menu-wrapper">
+      <div class="menu-nota"><span>🍕</span> Todos os preços referentes à pizza média (8 fatias). <strong>Borda recheada + R$ 6</strong></div>
+      <div class="menu-tabs" id="tabs">
+        <button class="menu-tab active" data-c="todos">Todas</button>
+        <button class="menu-tab" data-c="tradicionais">Tradicionais</button>
+        <button class="menu-tab" data-c="especiais">Especiais</button>
+        <button class="menu-tab" data-c="doces">Doces</button>
+      </div>
+      <div class="menu-grid" id="mg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── UNITS ─── -->
+<section class="container" id="unidades">
+  <div class="pp-h reveal">
+    <div class="pp-t">📍 Unidades</div>
+    <h2>Pizza perto de <em>você</em></h2>
+    <p>Estamos espalhados por toda Fortaleza. Escolha a unidade mais próxima e faça seu pedido.</p>
+  </div>
+  <div class="units-g" id="ug"></div>
+</section>
+
+<!-- ─── BANNER FRANQUIA ─── -->
+<section class="banner-especial" id="franquia">
+  <div class="in reveal">
+    <span class="ico-b">🔥</span>
+    <h2>Seja um franqueado <em>Prime</em></h2>
+    <p>Faça parte da maior rede de pizzarias artesanais do Nordeste. Invista em um negócio consolidado com suporte completo.</p>
+    <a href="https://wa.me/5585996896378?text=Olá!%20Quero%20saber%20mais%20sobre%20ser%20um%20franqueado%20Pizza%20Prime" target="_blank" class="btn">💬 Quero Saber Mais</a>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIAL ─── -->
+<!-- ─── FAQ ─── -->
+<section class="section-alt" id="faq">
+  <div class="container">
+    <div class="pp-h-ctr reveal">
+      <div class="pp-t">❓ FAQ</div>
+      <h2>Dúvidas <em>frequentes</em></h2>
+    </div>
+    <div class="pp-faq-defs" style="margin-top:2rem">
+      <div class="pp-faq-item reveal"><div class="pp-faq-q"><span class="pp-fq-ico">🕐</span>Horário de funcionamento?</div><div class="pp-faq-a">Funcionamos de terça a domingo, das 18h às 23h. Segunda-feira é nosso dia de descanso.</div></div>
+      <div class="pp-faq-item reveal" style="transition-delay:.04s"><div class="pp-faq-q"><span class="pp-fq-ico">📞</span>Como faço um pedido?</div><div class="pp-faq-a">Pelo WhatsApp, iFood ou nosso App Prime. Aceitamos pedidos com antecedência mínima de 40 minutos.</div></div>
+      <div class="pp-faq-item reveal" style="transition-delay:.08s"><div class="pp-faq-q"><span class="pp-fq-ico">💳</span>Quais formas de pagamento?</div><div class="pp-faq-a">Cartões de crédito e débito, PIX, dinheiro e vale-refeição. Parcelamos em até 6x sem juros.</div></div>
+      <div class="pp-faq-item reveal" style="transition-delay:.12s"><div class="pp-faq-q"><span class="pp-fq-ico">🚗</span>Tem estacionamento?</div><div class="pp-faq-a">Sim! Todas as unidades têm estacionamento gratuito para clientes. Também aceitamos delivery.</div></div>
+      <div class="pp-faq-item reveal" style="transition-delay:.16s"><div class="pp-faq-q"><span class="pp-fq-ico">🧀</span>Fazem borda recheada?</div><div class="pp-faq-a">Sim! Bordas recheadas com catupiry, cheddar ou cream cheese por apenas R$ 6 adicional.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="test-strip">
+  <blockquote>"A Pizza Prime transformou minhas sextas-feiras! Massa leve, ingredientes frescos e entrega que sempre chega antes do previsto."</blockquote>
+  <cite>— Amanda L. · Cliente desde 2021</cite>
+</section>
+
+<!-- ─── INSTAGRAM ─── -->
+<div class="insta-strip">
+  <div class="in">
+    <span class="txt">📸 Siga <strong>@pizzaprime</strong> e veja nossas pizzas saindo do forno</span>
+    <a href="#" target="_blank" rel="noopener" class="btn">📷 Seguir</a>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="grid">
+    <div><h3>Pizza <em>Prime</em></h3><p>Autêntica cozinha italiana desde 2015. Massa artesanal, ingredientes premium e forno a lenha. Uma experiência que vai além da pizza.</p></div>
+    <div><h4>Navegue</h4><div class="lnks"><a href="#hero">Início</a><a href="#historia">História</a><a href="#cardapio">Cardápio</a><a href="#unidades">Unidades</a><a href="#faq">FAQ</a></div></div>
+    <div><h4>Peça Já</h4><div class="lnks"><a href="https://wa.me/5585996896378" target="_blank">💬 WhatsApp</a><a href="#">🟥 iFood</a><a href="#">📱 App Prime</a></div></div>
+  </div>
+  <div class="bot"><span>© 2026 Pizza Prime. Site de exemplo — demonstração de capacidades.</span><span>🍕 Feito com massa e paixão</span></div>
+</footer>
+
+<!-- 📱 FLOATING WPP -->
+<a href="https://wa.me/5585996896378?text=Olá!%20Quero%20fazer%20um%20pedido%20na%20Pizza%20Prime" target="_blank" rel="noopener" class="wpp-float">💬</a>
+
+<script>
+// ── MENU ──
+const items=[
+  {c:'tradicionais',n:'Mussarela',d:'Molho especial, mussarela, orégano, azeitona',p:'R$ 42',tag:'Clássica'},
+  {c:'tradicionais',n:'Calabresa',d:'Calabresa fatiada, cebola roxa, mussarela, orégano',p:'R$ 45',tag:'🔥 Mais Pedida'},
+  {c:'tradicionais',n:'Portuguesa',d:'Presunto, ovos, cebola, pimentão, azeitona, mussarela',p:'R$ 48',tag:'Completa'},
+  {c:'tradicionais',n:'Margherita',d:'Mussarela de búfala, manjericão fresco, tomate italiano',p:'R$ 50',tag:'🇮🇹 Tradicional'},
+  {c:'tradicionais',n:'Frango com Catupiry',d:'Frango desfiado temperado, catupiry cremoso, milho',p:'R$ 47',tag:'Sucesso'},
+  {c:'tradicionais',n:'4 Queijos',d:'Mussarela, parmesão, gorgonzola, provolone defumado',p:'R$ 52',tag:'Premium'},
+  {c:'especiais',n:'Prime Supreme',d:'Pepperoni, cogumelos paris, azeitona preta, mussarela',p:'R$ 58',tag:'🔥 Top'},
+  {c:'especiais',n:'Bacon Prime',d:'Bacon crocante, cheddar cremoso, cebola caramelizada',p:'R$ 55',tag:'🔥 Top'},
+  {c:'especiais',n:'Nordestina',d:'Carne de sol desfiada, queijo coalho grelhado, cebola roxa',p:'R$ 56',tag:'Regional'},
+  {c:'especiais',n:'Camarão com Catupiry',d:'Camarão ao alho e óleo, catupiry, tomate cereja',p:'R$ 65',tag:'Premium'},
+  {c:'especiais',n:'Pesto com Tomate Seco',d:'Pesto de manjericão, tomate seco, mussarela de búfala',p:'R$ 54',tag:'Especial'},
+  {c:'doces',n:'Chocolate com Morango',d:'Chocolate ao leite, morangos frescos, granulado',p:'R$ 48',tag:'🍓'},
+  {c:'doces',n:'Banana Caramelada',d:'Banana, doce de leite, canela, açúcar mascavo',p:'R$ 45',tag:'🍌'},
+  {c:'doces',n:'Romeu e Julieta',d:'Goiabada cascão, mussarela, queijo minas fresco',p:'R$ 46',tag:'🇧🇷 Clássico'},
+];
+function renderMenu(cat){
+  mg.innerHTML=items.filter(i=>cat==='todos'||i.c===cat).map((i,n)=>`
+    <div class="menu-item reveal" style="transition-delay:${n*.04}s"><div class="inf"><h4>${i.n}</h4><p class="desc">${i.d}</p><div class="tags"><span>${i.tag}</span></div></div><span class="preco">${i.p}</span></div>
+  `).join('');
+  document.querySelectorAll('.menu-item.reveal').forEach(e=>ro.observe(e));
+}
+
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}})},{threshold:.08,rootMargin:'0px 0px -50px 0px'});
+
+renderMenu('todos');
+document.querySelectorAll('.menu-tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.menu-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMenu(b.dataset.c);
+}));
+
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(e=>ro.observe(e));
+
+// ── UNITS ──
+const units=[
+  {name:'Pizza Prime Zona Sul',addr:'Av. Washington Soares, 4335 — Sapiranga, Fortaleza',bairro:'Sapiranga',wpp:'5585996896378',horario:'18h-23h',ifood:true,app:true},
+  {name:'Pizza Prime Centro',addr:'Rua Guilherme Rocha, 1500 — Centro, Fortaleza',bairro:'Centro',wpp:'5585996896378',horario:'18h-0h',ifood:true,app:true},
+  {name:'Pizza Prime Aldeota',addr:'Av. Dom Luís, 900 — Aldeota, Fortaleza',bairro:'Aldeota',wpp:'5585996896378',horario:'18h-23h',ifood:false,app:true},
+  {name:'Pizza Prime Parangaba',addr:'Rua Germano Franck, 300 — Parangaba, Fortaleza',bairro:'Parangaba',wpp:'5585996896378',horario:'18h-0h',ifood:true,app:false},
+];
+document.getElementById('ug').innerHTML=units.map((u,n)=>`
+  <div class="unit-card reveal" style="transition-delay:${n*.08}s"><div class="city">📍 ${u.bairro}</div><h4>${u.name}</h4><div class="addr"><span class="ico">📍</span><span>${u.addr}</span></div><div class="info-r"><span>🕐 ${u.horario}</span><span>📞 (85) 99896-378</span></div><div class="unit-btns"><a href="https://wa.me/${u.wpp}?text=Olá!%20Quero%20fazer%20um%20pedido%20na%20${encodeURIComponent(u.name)}" target="_blank" class="uwpp">💬 WhatsApp</a>${u.ifood?'<a href="#" class="uifood">🟥 iFood</a>':''}${u.app?'<a href="#" class="uapp">📱 App</a>':''}</div></div>
+`).join('');
+document.querySelectorAll('.unit-card.reveal').forEach(e=>ro.observe(e));
+
+// ── MOBILE NAV ──
+const mt=document.getElementById('mt'),nl=document.getElementById('nl');
+mt.addEventListener('click',()=>{mt.classList.toggle('active');nl.classList.toggle('active')});
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mt.classList.remove('active');nl.classList.remove('active')}));
+</script>
+</body>
+</html>
